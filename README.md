@@ -9,6 +9,7 @@
 
 #2.相册选择器
 全局浏览和预览，采用后台预加载，完全消除卡顿现象
+
 <img src="https://github.com/gang544043963/LGPhotoBrowser/blob/master/LGPhotoBrowser/gif/picker.gif?raw=true" alt="CXLSlideList Screenshot" width="300" height="550"/> <img src="https://github.com/gang544043963/LGPhotoBrowser/blob/master/LGPhotoBrowser/gif/browser1.gif?raw=true" alt="CXLSlideList Screenshot" width="300" height="550"/>
 
 
