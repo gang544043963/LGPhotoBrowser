@@ -345,20 +345,10 @@ static CGFloat BOTTOM_HEIGHT = 60;
          // Continue as appropriate.
          NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
          UIImage *t_image = [UIImage imageWithData:imageData];
-         NSLog(@"imageOrientation---%ld",(long)t_image.imageOrientation);
-         
-         NSDateFormatter *formater = [[NSDateFormatter alloc] init];
-         formater.dateFormat = @"yyyyMMddHHmmss";
-         NSString *currentTimeStr = [[formater stringFromDate:[NSDate date]] stringByAppendingFormat:@"_%d" ,arc4random_uniform(10000)];
-         
          t_image = [self fixOrientation:t_image];
-         
-         NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:currentTimeStr];
-         [UIImagePNGRepresentation(t_image) writeToFile:path atomically:YES];
-         
          NSData *data = UIImageJPEGRepresentation(t_image, 0.3);
          ZLCamera *camera = [[ZLCamera alloc] init];
-         camera.imagePath = path;
+         camera.photoImage = t_image;
          camera.thumbImage = [UIImage imageWithData:data];
          
          if (self.cameraType == ZLCameraSingle) {

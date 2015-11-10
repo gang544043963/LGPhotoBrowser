@@ -11,7 +11,7 @@
 
 @interface ZLCamera : NSObject
 
-@property (copy,nonatomic) NSString *imagePath;
+//@property (copy,nonatomic) NSString *imagePath;
 @property (strong,nonatomic) UIImage *thumbImage;
 @property (strong,nonatomic) UIImage *photoImage;
 
