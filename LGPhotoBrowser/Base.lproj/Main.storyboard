@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -41,10 +42,10 @@
                                 <exclude reference="Oav-uf-Wom"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="p1n-O9-MjI"/>
                                 <exclude reference="izS-Bw-QrL"/>
                                 <exclude reference="nB7-ZD-3EM"/>
                                 <exclude reference="r0B-GD-y01"/>
-                                <exclude reference="p1n-O9-MjI"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -52,13 +53,14 @@
                                 <include reference="Oav-uf-Wom"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="p1n-O9-MjI"/>
                                 <include reference="izS-Bw-QrL"/>
                                 <include reference="nB7-ZD-3EM"/>
                                 <include reference="r0B-GD-y01"/>
-                                <include reference="p1n-O9-MjI"/>
                             </mask>
                         </variation>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="myTableView" destination="Oav-uf-Wom" id="s5L-a4-gRT"/>

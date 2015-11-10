@@ -7,10 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "LGPhotoPickerViewController.h"
-#import "LGPhotoPickerBrowserViewController.h"
-#import "LGPhotoPickerBrowserPhoto.h"
-
+#import "LGPhoto.h"
 #define HEADER_HEIGHT 100
 
 @interface ViewController ()<LGPhotoPickerViewControllerDelegate,LGPhotoPickerBrowserViewControllerDataSource,LGPhotoPickerBrowserViewControllerDelegate, UITableViewDataSource,UITableViewDelegate>
@@ -30,7 +27,7 @@
     self.myTableView.dataSource = self;
     
     self.titleArray = [[NSArray alloc] init];
-    self.titleArray = @[@"照片选择器",@"照片浏览器",@"网络图片浏览器"];
+    self.titleArray = @[@"照片选择器",@"照片浏览器",@"网络图片浏览器",@"单张拍照",@"手动连拍"];
     
     
     self.LGPhotoPickerBrowserPhotoArray = [[NSMutableArray alloc] init];
@@ -89,6 +86,30 @@
     [self presentViewController:BroswerVC animated:YES completion:nil];
 }
 
+- (void)presentCameraSingle {
+    ZLCameraViewController *cameraVC = [[ZLCameraViewController alloc] init];
+    // 拍照最多个数
+    cameraVC.maxCount = 1;
+    // 单拍
+    cameraVC.cameraType = ZLCameraSingle;
+    cameraVC.callback = ^(NSArray *cameras){
+        //在这里得到拍照结果
+    };
+    [cameraVC showPickerVc:self];
+}
+
+- (void)presentCameraContinuous {
+    ZLCameraViewController *cameraVC = [[ZLCameraViewController alloc] init];
+    // 拍照最多个数
+    cameraVC.maxCount = 4;
+    // 连拍
+    cameraVC.cameraType = ZLCameraContinuous;
+    cameraVC.callback = ^(NSArray *cameras){
+        //在这里得到拍照结果
+    };
+    [cameraVC showPickerVc:self];
+}
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.titleArray.count;
@@ -130,6 +151,12 @@
             break;
         case 2:
             [self pushPhotoBroswerWithStyle:LGShowImageTypeImageURL];
+            break;
+        case 3:
+            [self presentCameraSingle];
+            break;
+        case 4:
+            [self presentCameraContinuous];
             break;
             
         default:

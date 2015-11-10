@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		440C6AE71BF1925A006A03B0 /* LGCameraImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 440C6ADE1BF1925A006A03B0 /* LGCameraImageView.m */; };
+		440C6AE81BF1925A006A03B0 /* ZLCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 440C6AE01BF1925A006A03B0 /* ZLCamera.m */; };
+		440C6AE91BF1925A006A03B0 /* ZLCameraImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 440C6AE21BF1925A006A03B0 /* ZLCameraImageView.m */; };
+		440C6AEA1BF1925A006A03B0 /* ZLCameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = 440C6AE41BF1925A006A03B0 /* ZLCameraView.m */; };
+		440C6AEB1BF1925A006A03B0 /* ZLCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 440C6AE61BF1925A006A03B0 /* ZLCameraViewController.m */; };
+		440C6AF21BF19E2F006A03B0 /* shanguangdeng2.png in Resources */ = {isa = PBXBuildFile; fileRef = 440C6AEC1BF19E2F006A03B0 /* shanguangdeng2.png */; };
+		440C6AF31BF19E2F006A03B0 /* shanguangdeng2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 440C6AED1BF19E2F006A03B0 /* shanguangdeng2@2x.png */; };
+		440C6AF41BF19E2F006A03B0 /* X.png in Resources */ = {isa = PBXBuildFile; fileRef = 440C6AEE1BF19E2F006A03B0 /* X.png */; };
+		440C6AF51BF19E2F006A03B0 /* X@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 440C6AEF1BF19E2F006A03B0 /* X@2x.png */; };
+		440C6AF61BF19E2F006A03B0 /* xiang.png in Resources */ = {isa = PBXBuildFile; fileRef = 440C6AF01BF19E2F006A03B0 /* xiang.png */; };
+		440C6AF71BF19E2F006A03B0 /* xiang@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 440C6AF11BF19E2F006A03B0 /* xiang@2x.png */; };
+		440C6AFA1BF19EAC006A03B0 /* paizhao.png in Resources */ = {isa = PBXBuildFile; fileRef = 440C6AF81BF19EAC006A03B0 /* paizhao.png */; };
+		440C6AFB1BF19EAC006A03B0 /* paizhao@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 440C6AF91BF19EAC006A03B0 /* paizhao@2x.png */; };
 		4419271F1BE457ED000E691A /* lock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4419271E1BE457ED000E691A /* lock@2x.png */; };
 		44290B0A1BDF0E3D003D6E79 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 44290B091BDF0E3D003D6E79 /* main.m */; };
 		44290B0D1BDF0E3D003D6E79 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 44290B0C1BDF0E3D003D6E79 /* AppDelegate.m */; };
@@ -61,6 +74,24 @@
 /* Begin PBXFileReference section */
 		2ECC77517E15C5825EBC937E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		37BD9BD12B2BCEE73315516F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		440C6ADD1BF1925A006A03B0 /* LGCameraImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGCameraImageView.h; sourceTree = "<group>"; };
+		440C6ADE1BF1925A006A03B0 /* LGCameraImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGCameraImageView.m; sourceTree = "<group>"; };
+		440C6ADF1BF1925A006A03B0 /* ZLCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLCamera.h; sourceTree = "<group>"; };
+		440C6AE01BF1925A006A03B0 /* ZLCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLCamera.m; sourceTree = "<group>"; };
+		440C6AE11BF1925A006A03B0 /* ZLCameraImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLCameraImageView.h; sourceTree = "<group>"; };
+		440C6AE21BF1925A006A03B0 /* ZLCameraImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLCameraImageView.m; sourceTree = "<group>"; };
+		440C6AE31BF1925A006A03B0 /* ZLCameraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLCameraView.h; sourceTree = "<group>"; };
+		440C6AE41BF1925A006A03B0 /* ZLCameraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLCameraView.m; sourceTree = "<group>"; };
+		440C6AE51BF1925A006A03B0 /* ZLCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLCameraViewController.h; sourceTree = "<group>"; };
+		440C6AE61BF1925A006A03B0 /* ZLCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLCameraViewController.m; sourceTree = "<group>"; };
+		440C6AEC1BF19E2F006A03B0 /* shanguangdeng2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shanguangdeng2.png; sourceTree = "<group>"; };
+		440C6AED1BF19E2F006A03B0 /* shanguangdeng2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shanguangdeng2@2x.png"; sourceTree = "<group>"; };
+		440C6AEE1BF19E2F006A03B0 /* X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = X.png; sourceTree = "<group>"; };
+		440C6AEF1BF19E2F006A03B0 /* X@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "X@2x.png"; sourceTree = "<group>"; };
+		440C6AF01BF19E2F006A03B0 /* xiang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xiang.png; sourceTree = "<group>"; };
+		440C6AF11BF19E2F006A03B0 /* xiang@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xiang@2x.png"; sourceTree = "<group>"; };
+		440C6AF81BF19EAC006A03B0 /* paizhao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paizhao.png; sourceTree = "<group>"; };
+		440C6AF91BF19EAC006A03B0 /* paizhao@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paizhao@2x.png"; sourceTree = "<group>"; };
 		4419271E1BE457ED000E691A /* lock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock@2x.png"; sourceTree = "<group>"; };
 		44290B041BDF0E3D003D6E79 /* LGPhotoBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LGPhotoBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44290B081BDF0E3D003D6E79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -158,6 +189,23 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		440C6ADC1BF1925A006A03B0 /* ZLCamera */ = {
+			isa = PBXGroup;
+			children = (
+				440C6ADD1BF1925A006A03B0 /* LGCameraImageView.h */,
+				440C6ADE1BF1925A006A03B0 /* LGCameraImageView.m */,
+				440C6ADF1BF1925A006A03B0 /* ZLCamera.h */,
+				440C6AE01BF1925A006A03B0 /* ZLCamera.m */,
+				440C6AE11BF1925A006A03B0 /* ZLCameraImageView.h */,
+				440C6AE21BF1925A006A03B0 /* ZLCameraImageView.m */,
+				440C6AE31BF1925A006A03B0 /* ZLCameraView.h */,
+				440C6AE41BF1925A006A03B0 /* ZLCameraView.m */,
+				440C6AE51BF1925A006A03B0 /* ZLCameraViewController.h */,
+				440C6AE61BF1925A006A03B0 /* ZLCameraViewController.m */,
+			);
+			path = ZLCamera;
+			sourceTree = "<group>";
+		};
 		44290AFB1BDF0E3D003D6E79 = {
 			isa = PBXGroup;
 			children = (
@@ -224,6 +272,7 @@
 		44290B2D1BDF0F16003D6E79 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				440C6ADC1BF1925A006A03B0 /* ZLCamera */,
 				44290B371BDF0F16003D6E79 /* LGPhotoBrowser */,
 				44290B4B1BDF0F16003D6E79 /* LGPhotoPicker */,
 				44290B651BDF0F16003D6E79 /* Utils */,
@@ -353,6 +402,14 @@
 		44290BCC1BDF9095003D6E79 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				440C6AF81BF19EAC006A03B0 /* paizhao.png */,
+				440C6AF91BF19EAC006A03B0 /* paizhao@2x.png */,
+				440C6AEC1BF19E2F006A03B0 /* shanguangdeng2.png */,
+				440C6AED1BF19E2F006A03B0 /* shanguangdeng2@2x.png */,
+				440C6AEE1BF19E2F006A03B0 /* X.png */,
+				440C6AEF1BF19E2F006A03B0 /* X@2x.png */,
+				440C6AF01BF19E2F006A03B0 /* xiang.png */,
+				440C6AF11BF19E2F006A03B0 /* xiang@2x.png */,
 				4419271E1BE457ED000E691A /* lock@2x.png */,
 				44290BD71BE09384003D6E79 /* broswerPic0.jpg */,
 				44290BD81BE09384003D6E79 /* broswerPic1.jpg */,
@@ -460,17 +517,25 @@
 			files = (
 				44290BDE1BE09384003D6E79 /* broswerPic2.jpg in Resources */,
 				44290BD61BDF9BE8003D6E79 /* btn_back_imagePicker@2x.png in Resources */,
+				440C6AF21BF19E2F006A03B0 /* shanguangdeng2.png in Resources */,
 				44290BD41BDF9095003D6E79 /* checkbox_pic_non@2x.png in Resources */,
 				44290BDF1BE09384003D6E79 /* broswerPic3.jpg in Resources */,
 				44290BD21BDF9095003D6E79 /* checkbox_pic@2x.png in Resources */,
+				440C6AF41BF19E2F006A03B0 /* X.png in Resources */,
+				440C6AFA1BF19EAC006A03B0 /* paizhao.png in Resources */,
 				44290B131BDF0E3D003D6E79 /* Main.storyboard in Resources */,
+				440C6AF71BF19E2F006A03B0 /* xiang@2x.png in Resources */,
 				44290B181BDF0E3D003D6E79 /* LaunchScreen.xib in Resources */,
+				440C6AF51BF19E2F006A03B0 /* X@2x.png in Resources */,
 				4419271F1BE457ED000E691A /* lock@2x.png in Resources */,
 				44290BDC1BE09384003D6E79 /* broswerPic0.jpg in Resources */,
+				440C6AF61BF19E2F006A03B0 /* xiang.png in Resources */,
 				44290B151BDF0E3D003D6E79 /* Images.xcassets in Resources */,
 				44290BDD1BE09384003D6E79 /* broswerPic1.jpg in Resources */,
 				44290BD31BDF9095003D6E79 /* checkbox_pic_non2@2x.png in Resources */,
 				44290BE01BE09384003D6E79 /* broswerPic4.jpg in Resources */,
+				440C6AFB1BF19EAC006A03B0 /* paizhao@2x.png in Resources */,
+				440C6AF31BF19E2F006A03B0 /* shanguangdeng2@2x.png in Resources */,
 				44290BD11BDF9095003D6E79 /* checkbox_pic2@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -524,12 +589,14 @@
 			files = (
 				44290B9C1BDF0F16003D6E79 /* LGPhotoRect.m in Sources */,
 				44290BA01BDF0F16003D6E79 /* LGPhotoPickerBrowserPhotoScrollView.m in Sources */,
+				440C6AE81BF1925A006A03B0 /* ZLCamera.m in Sources */,
 				44290BA81BDF0F16003D6E79 /* LGPhotoPickerViewController.m in Sources */,
 				44290BCA1BDF1994003D6E79 /* UIView+Layout.m in Sources */,
 				44290BA51BDF0F16003D6E79 /* LGPhotoPickerGroup.m in Sources */,
 				44290B9E1BDF0F16003D6E79 /* LGPhotoPickerBrowserViewController.m in Sources */,
 				44290BAA1BDF0F16003D6E79 /* LGPhotoPickerCollectionViewCell.m in Sources */,
 				44290BA41BDF0F16003D6E79 /* LGPhotoPickerDatas.m in Sources */,
+				440C6AE91BF1925A006A03B0 /* ZLCameraImageView.m in Sources */,
 				44290BA21BDF0F16003D6E79 /* LGPhotoPickerCustomToolBarView.m in Sources */,
 				44290B9B1BDF0F16003D6E79 /* LGPhotoPickerBrowserPhoto.m in Sources */,
 				44290BA91BDF0F16003D6E79 /* LGPhotoPickerCollectionView.m in Sources */,
@@ -541,7 +608,10 @@
 				44290BC71BDF162B003D6E79 /* LGImagePickerSelectView.m in Sources */,
 				44290BAC1BDF0F16003D6E79 /* LGPhotoPickerGroupTableViewCell.m in Sources */,
 				44290B0A1BDF0E3D003D6E79 /* main.m in Sources */,
+				440C6AEB1BF1925A006A03B0 /* ZLCameraViewController.m in Sources */,
 				44290BA71BDF0F16003D6E79 /* LGPhotoPickerGroupViewController.m in Sources */,
+				440C6AE71BF1925A006A03B0 /* LGCameraImageView.m in Sources */,
+				440C6AEA1BF1925A006A03B0 /* ZLCameraView.m in Sources */,
 				44290BA31BDF0F16003D6E79 /* LGPhotoAssets.m in Sources */,
 				44290BA61BDF0F16003D6E79 /* LGPhotoPickerAssetsViewController.m in Sources */,
 				44290BA11BDF0F16003D6E79 /* LGPhotoPickerBrowserPhotoView.m in Sources */,

@@ -48,6 +48,7 @@
 #import "LGPhotoPickerBrowserViewController.h"
 #import "LGPhotoPickerAssetsViewController.h"
 #import "LGPhotoPickerViewController.h"
+#import "ZLCameraViewController.h"
 #import "LGPhotoPickerDatas.h"
 #import "LGPhotoPickerCommon.h"
 #import "UIView+Layout.h"
