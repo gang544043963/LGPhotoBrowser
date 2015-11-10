@@ -14,7 +14,12 @@
 
 
 #3.照相机
-<img src="https://github.com/gang544043963/LGPhotoBrowser/blob/master/LGPhotoBrowser/gif/IMG_2646.PNG?raw=true" alt="CXLSlideList Screenshot" width="300" height="550"/> <img src="https://github.com/gang544043963/LGPhotoBrowser/blob/master/LGPhotoBrowser/gif/IMG_2647.PNG?raw=true" alt="CXLSlideList Screenshot" width="300" height="550"/>
+拍照页面
+<img src="https://github.com/gang544043963/LGPhotoBrowser/blob/master/LGPhotoBrowser/gif/IMG_2648.PNG?raw=true" alt="CXLSlideList Screenshot" width="300" height="550"/> 
+单拍结果
+<img src="https://github.com/gang544043963/LGPhotoBrowser/blob/master/LGPhotoBrowser/gif/IMG_2647.PNG?raw=true" alt="CXLSlideList Screenshot" width="300" height="550"/>
+连拍结果
+<img src="https://github.com/gang544043963/LGPhotoBrowser/blob/master/LGPhotoBrowser/gif/IMG_2646.PNG?raw=true" alt="CXLSlideList Screenshot" width="300" height="550"/>
 
 # SUPPORT
 iOS7 or later
