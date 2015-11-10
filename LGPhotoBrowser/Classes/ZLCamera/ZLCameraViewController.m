@@ -114,11 +114,14 @@ static CGFloat BOTTOM_HEIGHT = 60;
         [self.session addOutput:_captureOutput];
     }
     
+    CGFloat viewWidth = self.view.frame.size.width;
+    CGFloat viewHeight = viewWidth / 480 * 640;;
     self.preview =[AVCaptureVideoPreviewLayer layerWithSession:self.session];
     self.preview.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    self.preview.frame = CGRectMake(0, 40, self.view.width, [UIScreen mainScreen].bounds.size.height - 40 - BOTTOM_HEIGHT);
+    self.preview.frame = CGRectMake(0, 40,viewWidth, viewHeight);
     
-    ZLCameraView *caramView = [[ZLCameraView alloc] initWithFrame:CGRectMake(0, 40, self.view.width, self.view.height - 40 - BOTTOM_HEIGHT)];
+    NSLog(@"%@",NSStringFromCGRect(self.view.frame));
+    ZLCameraView *caramView = [[ZLCameraView alloc] initWithFrame:CGRectMake(0, 40, viewWidth, viewHeight)];
     caramView.backgroundColor = [UIColor clearColor];
     caramView.delegate = self;
     [self.view addSubview:caramView];
