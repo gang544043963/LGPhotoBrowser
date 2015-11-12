@@ -416,25 +416,34 @@ static CGFloat BOTTOM_HEIGHT = 60;
 {
     if (srcImg.imageOrientation == UIImageOrientationUp) return srcImg;
     CGAffineTransform transform = CGAffineTransformIdentity;
-    //优于srcImg.gettingOrientation的值有问题，横竖屏拍照它的值不变。所以现在根据机器硬件的当前旋转方向，来确定自定义imageOrientation，根据这个值来翻转image
+    //由于srcImg.gettingOrientation的值有问题，横竖屏拍照它的值不变。所以现在根据机器硬件的当前旋转方向，来确定自定义imageOrientation，根据这个值来翻转image
     [self gettingOrientation];
+    
+    CGFloat width = srcImg.size.width;
+    CGFloat height = srcImg.size.height;
+    
+    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft ||
+        [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight) {
+        width = srcImg.size.width;
+        height = width * 0.75;  // 640:480
+    }
     
     switch (_imageOrientation) {
         case XGImageOrientationDown:
         case XGImageOrientationDownMirrored:
-            transform = CGAffineTransformTranslate(transform, srcImg.size.width, srcImg.size.height);
+            transform = CGAffineTransformTranslate(transform, width, height);
             transform = CGAffineTransformRotate(transform, M_PI);
             break;
             
         case XGImageOrientationLeft:
         case XGImageOrientationLeftMirrored:
-            transform = CGAffineTransformTranslate(transform, srcImg.size.width, 0);
+            transform = CGAffineTransformTranslate(transform, width, 0);
             transform = CGAffineTransformRotate(transform, M_PI_2);
             break;
             
         case XGImageOrientationRight:
         case XGImageOrientationRightMirrored:
-            transform = CGAffineTransformTranslate(transform, 0, srcImg.size.height);
+            transform = CGAffineTransformTranslate(transform, 0, height);
             transform = CGAffineTransformRotate(transform, -M_PI_2);
             break;
         case XGImageOrientationUp:
@@ -445,13 +454,13 @@ static CGFloat BOTTOM_HEIGHT = 60;
     switch (_imageOrientation) {
         case XGImageOrientationUpMirrored:
         case XGImageOrientationDownMirrored:
-            transform = CGAffineTransformTranslate(transform, srcImg.size.width, 0);
+            transform = CGAffineTransformTranslate(transform, width, 0);
             transform = CGAffineTransformScale(transform, -1, 1);
             break;
             
         case XGImageOrientationLeftMirrored:
         case XGImageOrientationRightMirrored:
-            transform = CGAffineTransformTranslate(transform, srcImg.size.height, 0);
+            transform = CGAffineTransformTranslate(transform, height, 0);
             transform = CGAffineTransformScale(transform, -1, 1);
             break;
         case XGImageOrientationUp:
@@ -461,28 +470,32 @@ static CGFloat BOTTOM_HEIGHT = 60;
             break;
     }
     
-    CGContextRef ctx = CGBitmapContextCreate(NULL, srcImg.size.width, srcImg.size.height,
+    CGContextRef ctx = CGBitmapContextCreate(NULL, width, height,
                                              CGImageGetBitsPerComponent(srcImg.CGImage), 0,
                                              CGImageGetColorSpace(srcImg.CGImage),
                                              CGImageGetBitmapInfo(srcImg.CGImage));
+    
+    
     CGContextConcatCTM(ctx, transform);
     switch (_imageOrientation) {
         case XGImageOrientationLeft:
         case XGImageOrientationLeftMirrored:
         case XGImageOrientationRight:
         case XGImageOrientationRightMirrored:
-            CGContextDrawImage(ctx, CGRectMake(0,0,srcImg.size.height,srcImg.size.width), srcImg.CGImage);
+            CGContextDrawImage(ctx, CGRectMake(0,0,height,width), srcImg.CGImage);
             break;
             
         default:
-            CGContextDrawImage(ctx, CGRectMake(0,0,srcImg.size.width,srcImg.size.height), srcImg.CGImage);
+            CGContextDrawImage(ctx, CGRectMake(0,0,width,height), srcImg.CGImage);
             break;
     }
     
     CGImageRef cgimg = CGBitmapContextCreateImage(ctx);
     UIImage *img = [UIImage imageWithCGImage:cgimg];
+    
     CGContextRelease(ctx);
     CGImageRelease(cgimg);
+    
     return img;
 }
 

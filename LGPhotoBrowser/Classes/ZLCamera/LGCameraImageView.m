@@ -66,25 +66,13 @@ static CGFloat BOTTOM_HEIGHT = 60;
 - (void)setImageToDisplay:(UIImage *)imageToDisplay {
     _imageToDisplay = imageToDisplay;
     
-    NSLog(@"%@",NSStringFromCGSize(imageToDisplay.size));
-    CGSize size;
-    
-    //不管是横拍还是竖拍，出来的iamge的size.width始终是窄的那个边，size.height是长的那个边。所以要在这里判断
-    NSLog(@"%d",imageToDisplay.imageOrientation);
-    switch (_imageOrientation) {
-        case UIImageOrientationLeft:
-        case UIImageOrientationLeftMirrored:
-        case UIImageOrientationRight:
-        case UIImageOrientationRightMirrored:
-            size.width = [UIScreen mainScreen].bounds.size.width;
-            size.height = ([UIScreen mainScreen].bounds.size.width / imageToDisplay.size.width) * imageToDisplay.size.height;
-            break;
-            
-        default:
-            size.width = [UIScreen mainScreen].bounds.size.width;
-            size.height = ([UIScreen mainScreen].bounds.size.width / imageToDisplay.size.height) * imageToDisplay.size.width;
-            break;
+    if (imageToDisplay == nil) {
+        return;
     }
+    
+    CGSize size;
+    size.width = [UIScreen mainScreen].bounds.size.width;
+    size.height = ([UIScreen mainScreen].bounds.size.width / imageToDisplay.size.width) * imageToDisplay.size.height;
     
     CGFloat x = (self.frame.size.width - size.width) / 2;
     CGFloat y = (self.frame.size.height - size.height) / 2;
