@@ -73,7 +73,7 @@ static CGFloat BOTTOM_HEIGHT = 60;
     CGSize size;
     size.width = [UIScreen mainScreen].bounds.size.width;
     size.height = ([UIScreen mainScreen].bounds.size.width / imageToDisplay.size.width) * imageToDisplay.size.height;
-    
+    NSLog(@"%@",NSStringFromCGSize(size));
     CGFloat x = (self.frame.size.width - size.width) / 2;
     CGFloat y = (self.frame.size.height - size.height) / 2;
     _photoDisplayView.frame = CGRectMake(x, y, size.width, size.height);

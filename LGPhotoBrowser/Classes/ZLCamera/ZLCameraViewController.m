@@ -103,7 +103,7 @@ static CGFloat BOTTOM_HEIGHT = 60;
     // Session
     self.session = [[AVCaptureSession alloc]init];
     
-    [self.session setSessionPreset:AVCaptureSessionPreset640x480];
+    [self.session setSessionPreset:AVCaptureSessionPresetHigh];
     if ([self.session canAddInput:self.input])
     {
         [self.session addInput:self.input];
@@ -348,6 +348,7 @@ static CGFloat BOTTOM_HEIGHT = 60;
          // Continue as appropriate.
          NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
          UIImage *t_image = [UIImage imageWithData:imageData];
+         t_image = [self cutImage:t_image];
          t_image = [self fixOrientation:t_image];
          NSData *data = UIImageJPEGRepresentation(t_image, 0.3);
          ZLCamera *camera = [[ZLCamera alloc] init];
@@ -366,127 +367,78 @@ static CGFloat BOTTOM_HEIGHT = 60;
      }];
 }
 
-//LG
-- (void)gettingOrientation {
+//裁剪image
+- (UIImage *)cutImage:(UIImage *)srcImg {
+    //注意：这个rect是指横屏时的rect，即屏幕对着自己，home建在右边
+    CGRect rect = CGRectMake((srcImg.size.height / CGRectGetHeight(self.view.frame)) * 70, 0, srcImg.size.width * 1.33, srcImg.size.width);
+    CGImageRef subImageRef = CGImageCreateWithImageInRect(srcImg.CGImage, rect);
+    CGFloat subWidth = CGImageGetWidth(subImageRef);
+    CGFloat subHeight = CGImageGetHeight(subImageRef);
+    CGRect smallBounds = CGRectMake(0, 0, subWidth, subHeight);
+    //旋转后，画出来
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    transform = CGAffineTransformTranslate(transform, 0, subWidth);
+    transform = CGAffineTransformRotate(transform, -M_PI_2);
+    CGContextRef ctx = CGBitmapContextCreate(NULL, subHeight, subWidth,
+                                             CGImageGetBitsPerComponent(subImageRef), 0,
+                                             CGImageGetColorSpace(subImageRef),
+                                             CGImageGetBitmapInfo(subImageRef));
+    CGContextConcatCTM(ctx, transform);
+    CGContextDrawImage(ctx, smallBounds, subImageRef);
+    CGImageRef cgimg = CGBitmapContextCreateImage(ctx);
+    UIImage *img = [UIImage imageWithCGImage:cgimg];
     
-    NSArray *inputs = self.session.inputs;
-    AVCaptureDevicePosition position;
-    for ( AVCaptureDeviceInput *input in inputs ) {
-        AVCaptureDevice *device = input.device;
-        if ( [device hasMediaType:AVMediaTypeVideo] ) {
-            position = device.position;
-        }
-    }
+    CGContextRelease(ctx);
+    CGImageRelease(cgimg);
+    return img;
+}
+
+//旋转image
+- (UIImage *)fixOrientation:(UIImage *)srcImg
+{
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    CGFloat width = srcImg.size.width;
+    CGFloat height = srcImg.size.height;
+    
+    CGContextRef ctx;
     
     switch ([[UIDevice currentDevice] orientation]) {
         case UIDeviceOrientationUnknown:
         case UIDeviceOrientationFaceUp:
         case UIDeviceOrientationFaceDown:
         case UIDeviceOrientationPortrait:
-        case UIDeviceOrientationPortraitUpsideDown:
-            _imageOrientation = XGImageOrientationRight;
-//            if (position == AVCaptureDevicePositionFront) {
-//                _imageOrientation = XGImageOrientationDownMirrored;
-//            }
-            break;
-//        case UIDeviceOrientationPortraitUpsideDown:
-//            _imageOrientation = XGImageOrientationLeft;
-//            if (position == AVCaptureDevicePositionFront) {
-//                _imageOrientation = XGImageOrientationLeftMirrored;
-//            }
-//            break;
-        case UIDeviceOrientationLandscapeLeft:
-            _imageOrientation = XGImageOrientationUp;
-//            if (position == AVCaptureDevicePositionFront) {
-//                _imageOrientation = XGImageOrientationUpMirrored;
-//            }
-            break;
-        case UIDeviceOrientationLandscapeRight:
-            _imageOrientation = XGImageOrientationDown;
-//            if (position == AVCaptureDevicePositionFront) {
-//                _imageOrientation = XGImageOrientationDownMirrored;
-//            }
-            break;
-        default:
-            break;
-    }
-}
-
-- (UIImage *)fixOrientation:(UIImage *)srcImg
-{
-    if (srcImg.imageOrientation == UIImageOrientationUp) return srcImg;
-    CGAffineTransform transform = CGAffineTransformIdentity;
-    //由于srcImg.gettingOrientation的值有问题，横竖屏拍照它的值不变。所以现在根据机器硬件的当前旋转方向，来确定自定义imageOrientation，根据这个值来翻转image
-    [self gettingOrientation];
-    
-    CGFloat width = srcImg.size.width;
-    CGFloat height = srcImg.size.height;
-    
-    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft ||
-        [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight) {
-        width = srcImg.size.width;
-        height = width * 0.75;  // 640:480
-    }
-    
-    switch (_imageOrientation) {
-        case XGImageOrientationDown:
-        case XGImageOrientationDownMirrored:
-            transform = CGAffineTransformTranslate(transform, width, height);
-            transform = CGAffineTransformRotate(transform, M_PI);
-            break;
-            
-        case XGImageOrientationLeft:
-        case XGImageOrientationLeftMirrored:
-            transform = CGAffineTransformTranslate(transform, width, 0);
-            transform = CGAffineTransformRotate(transform, M_PI_2);
-            break;
-            
-        case XGImageOrientationRight:
-        case XGImageOrientationRightMirrored:
-            transform = CGAffineTransformTranslate(transform, 0, height);
-            transform = CGAffineTransformRotate(transform, -M_PI_2);
-            break;
-        case XGImageOrientationUp:
-        case XGImageOrientationUpMirrored:
-            break;
-    }
-    
-    switch (_imageOrientation) {
-        case XGImageOrientationUpMirrored:
-        case XGImageOrientationDownMirrored:
-            transform = CGAffineTransformTranslate(transform, width, 0);
-            transform = CGAffineTransformScale(transform, -1, 1);
-            break;
-            
-        case XGImageOrientationLeftMirrored:
-        case XGImageOrientationRightMirrored:
-            transform = CGAffineTransformTranslate(transform, height, 0);
-            transform = CGAffineTransformScale(transform, -1, 1);
-            break;
-        case XGImageOrientationUp:
-        case XGImageOrientationDown:
-        case XGImageOrientationLeft:
-        case XGImageOrientationRight:
-            break;
-    }
-    
-    CGContextRef ctx = CGBitmapContextCreate(NULL, width, height,
-                                             CGImageGetBitsPerComponent(srcImg.CGImage), 0,
-                                             CGImageGetColorSpace(srcImg.CGImage),
-                                             CGImageGetBitmapInfo(srcImg.CGImage));
-    
-    
-    CGContextConcatCTM(ctx, transform);
-    switch (_imageOrientation) {
-        case XGImageOrientationLeft:
-        case XGImageOrientationLeftMirrored:
-        case XGImageOrientationRight:
-        case XGImageOrientationRightMirrored:
-            CGContextDrawImage(ctx, CGRectMake(0,0,height,width), srcImg.CGImage);
-            break;
-            
-        default:
+        case UIDeviceOrientationPortraitUpsideDown: //竖屏，不旋转
+            ctx = CGBitmapContextCreate(NULL, width, height,
+                                        CGImageGetBitsPerComponent(srcImg.CGImage), 0,
+                                        CGImageGetColorSpace(srcImg.CGImage),
+                                        CGImageGetBitmapInfo(srcImg.CGImage));
+            CGContextConcatCTM(ctx, transform);
             CGContextDrawImage(ctx, CGRectMake(0,0,width,height), srcImg.CGImage);
+            break;
+            
+        case UIDeviceOrientationLandscapeLeft:  //横屏，home键在右手边，逆时针旋转90°
+            transform = CGAffineTransformTranslate(transform, height, 0);
+            transform = CGAffineTransformRotate(transform, M_PI_2);
+            ctx = CGBitmapContextCreate(NULL, height, width,
+                                        CGImageGetBitsPerComponent(srcImg.CGImage), 0,
+                                        CGImageGetColorSpace(srcImg.CGImage),
+                                        CGImageGetBitmapInfo(srcImg.CGImage));
+            CGContextConcatCTM(ctx, transform);
+            CGContextDrawImage(ctx, CGRectMake(0,0,width,height), srcImg.CGImage);
+            break;
+            
+        case UIDeviceOrientationLandscapeRight:  //横屏，home键在左手边，顺时针旋转90°
+            transform = CGAffineTransformTranslate(transform, 0, width);
+            transform = CGAffineTransformRotate(transform, -M_PI_2);
+            ctx = CGBitmapContextCreate(NULL, height, width,
+                                        CGImageGetBitsPerComponent(srcImg.CGImage), 0,
+                                        CGImageGetColorSpace(srcImg.CGImage),
+                                        CGImageGetBitmapInfo(srcImg.CGImage));
+            CGContextConcatCTM(ctx, transform);
+            CGContextDrawImage(ctx, CGRectMake(0,0,width,height), srcImg.CGImage);
+            break;
+            
+        default:
             break;
     }
     
@@ -498,77 +450,6 @@ static CGFloat BOTTOM_HEIGHT = 60;
     
     return img;
 }
-
-//- (UIImage *)fixOrientation:(UIImage *)srcImg
-//{
-//    if (srcImg.imageOrientation == UIImageOrientationUp) return srcImg;
-//    CGAffineTransform transform = CGAffineTransformIdentity;
-//    switch (srcImg.imageOrientation) {
-//        case UIImageOrientationDown:
-//        case UIImageOrientationDownMirrored:
-//            transform = CGAffineTransformTranslate(transform, srcImg.size.width, srcImg.size.height);
-//            transform = CGAffineTransformRotate(transform, M_PI);
-//            break;
-//            
-//        case UIImageOrientationLeft:
-//        case UIImageOrientationLeftMirrored:
-//            transform = CGAffineTransformTranslate(transform, srcImg.size.width, 0);
-//            transform = CGAffineTransformRotate(transform, M_PI_2);
-//            break;
-//            
-//        case UIImageOrientationRight:
-//        case UIImageOrientationRightMirrored:
-//            transform = CGAffineTransformTranslate(transform, 0, srcImg.size.height);
-//            transform = CGAffineTransformRotate(transform, -M_PI_2);
-//            break;
-//        case UIImageOrientationUp:
-//        case UIImageOrientationUpMirrored:
-//            break;
-//    }
-//    
-//    switch (srcImg.imageOrientation) {
-//        case UIImageOrientationUpMirrored:
-//        case UIImageOrientationDownMirrored:
-//            transform = CGAffineTransformTranslate(transform, srcImg.size.width, 0);
-//            transform = CGAffineTransformScale(transform, -1, 1);
-//            break;
-//            
-//        case UIImageOrientationLeftMirrored:
-//        case UIImageOrientationRightMirrored:
-//            transform = CGAffineTransformTranslate(transform, srcImg.size.height, 0);
-//            transform = CGAffineTransformScale(transform, -1, 1);
-//            break;
-//        case UIImageOrientationUp:
-//        case UIImageOrientationDown:
-//        case UIImageOrientationLeft:
-//        case UIImageOrientationRight:
-//            break;
-//    }
-//
-//    CGContextRef ctx = CGBitmapContextCreate(NULL, srcImg.size.width, srcImg.size.height,
-//                                             CGImageGetBitsPerComponent(srcImg.CGImage), 0,
-//                                             CGImageGetColorSpace(srcImg.CGImage),
-//                                             CGImageGetBitmapInfo(srcImg.CGImage));
-//    CGContextConcatCTM(ctx, transform);
-//    switch (srcImg.imageOrientation) {
-//        case UIImageOrientationLeft:
-//        case UIImageOrientationLeftMirrored:
-//        case UIImageOrientationRight:
-//        case UIImageOrientationRightMirrored:
-//            CGContextDrawImage(ctx, CGRectMake(0,0,srcImg.size.height,srcImg.size.width), srcImg.CGImage);
-//            break;
-//            
-//        default:
-//            CGContextDrawImage(ctx, CGRectMake(0,0,srcImg.size.width,srcImg.size.height), srcImg.CGImage);
-//            break;
-//    }
-//
-//    CGImageRef cgimg = CGBitmapContextCreateImage(ctx);
-//    UIImage *img = [UIImage imageWithCGImage:cgimg];
-//    CGContextRelease(ctx);
-//    CGImageRelease(cgimg);
-//    return img;
-//}
 
 //LG
 - (void)displayImage:(UIImage *)images {
