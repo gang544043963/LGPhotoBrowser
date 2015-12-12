@@ -27,6 +27,9 @@
 
 <img src="https://github.com/gang544043963/LGPhotoBrowser/blob/master/LGPhotoBrowser/gif/IMG_2651.PNG?raw=true" alt="CXLSlideList Screenshot" width="300" height="550"/>
 
+# 初始化
+见ViewController.m，注释很清楚
+
 # SUPPORT
 iOS7 or later
 
