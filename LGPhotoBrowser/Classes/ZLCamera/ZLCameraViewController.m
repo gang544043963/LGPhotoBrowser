@@ -391,6 +391,19 @@ static CGFloat BOTTOM_HEIGHT = 60;
     CGContextRelease(ctx);
     CGImageRelease(cgimg);
     return img;
+    
+    
+//    CGImageRef subImageRef = CGImageCreateWithImageInRect(srcImg.CGImage, rect);
+//    CGRect smallBounds = CGRectMake(0, 0, CGImageGetWidth(subImageRef), CGImageGetHeight(subImageRef));
+//    
+//    UIGraphicsBeginImageContext(smallBounds.size);
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    CGContextDrawImage(context, smallBounds, subImageRef);
+//    UIImage* smallImage = [UIImage imageWithCGImage:subImageRef scale:1 orientation:UIImageOrientationRight];//由于直接从subImageRef中得到uiimage的方向是逆时针转了90°的
+//    UIGraphicsEndImageContext();
+//    CGImageRelease(subImageRef);
+//    
+//    return smallImage;
 }
 
 //旋转image
@@ -412,8 +425,6 @@ static CGFloat BOTTOM_HEIGHT = 60;
                                         CGImageGetBitsPerComponent(srcImg.CGImage), 0,
                                         CGImageGetColorSpace(srcImg.CGImage),
                                         CGImageGetBitmapInfo(srcImg.CGImage));
-            CGContextConcatCTM(ctx, transform);
-            CGContextDrawImage(ctx, CGRectMake(0,0,width,height), srcImg.CGImage);
             break;
             
         case UIDeviceOrientationLandscapeLeft:  //横屏，home键在右手边，逆时针旋转90°
@@ -423,8 +434,6 @@ static CGFloat BOTTOM_HEIGHT = 60;
                                         CGImageGetBitsPerComponent(srcImg.CGImage), 0,
                                         CGImageGetColorSpace(srcImg.CGImage),
                                         CGImageGetBitmapInfo(srcImg.CGImage));
-            CGContextConcatCTM(ctx, transform);
-            CGContextDrawImage(ctx, CGRectMake(0,0,width,height), srcImg.CGImage);
             break;
             
         case UIDeviceOrientationLandscapeRight:  //横屏，home键在左手边，顺时针旋转90°
@@ -434,14 +443,14 @@ static CGFloat BOTTOM_HEIGHT = 60;
                                         CGImageGetBitsPerComponent(srcImg.CGImage), 0,
                                         CGImageGetColorSpace(srcImg.CGImage),
                                         CGImageGetBitmapInfo(srcImg.CGImage));
-            CGContextConcatCTM(ctx, transform);
-            CGContextDrawImage(ctx, CGRectMake(0,0,width,height), srcImg.CGImage);
             break;
             
         default:
             break;
     }
     
+    CGContextConcatCTM(ctx, transform);
+    CGContextDrawImage(ctx, CGRectMake(0,0,width,height), srcImg.CGImage);
     CGImageRef cgimg = CGBitmapContextCreateImage(ctx);
     UIImage *img = [UIImage imageWithCGImage:cgimg];
     

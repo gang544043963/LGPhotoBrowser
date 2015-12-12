@@ -29,14 +29,31 @@
     self.titleArray = [[NSArray alloc] init];
     self.titleArray = @[@"照片选择器",@"照片浏览器",@"网络图片浏览器",@"单张拍照",@"手动连拍"];
     
-    
+    [self prepareForPhotoBroswerWithImage];
+    [self prepareForPhotoBroswerWithURL];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/**
+ *  给照片浏览器传image的时候先包装成LGPhotoPickerBrowserPhoto对象
+ */
+- (void)prepareForPhotoBroswerWithImage {
     self.LGPhotoPickerBrowserPhotoArray = [[NSMutableArray alloc] init];
     for (int i = 0; i < 5; i++) {
         LGPhotoPickerBrowserPhoto *photo = [[LGPhotoPickerBrowserPhoto alloc] init];
         photo.photoImage = [UIImage imageNamed:[NSString stringWithFormat:@"broswerPic%d.jpg",i]];
         [self.LGPhotoPickerBrowserPhotoArray addObject:photo];
     }
-    
+}
+
+/**
+ *  给照片浏览器传URL的时候先包装成LGPhotoPickerBrowserPhoto对象
+ */
+- (void)prepareForPhotoBroswerWithURL {
     self.LGPhotoPickerBrowserURLArray = [[NSMutableArray alloc] init];
     
     LGPhotoPickerBrowserPhoto *photo = [[LGPhotoPickerBrowserPhoto alloc] init];
@@ -60,23 +77,21 @@
     [self.LGPhotoPickerBrowserURLArray addObject:photo4];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
+/**
+ *  初始化相册选择器
+ */
 - (void)presentPhotoPickerViewControllerWithStyle:(LGShowImageType)style {
-    // 创建控制器
     LGPhotoPickerViewController *pickerVc = [[LGPhotoPickerViewController alloc] initWithShowType:style];
-    // 默认显示相册里面的内容SavePhotos
     pickerVc.status = PickerViewShowStatusCameraRoll;
-    // 最多能选9张图片
-    pickerVc.maxCount = 9;
+    pickerVc.maxCount = 9;   // 最多能选9张图片
     pickerVc.delegate = self;
     self.showType = style;
     [pickerVc showPickerVc:self];
 }
 
+/**
+ *  初始化图片浏览器
+ */
 - (void)pushPhotoBroswerWithStyle:(LGShowImageType)style{
     LGPhotoPickerBrowserViewController *BroswerVC = [[LGPhotoPickerBrowserViewController alloc] init];
     BroswerVC.delegate = self;
@@ -86,6 +101,9 @@
     [self presentViewController:BroswerVC animated:YES completion:nil];
 }
 
+/**
+ *  初始化自定义相机（单拍）
+ */
 - (void)presentCameraSingle {
     ZLCameraViewController *cameraVC = [[ZLCameraViewController alloc] init];
     // 拍照最多个数
@@ -98,6 +116,9 @@
     [cameraVC showPickerVc:self];
 }
 
+/**
+ *  初始化自定义相机（连拍）
+ */
 - (void)presentCameraContinuous {
     ZLCameraViewController *cameraVC = [[ZLCameraViewController alloc] init];
     // 拍照最多个数
@@ -111,6 +132,7 @@
 }
 
 #pragma mark - UITableViewDataSource
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.titleArray.count;
 }
@@ -140,6 +162,7 @@
 }
 
 #pragma mark - UITableViewDelegate
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     switch (indexPath.row) {
@@ -165,6 +188,7 @@
 }
 
 #pragma mark - LGPhotoPickerViewControllerDelegate
+
 - (void)pickerViewControllerDoneAsstes:(NSArray *)assets isOriginal:(BOOL)original{
     NSInteger num = (long)assets.count;
     NSString *isOriginal = original? @"YES":@"NO";
@@ -173,6 +197,7 @@
 }
 
 #pragma mark - LGPhotoPickerBrowserViewControllerDataSource
+
 - (NSInteger)photoBrowser:(LGPhotoPickerBrowserViewController *)photoBrowser numberOfItemsInSection:(NSUInteger)section{if (self.showType == LGShowImageTypeImageBroswer) {
         return self.LGPhotoPickerBrowserPhotoArray.count;
     } else if (self.showType == LGShowImageTypeImageURL) {
@@ -193,4 +218,5 @@
         return nil;
     }
 }
+
 @end
