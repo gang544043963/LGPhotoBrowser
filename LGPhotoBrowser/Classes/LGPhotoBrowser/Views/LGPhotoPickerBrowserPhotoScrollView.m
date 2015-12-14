@@ -213,8 +213,6 @@
     }
 }
 
-
-
 #pragma mark - Image
 // Get and display image
 - (void)displayImage {

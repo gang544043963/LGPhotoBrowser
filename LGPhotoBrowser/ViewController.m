@@ -57,7 +57,7 @@
     self.LGPhotoPickerBrowserURLArray = [[NSMutableArray alloc] init];
     
     LGPhotoPickerBrowserPhoto *photo = [[LGPhotoPickerBrowserPhoto alloc] init];
-    photo.photoURL = [NSURL URLWithString:@"http://c.hiphotos.baidu.com/image/pic/item/060828381f30e9242ab42f274f086e061d95f790.jpg"];
+    photo.photoURL = [NSURL URLWithString:@"http://img.ivsky.com/img/bizhi/slides/201511/11/december.jpg"];
     [self.LGPhotoPickerBrowserURLArray addObject:photo];
     
     LGPhotoPickerBrowserPhoto *photo1 = [[LGPhotoPickerBrowserPhoto alloc] init];

@@ -12,4 +12,4 @@ SPEC CHECKSUMS:
   DACircularProgress: aec7ca6c28bc1e59c87ba8a9fa7bb6db4fea4c2c
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0
