@@ -58,6 +58,7 @@
 		44290BDE1BE09384003D6E79 /* broswerPic2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 44290BD91BE09384003D6E79 /* broswerPic2.jpg */; };
 		44290BDF1BE09384003D6E79 /* broswerPic3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 44290BDA1BE09384003D6E79 /* broswerPic3.jpg */; };
 		44290BE01BE09384003D6E79 /* broswerPic4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 44290BDB1BE09384003D6E79 /* broswerPic4.jpg */; };
+		447810A41C229BDC0034CAAD /* icon_pic_break@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 447810A31C229BDC0034CAAD /* icon_pic_break@2x.png */; };
 		7326D278128DAD4527323D9A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BD9BD12B2BCEE73315516F /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -158,6 +159,7 @@
 		44290BD91BE09384003D6E79 /* broswerPic2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = broswerPic2.jpg; sourceTree = "<group>"; };
 		44290BDA1BE09384003D6E79 /* broswerPic3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = broswerPic3.jpg; sourceTree = "<group>"; };
 		44290BDB1BE09384003D6E79 /* broswerPic4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = broswerPic4.jpg; sourceTree = "<group>"; };
+		447810A31C229BDC0034CAAD /* icon_pic_break@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_pic_break@2x.png"; sourceTree = "<group>"; };
 		891E184C5F40315182CC2473 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -402,6 +404,7 @@
 		44290BCC1BDF9095003D6E79 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				447810A31C229BDC0034CAAD /* icon_pic_break@2x.png */,
 				440C6AF81BF19EAC006A03B0 /* paizhao.png */,
 				440C6AF91BF19EAC006A03B0 /* paizhao@2x.png */,
 				440C6AEC1BF19E2F006A03B0 /* shanguangdeng2.png */,
@@ -530,6 +533,7 @@
 				440C6AF51BF19E2F006A03B0 /* X@2x.png in Resources */,
 				4419271F1BE457ED000E691A /* lock@2x.png in Resources */,
 				44290BDC1BE09384003D6E79 /* broswerPic0.jpg in Resources */,
+				447810A41C229BDC0034CAAD /* icon_pic_break@2x.png in Resources */,
 				440C6AF61BF19E2F006A03B0 /* xiang.png in Resources */,
 				44290B151BDF0E3D003D6E79 /* Images.xcassets in Resources */,
 				44290BDD1BE09384003D6E79 /* broswerPic1.jpg in Resources */,

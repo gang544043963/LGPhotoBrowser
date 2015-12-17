@@ -55,7 +55,7 @@
         _photoImageView = [[LGPhotoPickerBrowserPhotoImageView alloc] initWithFrame:CGRectZero];
         _photoImageView.tapDelegate = self;
         _photoImageView.contentMode = UIViewContentModeCenter;
-        _photoImageView.backgroundColor = [UIColor whiteColor];
+        _photoImageView.backgroundColor = [UIColor clearColor];
         [self addSubview:_photoImageView];
         
         // Setup
@@ -202,6 +202,8 @@
                     [weakSelf displayImage];
                 }else{
                     [_photoImageView removeScaleBigTap];
+                    _photoImageView.image = [UIImage imageNamed:@"icon_pic_break.png"];
+                    [weakSelf displayImage];
                 }
             }];
         }
