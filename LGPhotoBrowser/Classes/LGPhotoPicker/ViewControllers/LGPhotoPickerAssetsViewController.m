@@ -512,6 +512,7 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
 - (void)photoBrowserSendBtnTouched:(LGPhotoPickerBrowserViewController *)pickerBrowser isOriginal:(BOOL)isOriginal
 {
     self.isOriginal = isOriginal;
+    self.selectAssets = pickerBrowser.selectedAssets;
     [self sendBtnTouched];
 }
 
