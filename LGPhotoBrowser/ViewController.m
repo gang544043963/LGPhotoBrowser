@@ -112,6 +112,12 @@
     cameraVC.cameraType = ZLCameraSingle;
     cameraVC.callback = ^(NSArray *cameras){
         //在这里得到拍照结果
+        //数组元素是ZLCamera对象
+        /*
+         @exemple
+         ZLCamera *canamerPhoto = cameras[0];
+         UIImage *image = canamerPhoto.photoImage;
+         */
     };
     [cameraVC showPickerVc:self];
 }
@@ -127,6 +133,12 @@
     cameraVC.cameraType = ZLCameraContinuous;
     cameraVC.callback = ^(NSArray *cameras){
         //在这里得到拍照结果
+        //数组元素是ZLCamera对象
+        /*
+         @exemple
+            ZLCamera *canamerPhoto = cameras[0];
+            UIImage *image = canamerPhoto.photoImage;
+         */
     };
     [cameraVC showPickerVc:self];
 }
