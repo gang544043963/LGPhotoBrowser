@@ -10,6 +10,6 @@ s.author       = { "ligang" => "544043963@.com" }
 s.platform     = :ios, "7.0"
 s.ios.deployment_target = "7.0"
 s.source       = { :git => "https://github.com/gang544043963/LGPhotoBrowser.git", :tag => s.version}
-s.source_files  = 'Classes/*'
+s.source_files  = 'LGPhotoBrowser/Classes/*'
 s.requires_arc = true
 end
