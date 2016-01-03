@@ -32,6 +32,8 @@
 
 '#import "LGPhoto.h"'
 
+暂不支持coacoPod
+
 # 初始化
 见ViewController.m，注释很清楚
 
