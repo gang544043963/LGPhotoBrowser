@@ -162,7 +162,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, HEADER_HEIGHT)];
-    textView.text = @"欢迎使用本框架\n如果在使用过程中遇到问题请联系作者\nQQ:544043963\nE-mail:544043963@qq.com\n博客:http://blog.csdn.net/gang544043963";
+    textView.text = @"欢迎使用本框架\n如果在使用过程中遇到问题请联系作者\nE-mail:544043963@qq.com\n博客:http://blog.csdn.net/gang544043963";
     [textView setBackgroundColor:[UIColor redColor]];
     textView.textAlignment = NSTextAlignmentCenter;
     textView.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:14];

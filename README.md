@@ -27,8 +27,24 @@
 
 <img src="https://github.com/gang544043963/LGPhotoBrowser/blob/master/LGPhotoBrowser/gif/IMG_2651.PNG?raw=true" alt="CXLSlideList Screenshot" width="300" height="550"/>
 
+# 添加到工程
+拷贝class文件夹到工程.
+
+'#import "LGPhoto.h"'
+
 # 初始化
 见ViewController.m，注释很清楚
+
+# 环境支持
+iOS7及更高
+
+# Adding to your preject
+copy the folder named 'Class' to your preject.
+
+'#import "LGPhoto.h"'
+
+# INITIALIZATION
+reference ViewController
 
 # SUPPORT
 iOS7 or later
