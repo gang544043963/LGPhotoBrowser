@@ -7,11 +7,7 @@
 //
 
 #import "LGCameraImageView.h"
-//#import "UIImage+ZLPhotoLib.h"
-//#import "UIImage+fixOrientation.h"
 
-static CGFloat ZLCameraColletionViewW = 80;
-static CGFloat ZLCameraColletionViewPadding = 20;
 static CGFloat BOTTOM_HEIGHT = 60;
 
 @interface LGCameraImageView()

@@ -35,6 +35,7 @@
 		440CC5031C392C9C0010FD30 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 440CC4F21C392C9C0010FD30 /* UIImageView+HighlightedWebCache.m */; };
 		440CC5041C392C9C0010FD30 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 440CC4F41C392C9C0010FD30 /* UIImageView+WebCache.m */; };
 		440CC5051C392C9C0010FD30 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 440CC4F61C392C9C0010FD30 /* UIView+WebCacheOperation.m */; };
+		440CC5071C43CA140010FD30 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 440CC5061C43CA140010FD30 /* Default-568h@2x.png */; };
 		4419271F1BE457ED000E691A /* lock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4419271E1BE457ED000E691A /* lock@2x.png */; };
 		44290B0A1BDF0E3D003D6E79 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 44290B091BDF0E3D003D6E79 /* main.m */; };
 		44290B0D1BDF0E3D003D6E79 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 44290B0C1BDF0E3D003D6E79 /* AppDelegate.m */; };
@@ -136,6 +137,7 @@
 		440CC4F41C392C9C0010FD30 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		440CC4F51C392C9C0010FD30 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		440CC4F61C392C9C0010FD30 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		440CC5061C43CA140010FD30 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		4419271E1BE457ED000E691A /* lock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock@2x.png"; sourceTree = "<group>"; };
 		44290B041BDF0E3D003D6E79 /* LGPhotoBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LGPhotoBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44290B081BDF0E3D003D6E79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 		44290AFB1BDF0E3D003D6E79 = {
 			isa = PBXGroup;
 			children = (
+				440CC5061C43CA140010FD30 /* Default-568h@2x.png */,
 				44290B061BDF0E3D003D6E79 /* LGPhotoBrowser */,
 				44290B201BDF0E3D003D6E79 /* LGPhotoBrowserTests */,
 				44290B051BDF0E3D003D6E79 /* Products */,
@@ -557,7 +560,7 @@
 		44290AFC1BDF0E3D003D6E79 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "L&G";
 				TargetAttributes = {
 					44290B031BDF0E3D003D6E79 = {
@@ -598,6 +601,7 @@
 				440C6AF21BF19E2F006A03B0 /* shanguangdeng2.png in Resources */,
 				44290BD41BDF9095003D6E79 /* checkbox_pic_non@2x.png in Resources */,
 				44290BDF1BE09384003D6E79 /* broswerPic3.jpg in Resources */,
+				440CC5071C43CA140010FD30 /* Default-568h@2x.png in Resources */,
 				44290BD21BDF9095003D6E79 /* checkbox_pic@2x.png in Resources */,
 				440C6AF41BF19E2F006A03B0 /* X.png in Resources */,
 				440C6AFA1BF19EAC006A03B0 /* paizhao.png in Resources */,
@@ -738,6 +742,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -753,7 +758,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -790,7 +795,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -800,7 +805,6 @@
 		44290B281BDF0E3D003D6E79 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Zhou qianren (C9LR3LDBA9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Zhou qianren (C9LR3LDBA9)";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
@@ -808,6 +812,7 @@
 				INFOPLIST_FILE = LGPhotoBrowser/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.company.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "77e0e7dc-861b-4222-b494-b5a9dfcdba24";
 			};
@@ -816,13 +821,13 @@
 		44290B291BDF0E3D003D6E79 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Zhou qianren (C9LR3LDBA9)";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = LGPhotoBrowser/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.company.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "77e0e7dc-861b-4222-b494-b5a9dfcdba24";
 			};
@@ -842,6 +847,7 @@
 				);
 				INFOPLIST_FILE = LGPhotoBrowserTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "LG.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LGPhotoBrowser.app/LGPhotoBrowser";
 			};
@@ -857,6 +863,7 @@
 				);
 				INFOPLIST_FILE = LGPhotoBrowserTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "LG.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LGPhotoBrowser.app/LGPhotoBrowser";
 			};
