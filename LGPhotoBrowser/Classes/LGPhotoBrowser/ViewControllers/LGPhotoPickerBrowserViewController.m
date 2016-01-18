@@ -266,17 +266,10 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
 
     [self setPageLabelPage:self.currentPage];
     
-//    [self.collectionView reloadData];
     if (self.currentPage >= 0) {
         CGPoint point = CGPointMake(self.currentPage * self.collectionView.width, 0);
+        NSLog(@"%ld,%f,%f",(long)self.currentPage , self.collectionView.width,point.x);
         self.collectionView.contentOffset = point;
-        if (self.currentPage == self.photos.count - 1 && self.photos.count > 1) {
-            //注意：如果不加以下代码，从最后一张图片进入本控制器的时候，最后一张图片显示有问题（contentOffset赋值失败引起）
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(00.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                self.collectionView.contentOffset = CGPointMake(self.currentPage * self.collectionView.width - LGPickerColletionViewPadding, 0);
-                self.beginDraggingContentOffsetX = self.collectionView.contentOffset.x;
-            });
-        }
         self.beginDraggingContentOffsetX = self.collectionView.contentOffset.x;
     }
 }
@@ -337,6 +330,11 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
 }
 
 #pragma mark - <UIScrollViewDelegate>
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+    return CGSizeMake(LGPickerColletionViewPadding, self.view.frame.size.height);
+}
+
 #pragma mark 滚动过程中重复调用
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
@@ -350,20 +348,7 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
     if (tempF.size.width < [UIScreen mainScreen].bounds.size.width){
         tempF.size.width = [UIScreen mainScreen].bounds.size.width;
     }
-    
-    if ([self isDataSourceElsePhotos]) {
-        if ((currentPage < [self.dataSource photoBrowser:self numberOfItemsInSection:self.currentIndexPath.section] - 1) || self.photos.count == 1) {
-            tempF.origin.x = 0;
-        }else{ //最后一张
-            tempF.origin.x = -LGPickerColletionViewPadding;
-        }
-    }else{
-        if ((currentPage < self.photos.count - 1) || self.photos.count == 1) {
-            tempF.origin.x = 0;
-        }else{
-            tempF.origin.x = -LGPickerColletionViewPadding;
-        }
-    }
+
     self.collectionView.frame = tempF;
     self.draggingDirect = [self getDraggingDirect];
 }
