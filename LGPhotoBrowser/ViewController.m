@@ -202,6 +202,22 @@
 #pragma mark - LGPhotoPickerViewControllerDelegate
 
 - (void)pickerViewControllerDoneAsstes:(NSArray *)assets isOriginal:(BOOL)original{
+    /*
+    //assets的元素是LGPhotoAssets对象，获取image方法如下:
+    NSMutableArray *thumbImageArray = [NSMutableArray array];
+    NSMutableArray *originImage = [NSMutableArray array];
+    NSMutableArray *fullResolutionImage = [NSMutableArray array];
+    
+    for (LGPhotoAssets *photo in assets) {
+        //缩略图
+        [thumbImageArray addObject:photo.thumbImage];
+        //原图
+        [originImage addObject:photo.originImage];
+        //全屏图
+        [fullResolutionImage addObject:fullResolutionImage];
+    }
+    */
+    
     NSInteger num = (long)assets.count;
     NSString *isOriginal = original? @"YES":@"NO";
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"发送图片" message:[NSString stringWithFormat:@"您选择了%ld张图片\n是否原图：%@",(long)num,isOriginal] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
