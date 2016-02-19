@@ -23,7 +23,7 @@
 @property (nonatomic, weak) LGPhotoPickerAssetsViewController *collectionVc;
 
 @property (nonatomic, weak) UITableView *tableView;
-@property (nonatomic, strong) NSArray *groups;
+@property (nonatomic, copy) NSArray *groups;
 @property (nonatomic, copy) NSString *selectGroupURL;
 
 @end
@@ -34,8 +34,8 @@
 
 - (void)dealloc
 {
-    self.tableView.delegate = nil;
-    self.tableView.dataSource = nil;
+    _tableView.delegate = nil;
+    _tableView.dataSource = nil;
 }
 
 - (instancetype)initWithShowType:(LGShowImageType)showType{

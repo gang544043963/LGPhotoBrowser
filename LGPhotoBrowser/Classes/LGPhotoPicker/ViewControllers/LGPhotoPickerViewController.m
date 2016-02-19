@@ -10,7 +10,7 @@
 
 @interface LGPhotoPickerViewController ()
 
-@property (nonatomic , weak) LGPhotoPickerGroupViewController *groupVc;
+@property (nonatomic , strong) LGPhotoPickerGroupViewController *groupVc;
 //是否发送原图，1 原图 0 压缩过图
 @property (nonatomic, assign) BOOL isOriginal;
 
@@ -37,17 +37,17 @@
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    self.groupVc.delegate = nil;
 }
 
 #pragma mark - init Action
 - (void) createNavigationController{
-    LGPhotoPickerGroupViewController *groupVc = [[LGPhotoPickerGroupViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:groupVc];
+    _groupVc = [[LGPhotoPickerGroupViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:_groupVc];
     
     nav.view.frame = self.view.bounds;
     [self addChildViewController:nav];
     [self.view addSubview:nav.view];
-    self.groupVc = groupVc;
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
