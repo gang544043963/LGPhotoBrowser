@@ -11,6 +11,7 @@
 #define HEADER_HEIGHT 100
 
 @interface ViewController ()<LGPhotoPickerViewControllerDelegate,LGPhotoPickerBrowserViewControllerDataSource,LGPhotoPickerBrowserViewControllerDelegate, UITableViewDataSource,UITableViewDelegate>
+
 @property (nonatomic, weak) IBOutlet UITableView *myTableView;
 @property (nonatomic, copy) NSArray *titleArray;
 @property (nonatomic, strong)NSMutableArray *LGPhotoPickerBrowserPhotoArray;
