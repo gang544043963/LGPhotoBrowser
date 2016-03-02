@@ -196,7 +196,7 @@
     LGPhotoPickerAssetsViewController *assetsVc = [[LGPhotoPickerAssetsViewController alloc] initWithShowType:self.showType];
     assetsVc.selectedAssetsBlock = ^(NSMutableArray *selectedAssets){
         //回传选择的照片，实现选择记忆
-        self.selectAsstes = selectedAssets;
+        self.selectAsstes = [selectedAssets copy];
     };
     assetsVc.selectPickerAssets = self.selectAsstes;
     assetsVc.assetsGroup = group;

@@ -404,12 +404,12 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
 
     if (self.selectPickerAssets.count == 0){
         self.selectAssets = [NSMutableArray arrayWithArray:pickerCollectionView.selectAssets];
-        
     } else if (deleteAssets == nil) {
         [self.selectAssets addObject:[pickerCollectionView.selectAssets lastObject]];
     } else if(deleteAssets) { //取消所选的照片
         //根据url删除对象
-        for (LGPhotoAssets *selectAsset in self.selectPickerAssets) {
+        NSArray *arr = [self.selectAssets copy];
+        for (LGPhotoAssets *selectAsset in arr) {
             if ([selectAsset.assetURL isEqual:deleteAssets.assetURL]) {
                 [self.selectAssets removeObject:selectAsset];
             }
