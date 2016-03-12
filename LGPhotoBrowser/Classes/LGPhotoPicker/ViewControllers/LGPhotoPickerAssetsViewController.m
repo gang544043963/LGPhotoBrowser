@@ -138,6 +138,7 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     pickerBrowser.delegate = self;
     pickerBrowser.dataSource = self;
     pickerBrowser.maxCount = self.maxCount;
+    pickerBrowser.isOriginal = self.isOriginal;
     pickerBrowser.selectedAssets = [self.selectAssets mutableCopy];
     // 数据源可以不传，传photos数组 photos<里面是ZLPhotoPickerBrowserPhoto>
 //    pickerBrowser.photos = self.selectAssets;
@@ -506,6 +507,7 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     self.makeView.text = [NSString stringWithFormat:@"%ld",(long)count];
     self.sendBtn.enabled = (count > 0);
     self.previewBtn.enabled = (count > 0);
+    self.isOriginal = pickerBrowser.isOriginal;
     [self updateToolbar];
 }
 

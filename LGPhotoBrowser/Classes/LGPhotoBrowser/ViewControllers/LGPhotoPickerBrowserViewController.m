@@ -37,7 +37,6 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
 @property (nonatomic, assign) DraggingDirect draggingDirect;
 @property (nonatomic, assign) BOOL scrollToEndFlag;
 @property (nonatomic, assign) BOOL needHidenBar; // YES - 隐藏顶部和底部bar，单击照片dismiss
-@property (nonatomic, assign) BOOL isOriginal;
 
 @end
 
@@ -228,6 +227,7 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
         CGFloat height = 44;
         _XGtoolbar = [[LGPhotoPickerCustomToolBarView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - height, CGRectGetWidth(self.view.bounds), height) showType:self.showType];
         _XGtoolbar.delegate = self;
+        
         __weak LGPhotoPickerBrowserViewController * weakself = self;
         
         _XGtoolbar.getSizeBlock = ^(){
