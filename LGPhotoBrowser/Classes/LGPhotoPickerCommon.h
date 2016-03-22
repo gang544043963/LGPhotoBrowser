@@ -30,7 +30,7 @@ typedef NS_ENUM(NSInteger, LGShowImageType) {
     LGShowImageTypeImageURL,        //网络图片浏览器
 };
 
-// 图片最多显示9张，超过9张取消单击事件
+// maxCount的默认值，不设置maxCount的时候有效
 static NSInteger const KPhotoShowMaxCount = 9;
 
 // ScrollView 滑动的间距

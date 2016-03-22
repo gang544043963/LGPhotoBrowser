@@ -103,14 +103,12 @@
         [cell.contentView addSubview:tickButton];
         [tickButton addTarget:self action:@selector(tickBtnTouched:) forControlEvents:UIControlEventTouchUpInside];
     }
-    //runtime 关联对象
-    objc_setAssociatedObject(tickButton, @"tickBtn", indexPath, OBJC_ASSOCIATION_ASSIGN);
+    tickButton.tag = indexPath.item;
 }
 
 - (void)tickBtnTouched:(UIButton *)btn
 {
-    //runtime 获取关联的对象
-    NSIndexPath * indexPath = objc_getAssociatedObject(btn, @"tickBtn");
+    NSIndexPath * indexPath = [NSIndexPath indexPathForItem:btn.tag inSection:0];
     
     if (self.topShowPhotoPicker && indexPath.row == 0) {
         if ([self.collectionViewDelegate respondsToSelector:@selector(pickerCollectionViewDidCameraSelect:)]) {

@@ -199,7 +199,8 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
     LGPhotoAssets *selectAsset = ((LGPhotoPickerBrowserPhoto *)self.photos[self.currentPage]).asset;
     
     // 0. 九张图片数量限制
-    if (self.selectedAssets.count >= KPhotoShowMaxCount && !_imagePickerSelectView.selectBtn.selected) {
+    NSUInteger maxCount = (self.maxCount < 0) ? KPhotoShowMaxCount :  self.maxCount;
+    if (self.selectedAssets.count >= maxCount && !_imagePickerSelectView.selectBtn.selected) {
         NSString *format = [NSString stringWithFormat:@"最多只能选择%ld张图片",(long)self. maxCount];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:format delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
