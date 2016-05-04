@@ -91,20 +91,6 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(done:) name:PICKER_TAKE_DONE object:nil];
     });
-    
-    // 监听异步点击第一个Cell的拍照通知
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectCamera:) name:PICKER_TAKE_PHOTO object:nil];
-    });
-}
-
-#pragma mark - 监听点击第一个Cell进行拍照
-- (void)selectCamera:(NSNotification *)noti{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if([self.delegate respondsToSelector:@selector(pickerCollectionViewSelectCamera:)]){
-            [self.delegate pickerCollectionViewSelectCamera:self];
-        }
-    });
 }
 
 #pragma mark - 监听点击Done按钮

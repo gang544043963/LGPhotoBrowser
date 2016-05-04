@@ -24,11 +24,7 @@ typedef NS_ENUM(NSInteger , PickerViewShowStatus) {
  *  返回所有的Asstes对象
  */
 - (void)pickerViewControllerDoneAsstes:(NSArray *)assets isOriginal:(BOOL)original;
-/**
- *  点击拍照
- */
-@optional
-- (void)pickerCollectionViewSelectCamera:(LGPhotoPickerViewController *)pickerVc;
+
 @end
 
 @interface LGPhotoPickerViewController : UIViewController
