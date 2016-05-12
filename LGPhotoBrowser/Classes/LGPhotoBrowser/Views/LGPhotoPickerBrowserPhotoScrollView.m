@@ -307,22 +307,20 @@
         minScale = 1.0;
     }
     maxScale = 2*minScale;
-    
-    if (imageSize.height > imageSize.width) {//超长图特殊处理
-        if (imageSize.height/imageSize.width > [[UIScreen mainScreen] bounds].size.height/SCREEN_WIDTH) {
-            minScale = xScale;
-            maxScale = xScale*2;
+    if ([self isSuperBigImage:_photoImageView.image]) {
+        if (imageSize.height > imageSize.width) {//超长图特殊处理
+            if (imageSize.height/imageSize.width > [[UIScreen mainScreen] bounds].size.height/SCREEN_WIDTH) {
+                minScale = xScale;
+                maxScale = xScale*2;
+            }
+        }else if (imageSize.height < imageSize.width) {//超宽图特殊处理
+            _photoImageView.contentMode = UIViewContentModeScaleAspectFill;
+            if ((CGFloat)imageSize.width/imageSize.height > (CGFloat)16.0f/9.0f) {
+                minScale = xScale;
+            }
+            maxScale = yScale;
         }
-    }else if (imageSize.height < imageSize.width) {//超宽图特殊处理
-        _photoImageView.contentMode = UIViewContentModeScaleAspectFill;
-        if ((CGFloat)imageSize.width/imageSize.height > (CGFloat)16.0f/9.0f) {
-            minScale = xScale;
-            
-            //            minScale = yScale/2; //超宽图默认高度为屏幕高度一半
-        }
-        maxScale = yScale;
     }
-    
     // Set
     self.maximumZoomScale = maxScale;
     self.minimumZoomScale = minScale;
@@ -429,11 +427,19 @@
 
 - (void)handleImageViewDoubleTap:(CGPoint)touchPoint
 {
+    CGPoint point = touchPoint;
+    if (touchPoint.x < _photoImageView.frame.origin.x
+        ||touchPoint.x > _photoImageView.frame.origin.x + _photoImageView.frame.size.width
+        ||touchPoint.y < _photoImageView.frame.origin.y
+        ||touchPoint.y > _photoImageView.frame.origin.y + _photoImageView.frame.size.height) {
+        point = _photoImageView.center;
+    }
+    
     CGSize imageViewSize = _photoImageView.frame.size;
     CGSize imageSize = _photoImageView.image.size;
     CGSize boundsSize = self.bounds.size;
     
-    if (imageViewSize.height < imageViewSize.width) {//宽图特殊处理  宽图放大 高要变成屏幕高度
+    if ([self isSuperBigImage:_photoImageView.image]) {//宽图特殊处理  宽图放大 高要变成屏幕高度
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.30];
         
@@ -442,19 +448,15 @@
         CGFloat photoImageViewWidth = 0;
         CGFloat photoImageViewHeight = 0;
         
+        // 图片高度小于宽度的情况下，放大结果就是让图片上下边沿贴住屏幕上下边沿（特别小的图片后面做特殊处理）
         if (!isBigScale) {
             photoImageViewWidth = boundsSize.height * ((CGFloat)imageSize.width/imageSize.height);
             photoImageViewHeight = boundsSize.height;
             
             isBigScale = YES;
-        }else{
-            //            if ((CGFloat)imageSize.width/imageSize.height > (CGFloat)16.0f/9.0f) {  //超宽图默认高度为 屏幕高度的一半
-            //                photoImageViewWidth = boundsSize.height * ((CGFloat)imageSize.width/imageSize.height)/2;
-            //                photoImageViewHeight =  boundsSize.height/2;
-            //            }else{
-            photoImageViewWidth = boundsSize.width;
-            photoImageViewHeight =  boundsSize.width * ((CGFloat)imageSize.height/imageSize.width);
-            //            }
+        } else {
+            photoImageViewWidth = MIN(boundsSize.width, imageSize.width);
+            photoImageViewHeight =  MIN(boundsSize.width, imageSize.width) * ((CGFloat)imageSize.height/imageSize.width);
             
             isBigScale = NO;
         }
@@ -475,12 +477,12 @@
         
         _photoImageView.frame = CGRectMake(photoImageViewX, photoImageViewY, photoImageViewWidth, photoImageViewHeight);
         
-        CGFloat touchPointToImageViewX = touchPoint.x + self.contentOffset.x;
-        CGFloat contentOffsetX = touchPointToImageViewX * photoImageViewWidth/imageViewSize.width - touchPoint.x;
+        CGFloat touchPointToImageViewX = point.x + self.contentOffset.x;
+        CGFloat contentOffsetX = touchPointToImageViewX * photoImageViewWidth/imageViewSize.width - boundsSize.width;
         self.contentSize = _photoImageView.frame.size;
    
-        if (contentOffsetX > photoImageViewWidth) {
-            contentOffsetX = photoImageViewWidth;
+        if (contentOffsetX > photoImageViewWidth - boundsSize.width) {
+            contentOffsetX = photoImageViewWidth - boundsSize.width;
         }
         
         if (contentOffsetX < 0) {
@@ -493,12 +495,12 @@
     }else{
         if (!isBigScale) {
             float newScale = maxScale;
-            CGRect zoomRect = [self zoomRectForScale:newScale withCenter:touchPoint];
+            CGRect zoomRect = [self zoomRectForScale:newScale withCenter:point];
             [self zoomToRect:zoomRect animated:YES];
             isBigScale = YES;
         }else{
             float newScale = minScale;
-            CGRect zoomRect = [self zoomRectForScale:newScale withCenter:touchPoint];
+            CGRect zoomRect = [self zoomRectForScale:newScale withCenter:point];
             [self zoomToRect:zoomRect animated:YES];
             isBigScale = NO;
         }
@@ -515,4 +517,14 @@
 
     return zoomRect;
 }
+
+//判断是否为超长图或超宽图
+- (BOOL)isSuperBigImage:(UIImage *)image {
+    if ((image.size.width > image.size.height * 3 && image.size.height > 100)
+        || (image.size.height > image.size.width * 3 && image.size.width > 100)) {
+        return YES;
+    }
+    return NO;
+}
+
 @end

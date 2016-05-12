@@ -48,7 +48,6 @@
 		44290B9C1BDF0F16003D6E79 /* LGPhotoRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 44290B3C1BDF0F16003D6E79 /* LGPhotoRect.m */; };
 		44290B9E1BDF0F16003D6E79 /* LGPhotoPickerBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44290B411BDF0F16003D6E79 /* LGPhotoPickerBrowserViewController.m */; };
 		44290B9F1BDF0F16003D6E79 /* LGPhotoPickerBrowserPhotoImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44290B441BDF0F16003D6E79 /* LGPhotoPickerBrowserPhotoImageView.m */; };
-		44290BA01BDF0F16003D6E79 /* LGPhotoPickerBrowserPhotoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44290B461BDF0F16003D6E79 /* LGPhotoPickerBrowserPhotoScrollView.m */; };
 		44290BA11BDF0F16003D6E79 /* LGPhotoPickerBrowserPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44290B481BDF0F16003D6E79 /* LGPhotoPickerBrowserPhotoView.m */; };
 		44290BA21BDF0F16003D6E79 /* LGPhotoPickerCustomToolBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44290B4A1BDF0F16003D6E79 /* LGPhotoPickerCustomToolBarView.m */; };
 		44290BA31BDF0F16003D6E79 /* LGPhotoAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 44290B4E1BDF0F16003D6E79 /* LGPhotoAssets.m */; };
@@ -74,6 +73,7 @@
 		44290BDE1BE09384003D6E79 /* broswerPic2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 44290BD91BE09384003D6E79 /* broswerPic2.jpg */; };
 		44290BDF1BE09384003D6E79 /* broswerPic3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 44290BDA1BE09384003D6E79 /* broswerPic3.jpg */; };
 		44290BE01BE09384003D6E79 /* broswerPic4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 44290BDB1BE09384003D6E79 /* broswerPic4.jpg */; };
+		4442B3651CE495F400A4F249 /* LGPhotoPickerBrowserPhotoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4442B3641CE495F400A4F249 /* LGPhotoPickerBrowserPhotoScrollView.m */; };
 		447810A41C229BDC0034CAAD /* icon_pic_break@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 447810A31C229BDC0034CAAD /* icon_pic_break@2x.png */; };
 /* End PBXBuildFile section */
 
@@ -161,7 +161,6 @@
 		44290B431BDF0F16003D6E79 /* LGPhotoPickerBrowserPhotoImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGPhotoPickerBrowserPhotoImageView.h; sourceTree = "<group>"; };
 		44290B441BDF0F16003D6E79 /* LGPhotoPickerBrowserPhotoImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGPhotoPickerBrowserPhotoImageView.m; sourceTree = "<group>"; };
 		44290B451BDF0F16003D6E79 /* LGPhotoPickerBrowserPhotoScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGPhotoPickerBrowserPhotoScrollView.h; sourceTree = "<group>"; };
-		44290B461BDF0F16003D6E79 /* LGPhotoPickerBrowserPhotoScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGPhotoPickerBrowserPhotoScrollView.m; sourceTree = "<group>"; };
 		44290B471BDF0F16003D6E79 /* LGPhotoPickerBrowserPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGPhotoPickerBrowserPhotoView.h; sourceTree = "<group>"; };
 		44290B481BDF0F16003D6E79 /* LGPhotoPickerBrowserPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGPhotoPickerBrowserPhotoView.m; sourceTree = "<group>"; };
 		44290B491BDF0F16003D6E79 /* LGPhotoPickerCustomToolBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGPhotoPickerCustomToolBarView.h; sourceTree = "<group>"; };
@@ -204,6 +203,7 @@
 		44290BD91BE09384003D6E79 /* broswerPic2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = broswerPic2.jpg; sourceTree = "<group>"; };
 		44290BDA1BE09384003D6E79 /* broswerPic3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = broswerPic3.jpg; sourceTree = "<group>"; };
 		44290BDB1BE09384003D6E79 /* broswerPic4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = broswerPic4.jpg; sourceTree = "<group>"; };
+		4442B3641CE495F400A4F249 /* LGPhotoPickerBrowserPhotoScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGPhotoPickerBrowserPhotoScrollView.m; sourceTree = "<group>"; };
 		447810A31C229BDC0034CAAD /* icon_pic_break@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_pic_break@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -410,7 +410,7 @@
 				44290B431BDF0F16003D6E79 /* LGPhotoPickerBrowserPhotoImageView.h */,
 				44290B441BDF0F16003D6E79 /* LGPhotoPickerBrowserPhotoImageView.m */,
 				44290B451BDF0F16003D6E79 /* LGPhotoPickerBrowserPhotoScrollView.h */,
-				44290B461BDF0F16003D6E79 /* LGPhotoPickerBrowserPhotoScrollView.m */,
+				4442B3641CE495F400A4F249 /* LGPhotoPickerBrowserPhotoScrollView.m */,
 				44290B471BDF0F16003D6E79 /* LGPhotoPickerBrowserPhotoView.h */,
 				44290B481BDF0F16003D6E79 /* LGPhotoPickerBrowserPhotoView.m */,
 				44290B491BDF0F16003D6E79 /* LGPhotoPickerCustomToolBarView.h */,
@@ -640,7 +640,6 @@
 				440CC5051C392C9C0010FD30 /* UIView+WebCacheOperation.m in Sources */,
 				440CC5011C392C9C0010FD30 /* UIImage+GIF.m in Sources */,
 				44290B9C1BDF0F16003D6E79 /* LGPhotoRect.m in Sources */,
-				44290BA01BDF0F16003D6E79 /* LGPhotoPickerBrowserPhotoScrollView.m in Sources */,
 				440C6AE81BF1925A006A03B0 /* ZLCamera.m in Sources */,
 				44290BA81BDF0F16003D6E79 /* LGPhotoPickerViewController.m in Sources */,
 				44290BCA1BDF1994003D6E79 /* UIView+Layout.m in Sources */,
@@ -661,6 +660,7 @@
 				440CC4FB1C392C9C0010FD30 /* SDWebImageDecoder.m in Sources */,
 				44290BAD1BDF0F16003D6E79 /* LGPhotoPickerImageView.m in Sources */,
 				44290BAB1BDF0F16003D6E79 /* LGPhotoPickerFooterCollectionReusableView.m in Sources */,
+				4442B3651CE495F400A4F249 /* LGPhotoPickerBrowserPhotoScrollView.m in Sources */,
 				440CC4FE1C392C9C0010FD30 /* SDWebImageManager.m in Sources */,
 				44290B101BDF0E3D003D6E79 /* ViewController.m in Sources */,
 				44290B0D1BDF0E3D003D6E79 /* AppDelegate.m in Sources */,
