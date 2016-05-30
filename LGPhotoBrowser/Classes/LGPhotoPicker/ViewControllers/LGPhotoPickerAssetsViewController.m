@@ -269,16 +269,10 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
 
 #pragma mark - 创建右边取消按钮
 - (void)addNavBarCancelButton{
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.titleLabel.font = [UIFont boldSystemFontOfSize:14.0f];
-    [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    button.titleEdgeInsets = UIEdgeInsetsMake(0, 6.0, 0, 3.0);
-    button.frame = CGRectMake(0, 0, 40, 28.0f);
-    [button setTitle:@"取消" forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(cancelBtnTouched) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *barbutton = [[UIBarButtonItem alloc] initWithCustomView:button];
-    self.navigationItem.rightBarButtonItem = barbutton;
+	UIBarButtonItem *temporaryBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+																							target:self
+																							action:@selector(cancelBtnTouched)];
+	self.navigationItem.rightBarButtonItem = temporaryBarButtonItem;
 }
 
 #pragma mark 初始化所有的组
