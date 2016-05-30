@@ -816,7 +816,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.company.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "77e0e7dc-861b-4222-b494-b5a9dfcdba24";
+				PROVISIONING_PROFILE = "e38d76ee-fb66-4ed9-9383-a081d1eb9069";
 			};
 			name = Debug;
 		};
@@ -833,7 +833,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.company.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "77e0e7dc-861b-4222-b494-b5a9dfcdba24";
+				PROVISIONING_PROFILE = "e38d76ee-fb66-4ed9-9383-a081d1eb9069";
 			};
 			name = Release;
 		};
