@@ -4,13 +4,13 @@
 此框架包含三个模块：照片浏览器，相册选择器，照相机
 
 #1.照片浏览器
-<img src="https://github.com/gang544043963/LGPhotoBrowser/blob/master/LGPhotoBrowser/gif/browser.gif?raw=true" alt="CXLSlideList Screenshot" width="300" height="550"/>
+<img src="https://github.com/gang544043963/LGPhotoBrowser/blob/master/LGPhotoBrowser/gif/browser.gif?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>
 
 
 #2.相册选择器
 全局浏览和预览，采用后台预加载，完全消除卡顿现象
 
-<img src="https://github.com/gang544043963/LGPhotoBrowser/blob/master/LGPhotoBrowser/gif/picker.gif?raw=true" alt="CXLSlideList Screenshot" width="300" height="550"/> <img src="https://github.com/gang544043963/LGPhotoBrowser/blob/master/LGPhotoBrowser/gif/browser1.gif?raw=true" alt="CXLSlideList Screenshot" width="300" height="550"/>
+<img src="https://github.com/gang544043963/LGPhotoBrowser/blob/master/LGPhotoBrowser/gif/picker.gif?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/> <img src="https://github.com/gang544043963/LGPhotoBrowser/blob/master/LGPhotoBrowser/gif/browser1.gif?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>
 
 
 #3.照相机
@@ -33,6 +33,8 @@
 '#import "LGPhoto.h"'
 
 暂不支持cocoaPods
+
+备注：class文件夹中的Third文件夹包含了两个第三方框架：'DACircularProgressView'和'SDWebImage'，如果你的项目中已经存在这两个框架，请手动删除Third文件夹中对应的框架。
 
 # 初始化
 见ViewController.m，注释很清楚
