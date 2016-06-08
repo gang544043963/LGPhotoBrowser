@@ -1,7 +1,11 @@
 # LGPhotoBrowser
-相册选择/浏览器（仿微信）
+1.此框架包含三个模块：照片浏览器，相册选择器，自定义照相机（支持单拍、连拍）；
+2.界面仿照微信的样式；
+3.加载本地照片速度快；
+4.图片浏览器采用后台预加载手段，完全消除大图浏览的卡顿现象；
+5.具备相册已选组别记忆功能；
 
-此框架包含三个模块：照片浏览器，相册选择器，照相机
+说明：如果照相机不需要连拍功能，建议采用系统相机，经测试，自定义相机的体验和内存消耗均劣于系统相机。
 
 #1.照片浏览器
 <img src="https://github.com/gang544043963/LGPhotoBrowser/blob/master/LGPhotoBrowser/gif/browser.gif?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>
