@@ -25,7 +25,7 @@
 #3.照相机
 拍照页面,单拍结果,连拍结果
 
-<img src="https://github.com/gang544043963/MyDataSource/blob/master/IMG_2653.PNG?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>  <img src="https://github.com/gang544043963/MyDataSource/blob/master/LGPhotoBrowser/IMG_2652.PNG?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/> <img src="https://github.com/gang544043963/MyDataSource/blob/master/IMG_2651.PNG?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>
+<img src="https://github.com/gang544043963/MyDataSource/blob/master/IMG_2653.PNG?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>  <img src="vhttps://github.com/gang544043963/MyDataSource/blob/master/IMG_2652.PNG?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/> <img src="https://github.com/gang544043963/MyDataSource/blob/master/IMG_2651.PNG?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>
 
 # 添加到工程
 第一步：拷贝class文件夹到工程.
