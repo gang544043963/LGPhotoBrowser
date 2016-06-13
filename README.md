@@ -13,19 +13,19 @@
 说明：如果照相机不需要连拍功能，建议采用系统相机，经测试，自定义相机的体验和内存消耗均劣于系统相机。
 
 #1.照片浏览器
-<img src="https://github.com/gang544043963/MyDataSource/tree/master/browser.gif?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>
+<https://github.com/gang544043963/MyDataSource/blob/master/browser.gif?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>
 
 
 #2.相册选择器
 全局浏览和预览，采用后台预加载，完全消除卡顿现象
 
-<img src="https://github.com/gang544043963/MyDataSource/tree/master/picker.gif?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/> <img src="https://github.com/gang544043963/MyDataSource/tree/master/browser1.gif?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>
+<img src="https://github.com/gang544043963/MyDataSource/blob/master/picker.gif?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/> <img src="https://github.com/gang544043963/MyDataSource/blob/master/browser1.gif?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>
 
 
 #3.照相机
 拍照页面,单拍结果,连拍结果
 
-<img src="https://github.com/gang544043963/MyDataSource/tree/master/IMG_2653.PNG?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>  <img src="https://github.com/gang544043963/LGPhotoBrowser/blob/master/LGPhotoBrowser/IMG_2652.PNG?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/> <img src="https://github.com/gang544043963/MyDataSource/tree/master/IMG_2651.PNG?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>
+<img src="https://github.com/gang544043963/MyDataSource/blob/master/IMG_2653.PNG?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>  <img src="https://github.com/gang544043963/MyDataSource/blob/master/LGPhotoBrowser/IMG_2652.PNG?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/> <img src="https://github.com/gang544043963/MyDataSource/blob/master/IMG_2651.PNG?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>
 
 # 添加到工程
 第一步：拷贝class文件夹到工程.
