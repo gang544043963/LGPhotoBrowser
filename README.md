@@ -12,6 +12,8 @@
 
 说明：如果照相机不需要连拍功能，建议采用系统相机，经测试，自定义相机的体验和内存消耗均劣于系统相机。
 
+相册优化方法：[iOS中自定义相册功能性能优化](http://blog.csdn.net/gang544043963/article/details/49329261)
+
 #1.照片浏览器
 <img src="https://github.com/gang544043963/MyDataSource/blob/master/browser.gif?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>
 
