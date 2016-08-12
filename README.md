@@ -10,7 +10,7 @@
 
 5) Have the album selected group memory function； 
 
-$Explain：$If the camera does not require continuous function, it is recommended the system camera. tested, and custom camera experience and memory consumption are inferior to the system camera。
+**Explain：**If the camera does not require continuous function, it is recommended the system camera. tested, and custom camera experience and memory consumption are inferior to the system camera。
 
 Album optimization method：[http://blog.csdn.net/gang544043963/article/details/49329261](http://blog.csdn.net/gang544043963/article/details/49329261)
 
