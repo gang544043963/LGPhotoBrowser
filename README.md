@@ -10,7 +10,7 @@
 
 5) Have the album selected group memory function； 
 
-Explain：If the camera does not require continuous function, it is recommended the system camera. tested, and custom camera experience and memory consumption are inferior to the system camera。
+$Explain：$If the camera does not require continuous function, it is recommended the system camera. tested, and custom camera experience and memory consumption are inferior to the system camera。
 
 Album optimization method：[http://blog.csdn.net/gang544043963/article/details/49329261](http://blog.csdn.net/gang544043963/article/details/49329261)
 
@@ -28,11 +28,15 @@ Album optimization method：[http://blog.csdn.net/gang544043963/article/details/
 <img src="https://github.com/gang544043963/MyDataSource/blob/master/IMG_2653.PNG?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>  <img src="https://github.com/gang544043963/MyDataSource/blob/master/IMG_2652.PNG?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/> <img src="https://github.com/gang544043963/MyDataSource/blob/master/IMG_2651.PNG?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>
 
 # Adding to your preject
+
 1)copy the folder named 'Class' to your preject.
+
 2)'#import "LGPhoto.h"'
 
 Explain：
+
 1）Class folder in the third folder contains two third-party frameworks:'DACircularProgressView'&'SDWebImage'. If your project already exists in the two framework. Please manually delete the third folder corresponding to the frame.
+
 2）Not supported cocoaPods
 
 # INITIALIZATION
