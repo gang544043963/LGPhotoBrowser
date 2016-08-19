@@ -27,7 +27,7 @@ Album optimization method：[http://blog.csdn.net/gang544043963/article/details/
 
 <img src="https://github.com/gang544043963/MyDataSource/blob/master/IMG_2653.PNG?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>  <img src="https://github.com/gang544043963/MyDataSource/blob/master/IMG_2652.PNG?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/> <img src="https://github.com/gang544043963/MyDataSource/blob/master/IMG_2651.PNG?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>
 
-# Adding to your preject
+# Adding to your project
 
 1)copy the folder named 'Class' to your preject.
 
