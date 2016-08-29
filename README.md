@@ -37,8 +37,13 @@
 
 - 暂不支持cocoaPods
 
-- class文件夹中的Third文件夹包含了两个第三方框架：'DACircularProgressView'和'SDWebImage'，如果你的项目中已经存在这两个框架，请手动删除Third文件夹中对应的框架。
+- 用到的第三方：
+  
+  |图片下载|SDWebImage            |
+  |:------:|:--------------------:|
+  |等待框  |DACircularProgressView|
 
+  如果你的项目中已经存在这两个框架，请手动删除Third文件夹中对应的框架。
 # 初始化
 见ViewController.m，注释很清楚
 
