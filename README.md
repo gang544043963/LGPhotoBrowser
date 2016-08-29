@@ -39,9 +39,9 @@
 
 - 用到的第三方：
   
-  |图片下载|SDWebImage            |
+  |图片下载|等待框            |
   |:------:|:--------------------:|
-  |等待框  |DACircularProgressView|
+  |SDWebImage  |DACircularProgressView|
 
   如果你的项目中已经存在这两个框架，请手动删除Third文件夹中对应的框架。
 # 初始化
