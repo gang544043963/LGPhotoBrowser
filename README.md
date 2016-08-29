@@ -44,6 +44,7 @@
   |SDWebImage  |DACircularProgressView|
 
   如果你的项目中已经存在这两个框架，请手动删除Third文件夹中对应的框架。
+  
 # 初始化
 见ViewController.m，注释很清楚
 
