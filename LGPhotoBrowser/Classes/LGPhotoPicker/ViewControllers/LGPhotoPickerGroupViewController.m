@@ -54,14 +54,7 @@
         [tableView registerClass:[LGPhotoPickerGroupTableViewCell class] forCellReuseIdentifier:NSStringFromClass([LGPhotoPickerGroupTableViewCell class])];
         [self.view addSubview:tableView];
         self.tableView = tableView;
-        
-        NSDictionary *views = NSDictionaryOfVariableBindings(tableView);
-        
-        NSString *heightVfl = @"V:|-0-[tableView]-0-|";
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:heightVfl options:0 metrics:nil views:views]];
-        NSString *widthVfl = @"H:|-0-[tableView]-0-|";
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:widthVfl options:0 metrics:nil views:views]];
-        
+		self.tableView.frame = self.view.bounds;
     }
     return _tableView;
 }

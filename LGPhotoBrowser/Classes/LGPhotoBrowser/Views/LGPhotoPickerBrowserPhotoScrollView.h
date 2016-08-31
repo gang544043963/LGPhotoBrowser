@@ -26,12 +26,12 @@ typedef void(^scrollViewCallBackBlock)(id obj);
 
 @interface LGPhotoPickerBrowserPhotoScrollView : UIScrollView <UIScrollViewDelegate, LGPhotoPickerBrowserPhotoImageViewDelegate,LGPhotoPickerBrowserPhotoViewDelegate>
 
-@property (nonatomic,strong) LGPhotoPickerBrowserPhoto *photo;
-@property (strong,nonatomic) LGPhotoPickerBrowserPhotoImageView *photoImageView;
-@property (nonatomic, weak) id <LGPhotoPickerPhotoScrollViewDelegate> photoScrollViewDelegate;
+@property (nonatomic,strong) LGPhotoPickerBrowserPhoto            *photo;
+@property (strong,nonatomic) LGPhotoPickerBrowserPhotoImageView   *photoImageView;
+@property (nonatomic, weak ) id <LGPhotoPickerPhotoScrollViewDelegate> photoScrollViewDelegate;
 
-@property (nonatomic) LGShowImageType showType;
+@property (nonatomic       ) LGShowImageType                      showType;
 // 单击销毁的block
-@property (copy,nonatomic) scrollViewCallBackBlock callback;
+@property (copy,nonatomic  ) scrollViewCallBackBlock              callback;
 - (void)setMaxMinZoomScalesForCurrentBounds;
 @end

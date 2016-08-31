@@ -9,13 +9,14 @@
 #import "UIView+Layout.h"
 
 @interface LGPhotoPickerFooterCollectionReusableView ()
+
 @property (weak, nonatomic) UILabel *footerLabel;
 
 @end
 
 @implementation LGPhotoPickerFooterCollectionReusableView
 
-- (UILabel *)footerLabel{
+- (UILabel *)footerLabel {
     if (!_footerLabel) {
         UILabel *footerLabel = [[UILabel alloc] init];
         footerLabel.frame = self.bounds;
@@ -23,11 +24,10 @@
         [self addSubview:footerLabel];
         self.footerLabel = footerLabel;
     }
-    
     return _footerLabel;
 }
 
-- (void)setCount:(NSInteger)count{
+- (void)setCount:(NSInteger)count {
     _count = count;
     
     if (count > 0) {

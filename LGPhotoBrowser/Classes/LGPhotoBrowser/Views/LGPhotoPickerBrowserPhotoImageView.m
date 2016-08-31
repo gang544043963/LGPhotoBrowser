@@ -42,7 +42,7 @@
 
 
 #pragma mark -监听手势
-- (void) addGesture{
+- (void) addGesture {
     self.contentMode = UIViewContentModeScaleAspectFit;
     // 双击放大
     UITapGestureRecognizer *scaleBigTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
@@ -59,11 +59,11 @@
     [disMissTap requireGestureRecognizerToFail:scaleBigTap];
 }
 
-- (void)addScaleBigTap{
+- (void)addScaleBigTap {
     [self.scaleBigTap addTarget:self action:@selector(handleDoubleTap:)];
 }
 
-- (void)removeScaleBigTap{
+- (void)removeScaleBigTap {
     [self.scaleBigTap removeTarget:self action:@selector(handleDoubleTap:)];
 }
 

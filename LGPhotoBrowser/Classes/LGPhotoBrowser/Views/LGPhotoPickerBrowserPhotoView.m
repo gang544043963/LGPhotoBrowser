@@ -25,10 +25,9 @@
 	return self;
 }
 
-
 #pragma mark -监听手势
-- (void) addGesture{
-    
+
+- (void) addGesture {
     // 双击放大
     UITapGestureRecognizer *scaleBigTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
     scaleBigTap.numberOfTapsRequired = 2;

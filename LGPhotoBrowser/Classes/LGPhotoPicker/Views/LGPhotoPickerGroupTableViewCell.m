@@ -17,7 +17,7 @@
 
 @implementation LGPhotoPickerGroupTableViewCell
 
-- (UIImageView *)groupImageView{
+- (UIImageView *)groupImageView {
     if (!_groupImageView) {
         UIImageView *groupImageView = [[UIImageView alloc] init];
         groupImageView.frame = CGRectMake(15, 5, 70, 70);
@@ -27,7 +27,7 @@
     return _groupImageView;
 }
 
-- (UILabel *)groupNameLabel{
+- (UILabel *)groupNameLabel {
     if (!_groupNameLabel) {
         UILabel *groupNameLabel = [[UILabel alloc] init];
         groupNameLabel.frame = CGRectMake(95, 15, self.frame.size.width - 100, 20);
@@ -36,7 +36,7 @@
     return _groupNameLabel;
 }
 
-- (UILabel *)groupPicCountLabel{
+- (UILabel *)groupPicCountLabel {
     if (!_groupPicCountLabel) {
         UILabel *groupPicCountLabel = [[UILabel alloc] init];
         groupPicCountLabel.font = [UIFont systemFontOfSize:13];
@@ -47,9 +47,8 @@
     return _groupPicCountLabel;
 }
 
-- (void)setGroup:(LGPhotoPickerGroup *)group{
+- (void)setGroup:(LGPhotoPickerGroup *)group {
     _group = group;
-    
     self.groupNameLabel.text = group.groupName;
     self.groupImageView.image = group.thumbImage;
     self.groupPicCountLabel.text = [NSString stringWithFormat:@"(%ld)",(long)group.assetsCount];

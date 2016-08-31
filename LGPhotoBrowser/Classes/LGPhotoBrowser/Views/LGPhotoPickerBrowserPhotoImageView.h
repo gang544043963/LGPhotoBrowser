@@ -17,6 +17,7 @@
 
 - (void)addScaleBigTap;
 - (void)removeScaleBigTap;
+
 @end
 
 @protocol LGPhotoPickerBrowserPhotoImageViewDelegate <NSObject>

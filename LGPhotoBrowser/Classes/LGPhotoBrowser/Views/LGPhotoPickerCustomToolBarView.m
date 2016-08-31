@@ -26,8 +26,7 @@
 @implementation LGPhotoPickerCustomToolBarView
 
 
-- (instancetype)initWithFrame:(CGRect)frame showType:(LGShowImageType)showType
-{
+- (instancetype)initWithFrame:(CGRect)frame showType:(LGShowImageType)showType {
     self = [super initWithFrame:frame];
     if (self) {
         self.showType = showType;
@@ -50,8 +49,7 @@
     return self;
 }
 
-- (void)sendAction
-{
+- (void)sendAction {
     if ([self.delegate respondsToSelector:@selector(customToolBarSendBtnTouched)]) {
         [self.delegate customToolBarSendBtnTouched];
     }
@@ -59,8 +57,7 @@
 
 - (void)updateToolbarWithOriginal:(BOOL)isOriginal
                       currentPage:(NSInteger)currentPage
-                    selectedCount:(NSInteger)count
-{
+                    selectedCount:(NSInteger)count {
     UIButton *fileSizeButton = (UIButton *)self.isOriginalBtn.customView;
     
     //左边原图按钮
@@ -103,7 +100,6 @@
     
 }
 
-
 /* 创建一个原图缩略图选择item */
 - (UIBarButtonItem *)createSelecteOriginalItemWithImg:(UIImage *)image
                                                 title:(NSString *)title
@@ -125,7 +121,8 @@
 }
 
 #pragma mark makeView 红点标记View
-- (UILabel *)makeView{
+
+- (UILabel *)makeView {
     if (!_makeView) {
         UILabel *makeView = [[UILabel alloc] init];
         makeView.textColor = [UIColor whiteColor];
@@ -143,8 +140,7 @@
     return _makeView;
 }
 
-- (void)originalAction
-{
+- (void)originalAction {
     if ([self.delegate respondsToSelector:@selector(customToolBarIsOriginalBtnTouched)]) {
         [self.delegate customToolBarIsOriginalBtnTouched];
     }

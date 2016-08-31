@@ -215,15 +215,7 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
         collectionView.contentInset = UIEdgeInsetsMake(5, 0,TOOLBAR_HEIGHT, 0);
         collectionView.collectionViewDelegate = self;
         [self.view insertSubview:_collectionView = collectionView belowSubview:self.toolBar];
-        
-        NSDictionary *views = NSDictionaryOfVariableBindings(collectionView);
-        
-        NSString *widthVfl = @"H:|-0-[collectionView]-0-|";
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:widthVfl options:0 metrics:nil views:views]];
-        
-        NSString *heightVfl = @"V:|-0-[collectionView]-0-|";
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:heightVfl options:0 metrics:nil views:views]];
-        
+		collectionView.frame = self.view.bounds;
     }
     return _collectionView;
 }

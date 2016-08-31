@@ -167,6 +167,7 @@
     [textView setBackgroundColor:[UIColor redColor]];
     textView.textAlignment = NSTextAlignmentCenter;
     textView.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:14];
+	
     return textView;
 }
 

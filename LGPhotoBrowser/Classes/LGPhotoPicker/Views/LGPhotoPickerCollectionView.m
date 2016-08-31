@@ -29,11 +29,11 @@
 @implementation LGPhotoPickerCollectionView
 
 #pragma mark -setter
-- (void)setDataArray:(NSArray *)dataArray{
+- (void)setDataArray:(NSArray *)dataArray {
     _dataArray = dataArray;
     
     // 需要记录选中的值的数据
-    if (self.isRecoderSelectPicker){
+    if (self.isRecoderSelectPicker) {
         NSMutableArray *selectAssets = [NSMutableArray array];
         for (LGPhotoAssets *asset in self.selectAssets) {
             for (LGPhotoAssets *asset2 in self.dataArray) {
@@ -49,11 +49,10 @@
         }
         _selectAssets = selectAssets;
     }
-    
     [self reloadData];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout{
+- (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout {
     if (self = [super initWithFrame:frame collectionViewLayout:layout]) {
         
         self.backgroundColor = [UIColor clearColor];
@@ -65,8 +64,7 @@
 }
 
 - (void)setupPickerImageViewOnCell:(LGPhotoPickerCollectionViewCell *)cell
-                           AtIndex:(NSIndexPath *)indexPath
-{
+                           AtIndex:(NSIndexPath *)indexPath {
     LGPhotoPickerImageView *cellImgView = nil;
     if (cell.contentView.subviews.count == 2 && [cell.contentView.subviews[0] isKindOfClass:[UIView class]]) {//如果是重用cell，则不用再添加cellImgView
         cellImgView = cell.contentView.subviews[0];
@@ -91,8 +89,7 @@
  *  每个cell右上角的选择按钮
  */
 - (void)setupTickButtonOnCell:(LGPhotoPickerCollectionViewCell *)cell
-                      AtIndex:(NSIndexPath *)indexPath
-{
+                      AtIndex:(NSIndexPath *)indexPath {
     UIButton *tickButton = nil;
     if (cell.contentView.subviews.count == 2 && [cell.contentView.subviews[1] isKindOfClass:[UIButton class]]) {//如果是重用cell，则不用再添加button
         tickButton = cell.contentView.subviews[1];
@@ -106,8 +103,7 @@
     tickButton.tag = indexPath.item;
 }
 
-- (void)tickBtnTouched:(UIButton *)btn
-{
+- (void)tickBtnTouched:(UIButton *)btn {
     NSIndexPath * indexPath = [NSIndexPath indexPathForItem:btn.tag inSection:0];
     
     if (self.topShowPhotoPicker && indexPath.row == 0) {
@@ -159,15 +155,15 @@
 }
 
 #pragma mark -<UICollectionViewDataSource>
-- (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+- (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
 
-- (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+- (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.dataArray.count;
 }
 
-- (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+- (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 //    NSLog(@"cellForItemAtIndexPath --- start");
     LGPhotoPickerCollectionViewCell *cell = [LGPhotoPickerCollectionViewCell cellWithCollectionView:collectionView cellForItemAtIndexPath:indexPath];
  
@@ -178,7 +174,7 @@
 }
 
 #pragma mark - <UICollectionViewDelegate>
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     //cell被点击，进入相册浏览器
     if ([self.collectionViewDelegate respondsToSelector:@selector(pickerCollectionCellTouchedIndexPath:)]) {
         [self.collectionViewDelegate pickerCollectionCellTouchedIndexPath:indexPath];
@@ -186,8 +182,7 @@
 }
 
 #pragma mark 底部View
--(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-{
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     LGPhotoPickerFooterCollectionReusableView *reusableView = nil;
     if (kind == UICollectionElementKindSectionFooter) {
         LGPhotoPickerFooterCollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView" forIndexPath:indexPath];
@@ -200,8 +195,7 @@
     return reusableView;
 }
 
-- (void)layoutSubviews{
-    
+- (void)layoutSubviews {
     [super layoutSubviews];
     
     // 时间置顶的话
@@ -213,7 +207,7 @@
             self.contentOffset = CGPointMake(self.contentOffset.x, self.contentOffset.y + 100);
             self.firstLoadding = YES;
         }
-    }else if (self.status == LGPickerCollectionViewShowOrderStatusTimeAsc){
+    } else if (self.status == LGPickerCollectionViewShowOrderStatusTimeAsc) {
         // 滚动到最底部（最新的）
         if (!self.firstLoadding && self.contentSize.height > [[UIScreen mainScreen] bounds].size.height) {
             [self scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
@@ -224,7 +218,7 @@
     }
 }
 
-- (void)dealloc{
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 @end

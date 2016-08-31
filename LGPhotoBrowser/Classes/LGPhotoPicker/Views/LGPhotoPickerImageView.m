@@ -9,7 +9,7 @@
 
 @interface LGPhotoPickerImageView ()
 
-@property (nonatomic, weak) UIView *maskView;
+@property (nonatomic, weak) UIView      *maskView;
 @property (nonatomic, weak) UIImageView *tickImageView;
 @property (nonatomic, weak) UIImageView *videoView;
 
@@ -17,7 +17,7 @@
 
 @implementation LGPhotoPickerImageView
 
-- (instancetype)initWithFrame:(CGRect)frame{
+- (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.contentMode = UIViewContentModeScaleAspectFill;
         self.clipsToBounds = YES;
@@ -25,7 +25,7 @@
     return self;
 }
 
-- (UIView *)maskView{
+- (UIView *)maskView {
     if (!_maskView) {
         UIView *maskView = [[UIView alloc] init];
         maskView.frame = self.bounds;
@@ -48,52 +48,45 @@
 //    return _videoView;
 //}
 
-- (UIImageView *)tickImageView{
+- (UIImageView *)tickImageView {
     if (!_tickImageView) {
         UIImageView *tickImageView = [[UIImageView alloc] init];
         tickImageView.frame = CGRectMake(self.bounds.size.width - 28, 5, 21, 21);
         tickImageView.image = [UIImage imageNamed:@"checkbox_pic_non"];
-        //        tickImageView.hidden = YES;
         [self addSubview:tickImageView];
         self.tickImageView = tickImageView;
     }
     return _tickImageView;
 }
 
-- (void)setIsVideoType:(BOOL)isVideoType{
+- (void)setIsVideoType:(BOOL)isVideoType {
     _isVideoType = isVideoType;
-    
     self.videoView.hidden = !(isVideoType);
 }
 
-- (void)setMaskViewFlag:(BOOL)maskViewFlag{
+- (void)setMaskViewFlag:(BOOL)maskViewFlag {
     _maskViewFlag = maskViewFlag;
     
-    if (!maskViewFlag){
+    if (!maskViewFlag) {
         // hidden
         [self.tickImageView setImage:[UIImage imageNamed:@"checkbox_pic_non"]];
     }else{
         [self.tickImageView setImage:[UIImage imageNamed:@"checkbox_pic"]];
     }
-    
-    //    self.maskView.hidden = !maskViewFlag;
     self.animationRightTick = maskViewFlag;
 }
 
-- (void)setMaskViewColor:(UIColor *)maskViewColor{
+- (void)setMaskViewColor:(UIColor *)maskViewColor {
     _maskViewColor = maskViewColor;
-    
     self.maskView.backgroundColor = maskViewColor;
 }
 
-- (void)setMaskViewAlpha:(CGFloat)maskViewAlpha{
+- (void)setMaskViewAlpha:(CGFloat)maskViewAlpha {
     _maskViewAlpha = maskViewAlpha;
-    
     self.maskView.alpha = maskViewAlpha;
 }
 
-- (void)setAnimationRightTick:(BOOL)animationRightTick{
+- (void)setAnimationRightTick:(BOOL)animationRightTick {
     _animationRightTick = animationRightTick;
-    //    self.tickImageView.hidden = !animationRightTick;
 }
 @end

@@ -9,7 +9,7 @@
 #import "LGPhotoRect.h"
 
 @implementation LGPhotoRect
-+ (CGRect)setMaxMinZoomScalesForCurrentBoundWithImage:(UIImage *)image{
++ (CGRect)setMaxMinZoomScalesForCurrentBoundWithImage:(UIImage *)image {
     if (!([image isKindOfClass:[UIImage class]]) || image == nil) {
         if (!([image isKindOfClass:[UIImage class]])) {
             return CGRectZero;
@@ -53,7 +53,7 @@
     return frameToCenter;
 }
 
-+ (CGRect)setMaxMinZoomScalesForCurrentBoundWithImageView:(UIImageView *)imageView{
++ (CGRect)setMaxMinZoomScalesForCurrentBoundWithImageView:(UIImageView *)imageView {
     return [self setMaxMinZoomScalesForCurrentBoundWithImage:imageView.image];
 }
 

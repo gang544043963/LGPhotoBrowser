@@ -79,21 +79,21 @@
 @property (nonatomic , weak) id<LGPhotoPickerBrowserViewControllerDelegate> delegate;
 
 // 展示的图片数组<ZLPhotoPickerBrowserPhoto> == [self.dataSource photoBrowser:photoAtIndexPath:]
-@property (nonatomic, copy) NSArray *photos;
+@property (nonatomic, copy  ) NSArray         *photos;
 
-@property (nonatomic, strong) NSMutableArray *selectedAssets;
+@property (nonatomic, strong) NSMutableArray  *selectedAssets;
 // 当前提供的组
-@property (strong,nonatomic) NSIndexPath *currentIndexPath;
+@property (strong,nonatomic ) NSIndexPath     *currentIndexPath;
 
-@property (nonatomic) LGShowImageType showType;
+@property (nonatomic        ) LGShowImageType showType;
 // 长按保存图片会调用sheet
-@property (nonatomic, strong) UIActionSheet *sheet;
+@property (nonatomic, strong) UIActionSheet   *sheet;
 // 需要增加的导航高度
-@property (nonatomic, assign) CGFloat navigationHeight;
+@property (nonatomic, assign) CGFloat         navigationHeight;
 
-@property (nonatomic, assign) NSInteger maxCount;
+@property (nonatomic, assign) NSInteger       maxCount;
 
-@property (nonatomic, assign) BOOL isOriginal;
+@property (nonatomic, assign) BOOL            isOriginal;
 // 放大缩小一张图片的情况下（查看头像）
 - (void)showHeadPortrait:(UIImageView *)toImageView;
 // 放大缩小一张图片的情况下（查看头像）/ 缩略图是toImageView.image 原图URL

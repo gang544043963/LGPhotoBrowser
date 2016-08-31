@@ -26,9 +26,9 @@
     BOOL isNotFirst;
 }
 
-@property (nonatomic, assign) CGFloat progress;
-@property (strong,nonatomic) DACircularProgressView *progressView;
-@property (nonatomic, assign) BOOL isLoadingDone;
+@property (nonatomic, assign) CGFloat                progress;
+@property (strong,nonatomic ) DACircularProgressView *progressView;
+@property (nonatomic, assign) BOOL                   isLoadingDone;
 
 @end
 
@@ -93,7 +93,8 @@
 }
 
 #pragma mark - setProgress
-- (void)setProgress:(CGFloat)progress{
+
+- (void)setProgress:(CGFloat)progress {
     _progress = progress;
     
     self.progressView.hidden = NO;
@@ -106,7 +107,7 @@
     }
 }
 
-- (void)addObservers{
+- (void)addObservers {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(imageDownloadStartAction)
                                                  name:LGPhotoImageDidStartLoad
@@ -123,11 +124,10 @@
                                                object:nil];
 }
 
-- (void)imageDownloadStartAction{
+- (void)imageDownloadStartAction {
 }
 
-- (void)imageDownloadDidFinishAction{
-    
+- (void)imageDownloadDidFinishAction {
     dispatch_async(dispatch_get_main_queue(), ^{
         _photoImageView.image = self.photo.photoImage;
         self.isLoadingDone = YES;
@@ -135,11 +135,11 @@
     });
 }
 
-- (void)imageDownloadDidFailAction{
+- (void)imageDownloadDidFailAction {
 
 }
 
-- (void)longGesture:(UILongPressGestureRecognizer *)gesture{
+- (void)longGesture:(UILongPressGestureRecognizer *)gesture {
     if (gesture.state == UIGestureRecognizerStateBegan) {
         if ([self.photoScrollViewDelegate respondsToSelector:@selector(pickerPhotoScrollViewDidLongPressed:)]) {
             [self.photoScrollViewDelegate pickerPhotoScrollViewDidLongPressed:self];
@@ -149,7 +149,7 @@
 
 
 
-- (void)setPhoto:(LGPhotoPickerBrowserPhoto *)photo{
+- (void)setPhoto:(LGPhotoPickerBrowserPhoto *)photo {
     _photo = photo;
     
     __weak typeof(self) weakSelf = self;
@@ -247,8 +247,7 @@
     [self setNeedsLayout];
 }
 
-- (void)layoutPhotoLoadOriginButton
-{
+- (void)layoutPhotoLoadOriginButton {
     [[self.superview viewWithTag:ORIGINALBTN_TAG] removeFromSuperview];
     if ([_photo respondsToSelector:@selector(loadOriginButton)])
     {
@@ -266,6 +265,7 @@
 
 #pragma mark - Loading Progress
 #pragma mark - Setup
+
 - (CGFloat)initialZoomScaleWithMinScale {
     CGFloat zoomScale = self.minimumZoomScale;
     if (_photoImageView) {
@@ -374,12 +374,12 @@
 
 #pragma mark - Tap Detection
 
-- (void)imageView:(UIImageView *)imageView singleTapDetected:(UITouch *)touch{
+- (void)imageView:(UIImageView *)imageView singleTapDetected:(UITouch *)touch {
     [self disMissTap:nil];
 }
 
 #pragma mark - disMissTap
-- (void) disMissTap:(UITapGestureRecognizer *)tap{
+- (void) disMissTap:(UITapGestureRecognizer *)tap {
     if (self.callback){
         self.callback(nil);
     }else if ([self.photoScrollViewDelegate respondsToSelector:@selector(pickerPhotoScrollViewDidSingleClick:)]) {
@@ -398,7 +398,7 @@
     }
 }
 
-- (void)view:(UIView *)view singleTapDetected:(UITouch *)touch{
+- (void)view:(UIView *)view singleTapDetected:(UITouch *)touch {
     [self disMissTap:nil];
 }
 
@@ -415,8 +415,7 @@
 
 #pragma mark - Tap Detection
 
-- (void)handleDoubleTap:(UIGestureRecognizer *)gesture
-{
+- (void)handleDoubleTap:(UIGestureRecognizer *)gesture {
     CGSize imageViewSize = _photoImageView.frame.size;
     if (imageViewSize.height < imageViewSize.width) {//宽图特殊处理  宽图放大 高要变成屏幕高度
         [self handleImageViewDoubleTap:[gesture locationInView:nil]];//locationInView:传nil 传gesture.view坐标不对
@@ -425,8 +424,7 @@
     }
 }
 
-- (void)handleImageViewDoubleTap:(CGPoint)touchPoint
-{
+- (void)handleImageViewDoubleTap:(CGPoint)touchPoint {
     CGPoint point = touchPoint;
     if (touchPoint.x < _photoImageView.frame.origin.x
         ||touchPoint.x > _photoImageView.frame.origin.x + _photoImageView.frame.size.width
@@ -492,7 +490,7 @@
         
         
         [UIView commitAnimations];
-    }else{
+    } else {
         if (!isBigScale) {
             float newScale = maxScale;
             CGRect zoomRect = [self zoomRectForScale:newScale withCenter:point];
@@ -507,8 +505,7 @@
     }
 }
 
-- (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center
-{
+- (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center {
     CGRect zoomRect;
     zoomRect.size.height = self.frame.size.height / scale;
     zoomRect.size.width  = self.frame.size.width / scale;

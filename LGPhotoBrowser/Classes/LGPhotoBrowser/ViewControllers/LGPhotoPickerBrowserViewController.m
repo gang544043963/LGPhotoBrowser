@@ -24,19 +24,19 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
 @interface LGPhotoPickerBrowserViewController () <UIScrollViewDelegate,LGPhotoPickerPhotoScrollViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,LGPhotoPickerCustomToolBarViewDelegate>
 
 // 控件
-@property (nonatomic, weak)  UILabel          *pageLabel;
-@property (nonatomic, weak)  UIButton         *backBtn;
-@property (nonatomic, weak)  UICollectionView *collectionView;
-@property (nonatomic, assign) NSInteger currentPage;
-@property (nonatomic, assign) BOOL isNowRotation;
-@property (nonatomic, weak)  LGImagePickerSelectView *imagePickerSelectView;
-@property (nonatomic, strong) LGPhotoPickerCustomToolBarView *XGtoolbar;
-@property (nonatomic, weak) LGPhotoPickerBrowserPhotoScrollView *cellScrollView;
-@property (nonatomic, strong) UIImage *displayImage;
-@property (nonatomic, assign) CGFloat beginDraggingContentOffsetX;
-@property (nonatomic, assign) DraggingDirect draggingDirect;
-@property (nonatomic, assign) BOOL scrollToEndFlag;
-@property (nonatomic, assign) BOOL needHidenBar; // YES - 隐藏顶部和底部bar，单击照片dismiss
+@property (nonatomic, weak  ) UILabel                             *pageLabel;
+@property (nonatomic, weak  ) UIButton                            *backBtn;
+@property (nonatomic, weak  ) UICollectionView                    *collectionView;
+@property (nonatomic, assign) NSInteger                           currentPage;
+@property (nonatomic, assign) BOOL                                isNowRotation;
+@property (nonatomic, weak  ) LGImagePickerSelectView             *imagePickerSelectView;
+@property (nonatomic, strong) LGPhotoPickerCustomToolBarView      *XGtoolbar;
+@property (nonatomic, weak  ) LGPhotoPickerBrowserPhotoScrollView *cellScrollView;
+@property (nonatomic, strong) UIImage                             *displayImage;
+@property (nonatomic, assign) CGFloat                             beginDraggingContentOffsetX;
+@property (nonatomic, assign) DraggingDirect                      draggingDirect;
+@property (nonatomic, assign) BOOL                                scrollToEndFlag;
+@property (nonatomic, assign) BOOL                                needHidenBar;// YES - 隐藏顶部和底部bar，单击照片dismiss
 
 @end
 
@@ -44,7 +44,7 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
 
 #pragma mark - dealloc
 
-- (void)dealloc{
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     self.delegate = nil;
     self.dataSource = nil;
@@ -52,8 +52,7 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
 
 #pragma mark - setter
 
-- (void)setShowType:(LGShowImageType)showType
-{
+- (void)setShowType:(LGShowImageType)showType {
     _showType = showType;
     if (self.showType != LGShowImageTypeImagePicker){
         self.needHidenBar = YES;
@@ -62,7 +61,8 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
 
 #pragma mark - getter
 #pragma mark photos
-- (NSArray *)photos{
+
+- (NSArray *)photos {
     if (!_photos) {
         _photos = [self getPhotos];
     }
@@ -70,6 +70,7 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
 }
 
 #pragma mark setupCollectionView
+
 - (void)setupCollectionView{
     if (!_collectionView) {
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -92,13 +93,13 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
 
         [self.view addSubview:collectionView];
         self.collectionView = collectionView;
-
         self.pageLabel.hidden = NO;
     }
 }
 
 #pragma mark pageLabel
-- (UILabel *)pageLabel{
+
+- (UILabel *)pageLabel {
     if (!_pageLabel) {
         UILabel *pageLabel = [[UILabel alloc] init];
         pageLabel.font = [UIFont systemFontOfSize:18];
@@ -117,13 +118,13 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
         
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:widthVfl options:0 metrics:metrics views:views]];
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:heightVfl options:0 metrics:metrics views:views]];
-        
     }
     return _pageLabel;
 }
 
 #pragma mark getPhotos
-- (NSArray *)getPhotos{
+
+- (NSArray *)getPhotos {
     NSMutableArray *photos = [NSMutableArray arrayWithArray:_photos];
     if ([self isDataSourceElsePhotos]) {
         NSInteger section = self.currentIndexPath.section;
@@ -146,7 +147,7 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
     [self setupXGToolbar];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
@@ -156,17 +157,15 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
     [self updateSelectBtn];
 }
 
-- (void)viewDidAppear:(BOOL)animated{
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (self.photos.count == 0) {
         NSAssert(self.dataSource, @"你没成为数据源代理");
     }
-    
     [self prepareLeftAndRighImage];
 }
 
-
-- (void)viewWillDisappear:(BOOL)animated{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
@@ -175,6 +174,7 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
 }
 
 #pragma mark - ImagePickerSelectView 相关
+
 - (void)setupTopView {
     self.navigationController.navigationBarHidden = YES;
     if ((!_imagePickerSelectView) && (!self.needHidenBar)) {
@@ -191,13 +191,11 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
     if ([self.delegate respondsToSelector:@selector(photoBrowserWillExit:)]) {
         [self.delegate photoBrowserWillExit:self];
     }
-    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)selectedButtonTapped {
     LGPhotoAssets *selectAsset = ((LGPhotoPickerBrowserPhoto *)self.photos[self.currentPage]).asset;
-    
     // 0. 九张图片数量限制
     NSUInteger maxCount = (self.maxCount < 0) ? KPhotoShowMaxCount :  self.maxCount;
     if (self.selectedAssets.count >= maxCount && !_imagePickerSelectView.selectBtn.selected) {
@@ -222,8 +220,8 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
 }
 
 #pragma mark - XGToolbar 相关
-- (void)setupXGToolbar
-{
+
+- (void)setupXGToolbar {
     if ((!_XGtoolbar)  && (!self.needHidenBar)) {
         CGFloat height = 44;
         _XGtoolbar = [[LGPhotoPickerCustomToolBarView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - height, CGRectGetWidth(self.view.bounds), height) showType:self.showType];
@@ -237,11 +235,11 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
             NSString *fileSize = [NSString stringWithFormat:@"(%@)",[weakself getFileSizeByBt:[NSNumber numberWithLongLong:rep.size]]];
             return fileSize;
         };
-        
         [self.view addSubview:_XGtoolbar];
     }
 }
-- (NSString *)getFileSizeByBt:(NSNumber *)fileSize{
+
+- (NSString *)getFileSizeByBt:(NSNumber *)fileSize {
     CGFloat size = [fileSize floatValue];
     if (size >= 1024*1024*1024) {
         return [NSString stringWithFormat:@"%.2fG",size/(1024*1024*1024)];
@@ -254,19 +252,16 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
 
 #pragma mark - reloadData
 
-- (void)reloadData{
-    if (self.currentPage <= 0){
+- (void)reloadData {
+    if (self.currentPage <= 0) {
         self.currentPage = self.currentIndexPath.item;
-    }else{
+    } else {
         --self.currentPage;
     }
-    
     if (self.currentPage >= self.photos.count) {
         self.currentPage = self.photos.count - 1;
     }
-
     [self setPageLabelPage:self.currentPage];
-    
     if (self.currentPage >= 0) {
         CGPoint point = CGPointMake(self.currentPage * self.collectionView.width, 0);
         NSLog(@"%ld,%f,%f",(long)self.currentPage , self.collectionView.width,point.x);
@@ -284,7 +279,7 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
     return self.photos.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:_cellIdentifier forIndexPath:indexPath];
     
@@ -318,14 +313,14 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
     return cell;
 }
 
-- (NSUInteger)getRealPhotosCount{
+- (NSUInteger)getRealPhotosCount {
     if ([self isDataSourceElsePhotos]) {
         return [self.dataSource photoBrowser:self numberOfItemsInSection:self.currentIndexPath.section];
     }
     return self.photos.count;
 }
 
--(void)setPageLabelPage:(NSInteger)page{
+-(void)setPageLabelPage:(NSInteger)page {
     self.pageLabel.text = [NSString stringWithFormat:@"%ld / %ld",(unsigned long)(page + 1), (unsigned long)self.photos.count];
         self.title = self.pageLabel.text;
 }
@@ -337,7 +332,8 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
 }
 
 #pragma mark 滚动过程中重复调用
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     if (self.isNowRotation) {
         self.isNowRotation = NO;
@@ -355,12 +351,12 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
 }
 
 #pragma mark 将要减速
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
     
 }
 
 #pragma mark 减速完成
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     
     if ([self.delegate respondsToSelector:@selector(photoBrowser:didCurrentPage:)]) {
         [self.delegate photoBrowser:self didCurrentPage:self.currentPage];
@@ -418,6 +414,7 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
 }
 
 #pragma mark - <PickerPhotoScrollViewDelegate>
+
 - (void)pickerPhotoScrollViewDidSingleClick:(LGPhotoPickerBrowserPhotoScrollView *)photoScrollView{
     if (self.needHidenBar) {
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -437,21 +434,20 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
 }
 
 #pragma mark - ZLPhotoPickerCustomToolBarViewDelegate
+
 - (void)customToolBarIsOriginalBtnTouched {
     self.isOriginal = !self.isOriginal;
     [self updateXGToolbar];
 }
 
-- (void)customToolBarSendBtnTouched{
-    
+- (void)customToolBarSendBtnTouched {
     [self dismissViewControllerAnimated:NO completion:nil];
     if ([self.delegate respondsToSelector:@selector(photoBrowserSendBtnTouched:isOriginal:)]) {
         [self.delegate photoBrowserSendBtnTouched:self isOriginal:self.isOriginal];
     }
 }
 
-- (DraggingDirect)getDraggingDirect
-{
+- (DraggingDirect)getDraggingDirect {
     DraggingDirect direct;
     if (self.beginDraggingContentOffsetX == self.collectionView.contentOffset.x
         ) {
@@ -516,10 +512,10 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
 }
 
 #pragma mark - 长按动作
+
 - (void)longPressAction {
     NSLog(@"long pressed");
 }
-
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0){

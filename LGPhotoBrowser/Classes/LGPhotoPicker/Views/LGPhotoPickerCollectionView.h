@@ -32,18 +32,18 @@ typedef NS_ENUM(NSUInteger, LGPickerCollectionViewShowOrderStatus){
 // scrollView滚动的升序降序
 @property (nonatomic , assign) LGPickerCollectionViewShowOrderStatus status;
 // 保存所有的数据
-@property (nonatomic , strong) NSArray *dataArray;
+@property (nonatomic , strong) NSArray        *dataArray;
 // 保存选中的图片
 @property (nonatomic , strong) NSMutableArray *selectAssets;
 // 最后保存的一次图片
-@property (strong,nonatomic) NSMutableArray *lastDataArray;
+@property (strong,nonatomic  ) NSMutableArray *lastDataArray;
 // delegate
 @property (nonatomic , weak) id <LGPhotoPickerCollectionViewDelegate> collectionViewDelegate;
 // 限制最大数
 @property (nonatomic , assign) NSInteger maxCount;
 // 置顶展示图片
-@property (assign,nonatomic) BOOL topShowPhotoPicker;
+@property (assign,nonatomic  ) BOOL      topShowPhotoPicker;
 // 记录选中的值
-@property (assign,nonatomic) BOOL isRecoderSelectPicker;
+@property (assign,nonatomic  ) BOOL      isRecoderSelectPicker;
 
 @end

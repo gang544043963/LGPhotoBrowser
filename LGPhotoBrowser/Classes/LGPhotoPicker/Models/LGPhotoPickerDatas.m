@@ -10,13 +10,14 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 
 @interface LGPhotoPickerDatas ()
+
 @property (nonatomic , strong) ALAssetsLibrary *library;
+
 @end
 
 @implementation LGPhotoPickerDatas
 
-+ (ALAssetsLibrary *)defaultAssetsLibrary
-{
++ (ALAssetsLibrary *)defaultAssetsLibrary {
     static dispatch_once_t pred = 0;
     static ALAssetsLibrary *library = nil;
     dispatch_once(&pred,^
@@ -26,8 +27,7 @@
     return library;
 }
 
-- (ALAssetsLibrary *)library
-{
+- (ALAssetsLibrary *)library {
     if (nil == _library)
     {
         _library = [self.class defaultAssetsLibrary];
@@ -37,18 +37,18 @@
 }
 
 #pragma mark - getter
-+ (instancetype) defaultPicker{
++ (instancetype) defaultPicker {
     return [[self alloc] init];
 }
 
 #pragma mark -获取所有组
-- (void) getAllGroupWithPhotos : (groupCallBackBlock ) callBack{
+- (void) getAllGroupWithPhotos : (groupCallBackBlock ) callBack {
     [self getAllGroupAllPhotos:YES withResource:callBack];
 }
 
-- (void) getAllGroupAllPhotos:(BOOL)allPhotos withResource : (groupCallBackBlock ) callBack{
+- (void) getAllGroupAllPhotos:(BOOL)allPhotos withResource : (groupCallBackBlock ) callBack {
     NSMutableArray *groups = [NSMutableArray array];
-    ALAssetsLibraryGroupsEnumerationResultsBlock resultBlock = ^(ALAssetsGroup *group, BOOL *stop){
+    ALAssetsLibraryGroupsEnumerationResultsBlock resultBlock = ^(ALAssetsGroup *group, BOOL *stop) {
         if (group) {
             if (allPhotos){
                 [group setAssetsFilter:[ALAssetsFilter allPhotos]];
@@ -80,7 +80,7 @@
 }
 
 #pragma mark -传入一个组获取组里面的Asset
-- (void) getGroupPhotosWithGroup : (LGPhotoPickerGroup *) pickerGroup finished : (groupCallBackBlock ) callBack{
+- (void) getGroupPhotosWithGroup : (LGPhotoPickerGroup *) pickerGroup finished : (groupCallBackBlock ) callBack {
     
     NSMutableArray *assets = [NSMutableArray array];
     ALAssetsGroupEnumerationResultsBlock result = ^(ALAsset *asset , NSUInteger index , BOOL *stop){
@@ -94,7 +94,7 @@
 }
 
 #pragma mark -传入一个AssetsURL来获取UIImage
-- (void) getAssetsPhotoWithURLs:(NSURL *) url callBack:(groupCallBackBlock ) callBack{
+- (void) getAssetsPhotoWithURLs:(NSURL *) url callBack:(groupCallBackBlock ) callBack {
     [self.library assetForURL:url resultBlock:^(ALAsset *asset) {
         dispatch_async(dispatch_get_main_queue(), ^{
             callBack([UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]]);

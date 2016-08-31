@@ -43,9 +43,6 @@
  //                  佛祖保佑             永无BUG
  ---------------------------------------------------------------------------*/
 
-#ifndef ZLAssetsPickerDemo_ZLPicker_h
-#define ZLAssetsPickerDemo_ZLPicker_h
-
 #import "LGPhotoPickerBrowserViewController.h"
 #import "LGPhotoPickerAssetsViewController.h"
 #import "LGPhotoPickerViewController.h"
@@ -54,4 +51,3 @@
 #import "LGPhotoPickerCommon.h"
 #import "UIView+Layout.h"
 
-#endif

@@ -10,7 +10,7 @@
 
 @implementation LGImagePickerSelectView
 
-- (id)init{
+- (id)init {
     if (self = [super init]) {
         self.frame = CGRectMake(0, 0, SCREEN_WIDTH, 64);
         self.backgroundColor = [UIColor clearColor];
@@ -36,10 +36,9 @@
     return self;
 }
 
-- (void)addTarget:(id)target backAction:(SEL)backAction selectAction:(SEL)selectAction forControlEvents:(UIControlEvents)controlEvents{
+- (void)addTarget:(id)target backAction:(SEL)backAction selectAction:(SEL)selectAction forControlEvents:(UIControlEvents)controlEvents {
     [self.backBtn addTarget:target action:backAction forControlEvents:controlEvents];
     [self.selectBtn addTarget:target action:selectAction forControlEvents:controlEvents];
 }
-
 
 @end
