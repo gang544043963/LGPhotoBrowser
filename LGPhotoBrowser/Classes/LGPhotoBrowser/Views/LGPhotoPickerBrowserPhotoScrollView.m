@@ -102,8 +102,10 @@
     if (progress / 1.0 != 1.0) {
         [self.progressView setProgress:progress animated:YES];
     }else{
-        [self.progressView removeFromSuperview];
-        self.progressView = nil;
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[self.progressView removeFromSuperview];
+			self.progressView = nil;
+		});
     }
 }
 
