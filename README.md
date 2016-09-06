@@ -46,7 +46,61 @@
   如果你的项目中已经存在这两个框架，请手动删除Third文件夹中对应的框架。
   
 # 初始化
-见ViewController.m，注释很清楚
+
+6行代码初始化相册选择器，里面包括大图浏览
+```
+/**
+ *  初始化相册选择器
+ */
+- (void)presentPhotoPickerViewControllerWithStyle:(LGShowImageType)style {
+    LGPhotoPickerViewController *pickerVc = [[LGPhotoPickerViewController alloc] initWithShowType:style];
+    pickerVc.status = PickerViewShowStatusCameraRoll;
+    pickerVc.maxCount = 9;   // 最多能选9张图片
+    pickerVc.delegate = self;
+    self.showType = style;
+    [pickerVc showPickerVc:self];
+}
+```
+如果单独使用图片浏览器，也很简单：初始化+实现数据源方法
+```
+/**
+ *  初始化图片浏览器
+ */
+- (void)pushPhotoBroswerWithStyle:(LGShowImageType)style{
+    LGPhotoPickerBrowserViewController *BroswerVC = [[LGPhotoPickerBrowserViewController alloc] init];
+    BroswerVC.delegate = self;
+    BroswerVC.dataSource = self;
+    BroswerVC.showType = style;
+    self.showType = style;
+    [self presentViewController:BroswerVC animated:YES completion:nil];
+}
+```
+```
+#pragma mark - LGPhotoPickerBrowserViewControllerDataSource
+
+- (NSInteger)photoBrowser:(LGPhotoPickerBrowserViewController *)photoBrowser numberOfItemsInSection:(NSUInteger)section{if (self.showType == LGShowImageTypeImageBroswer) {
+        return self.LGPhotoPickerBrowserPhotoArray.count;
+    } else if (self.showType == LGShowImageTypeImageURL) {
+        return self.LGPhotoPickerBrowserURLArray.count;
+    } else {
+        NSLog(@"非法数据源");
+        return 0;
+    }
+}
+//在这里，需要把图片包装成LGPhotoPickerBrowserPhoto对象，然后return即可。
+- (id<LGPhotoPickerBrowserPhoto>)photoBrowser:(LGPhotoPickerBrowserViewController *)pickerBrowser photoAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.showType == LGShowImageTypeImageBroswer) {
+        return [self.LGPhotoPickerBrowserPhotoArray objectAtIndex:indexPath.item];
+    } else if (self.showType == LGShowImageTypeImageURL) {
+        return [self.LGPhotoPickerBrowserURLArray objectAtIndex:indexPath.item];
+    } else {
+        NSLog(@"非法数据源");
+        return nil;
+    }
+}
+
+```
+详见ViewController.m，注释很清楚
 
 # 环境支持
 iOS7及更高
