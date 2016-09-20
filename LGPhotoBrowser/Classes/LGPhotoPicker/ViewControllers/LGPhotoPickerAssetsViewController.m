@@ -510,10 +510,8 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void) sendBtnTouched {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:PICKER_TAKE_DONE object:nil userInfo:@{@"selectAssets":self.selectAssets,@"isOriginal":@(self.isOriginal)}];
-        NSLog(@"%@",@(self.isOriginal));
-    });
+	[[NSNotificationCenter defaultCenter] postNotificationName:PICKER_TAKE_DONE object:nil userInfo:@{@"selectAssets":self.selectAssets,@"isOriginal":@(self.isOriginal)}];
+	NSLog(@"%@",@(self.isOriginal));
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
