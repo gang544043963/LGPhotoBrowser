@@ -36,10 +36,6 @@ static NSInteger const KPhotoShowMaxCount = 9;
 // ScrollView 滑动的间距
 static CGFloat const LGPickerColletionViewPadding = 20;
 
-// ScrollView拉伸的比例
-static CGFloat const LGPickerScrollViewMaxZoomScale = 3.0;
-static CGFloat const LGPickerScrollViewMinZoomScale = 1.0;
-
 // 进度条的宽度/高度
 static NSInteger const LGPickerProgressViewW = 50;
 static NSInteger const LGPickerProgressViewH = 50;
