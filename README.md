@@ -1,14 +1,16 @@
 # LGPhotoBrowser
 
-#前言
+# 前言
  **此框架经过实际项目锤炼，使用过程中改善了众多bug，在稳定性、流畅性以及内存消耗方面做了大量优化。
  但难免还有缺陷，希望同仁们在使用过程中发现并指正，并提issue！**
  
  **注意：如果照相机不需要连拍功能，建议采用系统相机，经测试，自定义相机的体验和内存消耗均劣于系统相机。**
  
  **相册优化方法：[iOS中自定义相册功能性能优化](http://blog.csdn.net/gang544043963/article/details/49329261)**
+ 
+ **如果对您有帮助，记得star，动力源自鼓励**
 
-#简介
+# 简介
 - 此框架包含三个模块：图片浏览器，相册选择器，自定义照相机（支持单拍、连拍）； 
 
 - 界面仿照微信的样式； 
@@ -19,16 +21,16 @@
 
 - 具备相册已选组别记忆功能； 
 
-#1.图片浏览器
+# 1.图片浏览器
 <img src="https://github.com/gang544043963/MyDataSource/blob/master/browser.gif?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>
 
 
-#2.相册选择器
+# 2.相册选择器
 
 <img src="https://github.com/gang544043963/MyDataSource/blob/master/picker.gif?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/> <img src="https://github.com/gang544043963/MyDataSource/blob/master/browser1.gif?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>
 
 
-#3.自定义相机
+# 3.自定义相机
 
 <img src="https://github.com/gang544043963/MyDataSource/blob/master/IMG_2653.PNG?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>  <img src="https://github.com/gang544043963/MyDataSource/blob/master/IMG_2652.PNG?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/> <img src="https://github.com/gang544043963/MyDataSource/blob/master/IMG_2651.PNG?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>
 

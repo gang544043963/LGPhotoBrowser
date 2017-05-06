@@ -78,10 +78,10 @@
 @property (nonatomic , weak) id<LGPhotoPickerBrowserViewControllerDataSource> dataSource;
 @property (nonatomic , weak) id<LGPhotoPickerBrowserViewControllerDelegate> delegate;
 
-// 展示的图片数组<ZLPhotoPickerBrowserPhoto> == [self.dataSource photoBrowser:photoAtIndexPath:]
-@property (nonatomic, copy  ) NSArray         *photos;
+// 展示的图片数组<LGPhotoPickerBrowserPhoto> == [self.dataSource photoBrowser:photoAtIndexPath:]
+@property (nonatomic, copy  ) NSArray<__kindof LGPhotoPickerBrowserPhoto*> *photos;
 
-@property (nonatomic, strong) NSMutableArray  *selectedAssets;
+@property (nonatomic, strong) NSMutableArray<__kindof LGPhotoAssets*>  *selectedAssets;
 // 当前提供的组
 @property (strong,nonatomic ) NSIndexPath     *currentIndexPath;
 

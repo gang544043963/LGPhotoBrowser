@@ -10,7 +10,6 @@
 #import "LGPhotoPickerBrowserPhotoImageView.h"
 #import "LGPhotoPickerBrowserPhotoView.h"
 #import "LGPhotoPickerBrowserPhoto.h"
-//#import "XGPhoto.h"
 #import "LGPhoto.h"
 
 

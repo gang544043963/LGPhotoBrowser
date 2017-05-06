@@ -433,7 +433,7 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
     [self longPressAction];
 }
 
-#pragma mark - ZLPhotoPickerCustomToolBarViewDelegate
+#pragma mark - LGPhotoPickerCustomToolBarViewDelegate
 
 - (void)customToolBarIsOriginalBtnTouched {
     self.isOriginal = !self.isOriginal;
