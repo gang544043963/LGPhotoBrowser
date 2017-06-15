@@ -416,39 +416,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     [self.sendBtn setTitle:title forState:UIControlStateNormal];
 }
 
-#pragma mark - UICollectionViewDataSource
-- (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 1;
-}
-
-- (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return self.selectAssets.count;
-}
-
-- (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:_identifier forIndexPath:indexPath];
-    
-    if (self.selectAssets.count > indexPath.item) {
-        UIImageView *imageView = [[cell.contentView subviews] lastObject];
-        // 判断真实类型
-        if (![imageView isKindOfClass:[UIImageView class]]) {
-            imageView = [[UIImageView alloc] initWithFrame:cell.bounds];
-            imageView.contentMode = UIViewContentModeScaleAspectFit;
-            imageView.clipsToBounds = YES;
-            [cell.contentView addSubview:imageView];
-        }
-        imageView.tag = indexPath.item;
-        if ([self.selectAssets[indexPath.item] isKindOfClass:[LGPhotoAssets class]]) {
-            imageView.image = [self.selectAssets[indexPath.item] thumbImage];
-        }else if ([self.selectAssets[indexPath.item] isKindOfClass:[UIImage class]]){
-            imageView.image = (UIImage *)self.selectAssets[indexPath.item];
-        }
-    }
-
-    return cell;
-}
-
 #pragma mark - LGPhotoPickerBrowserViewControllerDataSource
 
 - (NSInteger)numberOfSectionInPhotosInPickerBrowser:(LGPhotoPickerBrowserViewController *)pickerBrowser{
