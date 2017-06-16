@@ -35,21 +35,20 @@ LGPhotoPickerCollectionViewCellDelegate
     
     // 需要记录选中的值的数据
     NSArray *selectedAssest = [self.collectionViewDelegate selectedAssests];
-    if (self.isRecoderSelectPicker) {
-        NSMutableArray *selectAssets = [NSMutableArray array];
-        for (LGPhotoAssets *asset in selectedAssest) {
-            for (LGPhotoAssets *asset2 in self.dataArray) {
-                
-                if ([asset isKindOfClass:[UIImage class]] || [asset2 isKindOfClass:[UIImage class]]) {
-                    continue;
-                }
-                if ([asset.asset.defaultRepresentation.url isEqual:asset2.asset.defaultRepresentation.url]) {
-                    [selectAssets addObject:asset2];
-                    break;
-                }
+    NSMutableArray *selectAssets = [NSMutableArray array];
+    for (LGPhotoAssets *asset in selectedAssest) {
+        for (LGPhotoAssets *asset2 in self.dataArray) {
+            
+            if ([asset isKindOfClass:[UIImage class]] || [asset2 isKindOfClass:[UIImage class]]) {
+                continue;
+            }
+            if ([asset.asset.defaultRepresentation.url isEqual:asset2.asset.defaultRepresentation.url]) {
+                [selectAssets addObject:asset2];
+                break;
             }
         }
     }
+
     [self reloadData];
 }
 

@@ -23,7 +23,7 @@ typedef NS_ENUM(NSUInteger, LGPickerCollectionViewShowOrderStatus){
 // 取消选中照片
 - (void) pickerCollectionViewDidDeselected:(LGPhotoPickerCollectionView *) pickerCollectionView deselectedAsset:(LGPhotoAssets *)assets;
 
-//点击cell会调用
+// 点击cell会调用
 - (void) pickerCollectionCellTouchedIndexPath:(NSIndexPath *)indexPath;
 
 // 点击拍照就会调用
@@ -37,15 +37,11 @@ typedef NS_ENUM(NSUInteger, LGPickerCollectionViewShowOrderStatus){
 
 // 保存所有的数据
 @property (nonatomic, strong) NSArray<__kindof LGPhotoAssets*>        *dataArray;
-// 最后保存的一次图片
-//@property (nonatomic, strong) NSMutableArray *lastDataArray;
 // delegate
 @property (nonatomic, weak) id <LGPhotoPickerCollectionViewDelegate> collectionViewDelegate;
 // 限制最大数
 @property (nonatomic, assign) NSInteger maxCount;
 // 置顶展示相册按钮
 @property (nonatomic, assign) BOOL      topShowPhotoPicker;
-// 记录选中的值
-@property (nonatomic, assign) BOOL      isRecoderSelectPicker;
 
 @end

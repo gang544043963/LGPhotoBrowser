@@ -159,7 +159,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     }
     
     self.selectAssets = [selectPickerAssets mutableCopy];
-    self.collectionView.isRecoderSelectPicker = YES;
     NSInteger count = self.selectAssets.count;
     self.makeView.hidden = !count;
     self.makeView.text = [NSString stringWithFormat:@"%ld",(long)count];
@@ -418,7 +417,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
 - (void)photoBrowserWillExit:(LGPhotoPickerBrowserViewController *)pickerBrowser
 {
     self.selectAssets = [NSMutableArray arrayWithArray:pickerBrowser.selectedAssets];
-    self.collectionView.isRecoderSelectPicker = YES;
     NSInteger count = self.selectAssets.count;
     self.makeView.hidden = !count;
     self.makeView.text = [NSString stringWithFormat:@"%ld",(long)count];
