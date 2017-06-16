@@ -159,7 +159,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     }
     
     self.selectAssets = [selectPickerAssets mutableCopy];
-    self.collectionView.lastDataArray = nil;
     self.collectionView.isRecoderSelectPicker = YES;
     NSInteger count = self.selectAssets.count;
     self.makeView.hidden = !count;
@@ -182,7 +181,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
         LGPhotoAssets *lgAsset = [[LGPhotoAssets alloc] init];
         [reSortArray insertObject:lgAsset atIndex:0];
         
-        self.collectionView.status = LGPickerCollectionViewShowOrderStatusTimeAsc;
         self.collectionView.topShowPhotoPicker = topShowPhotoPicker;
         self.collectionView.dataArray = reSortArray;
         [self.collectionView reloadData];
@@ -202,7 +200,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
         
         LGPhotoPickerCollectionView *collectionView = [[LGPhotoPickerCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         // 时间置顶
-        collectionView.status = LGPickerCollectionViewShowOrderStatusTimeDesc;
         collectionView.translatesAutoresizingMaskIntoConstraints = NO;
         [collectionView registerClass:[LGPhotoPickerCollectionViewCell class] forCellWithReuseIdentifier:_cellIdentifier];
         // 底部的View
@@ -421,7 +418,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
 - (void)photoBrowserWillExit:(LGPhotoPickerBrowserViewController *)pickerBrowser
 {
     self.selectAssets = [NSMutableArray arrayWithArray:pickerBrowser.selectedAssets];
-    self.collectionView.lastDataArray = nil;
     self.collectionView.isRecoderSelectPicker = YES;
     NSInteger count = self.selectAssets.count;
     self.makeView.hidden = !count;
