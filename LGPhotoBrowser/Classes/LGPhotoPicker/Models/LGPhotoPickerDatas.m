@@ -67,7 +67,7 @@
         }
     };
     
-    NSInteger type = ALAssetsGroupAll;
+    NSInteger type = ALAssetsGroupAlbum | ALAssetsGroupSavedPhotos;
     
     [self.library enumerateGroupsWithTypes:type usingBlock:resultBlock failureBlock:nil];
 }

@@ -22,14 +22,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZy-yh-UwQ">
-                        <rect key="frame" x="75" y="5" width="20" height="20"/>
+                        <rect key="frame" x="66" y="6" width="28" height="28"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="Qcm-ls-TgG"/>
-                            <constraint firstAttribute="width" constant="20" id="pVA-Kd-Go0"/>
+                            <constraint firstAttribute="height" constant="28" id="Qcm-ls-TgG"/>
+                            <constraint firstAttribute="width" constant="28" id="pVA-Kd-Go0"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -37,8 +37,8 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Qbk-DS-sp8" secondAttribute="trailing" id="D9b-HG-fSd"/>
                 <constraint firstItem="Qbk-DS-sp8" firstAttribute="leading" secondItem="W2q-P7-ea7" secondAttribute="leading" id="T6T-aO-Lqv"/>
-                <constraint firstItem="jZy-yh-UwQ" firstAttribute="top" secondItem="W2q-P7-ea7" secondAttribute="top" constant="5" id="YaG-Br-hFA"/>
-                <constraint firstAttribute="trailing" secondItem="jZy-yh-UwQ" secondAttribute="trailing" constant="5" id="d6y-4C-xrM"/>
+                <constraint firstItem="jZy-yh-UwQ" firstAttribute="top" secondItem="W2q-P7-ea7" secondAttribute="top" constant="6" id="YaG-Br-hFA"/>
+                <constraint firstAttribute="trailing" secondItem="jZy-yh-UwQ" secondAttribute="trailing" constant="6" id="d6y-4C-xrM"/>
                 <constraint firstAttribute="bottom" secondItem="Qbk-DS-sp8" secondAttribute="bottom" id="mf2-et-bDB"/>
                 <constraint firstItem="Qbk-DS-sp8" firstAttribute="top" secondItem="W2q-P7-ea7" secondAttribute="top" id="pU9-p4-jRj"/>
             </constraints>

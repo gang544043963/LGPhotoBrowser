@@ -19,9 +19,8 @@ static NSString *const _cellIdentifier = @"cell";
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.selectTagLabel.layer.cornerRadius = 10.0;
-    self.selectTagLabel.layer.borderWidth = 1.0;
-    self.selectTagLabel.layer.borderColor = [UIColor redColor].CGColor;
+    self.selectTagLabel.layer.cornerRadius = 14.0;
+    [self setupNormalUI];
     
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTagLabel:)];
     [self.selectTagLabel addGestureRecognizer:gesture];
@@ -30,13 +29,13 @@ static NSString *const _cellIdentifier = @"cell";
 - (void)selectedWithNumber:(NSInteger)number {
     self.selected = YES;
     self.selectTagLabel.text = [NSString stringWithFormat:@"%@", @(number)];
-    self.selectTagLabel.backgroundColor = [UIColor yellowColor];
+    [self setupSelectedUI];
 }
 
 - (void)deselected {
     self.selected = NO;
     self.selectTagLabel.text = @"";
-    self.selectTagLabel.backgroundColor = [UIColor whiteColor];
+    [self setupNormalUI];
 }
 
 #pragma mark - Action 
@@ -45,6 +44,19 @@ static NSString *const _cellIdentifier = @"cell";
     if ([self.delegate respondsToSelector:@selector(photoPickerCollectionViewCell:didSelectImage:)]) {
         [self.delegate photoPickerCollectionViewCell:self didSelectImage:self.imageView.image];
     }
+}
+
+#pragma mark - Private Method
+
+- (void)setupNormalUI {
+    self.selectTagLabel.layer.borderWidth = 1.0;
+    self.selectTagLabel.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.selectTagLabel.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+}
+
+- (void)setupSelectedUI {
+    self.selectTagLabel.layer.borderWidth = 0;
+    self.selectTagLabel.backgroundColor = [UIColor orangeColor];
 }
 
 @end
