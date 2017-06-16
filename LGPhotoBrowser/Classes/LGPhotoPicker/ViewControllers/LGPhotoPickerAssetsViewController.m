@@ -46,10 +46,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
 
 #pragma mark - dealloc
 
-- (void)dealloc{
-    
-}
-
 - (void)viewDidDisappear:(BOOL)animated
 {
     // 赋值给上一个控制器,以便记录上次选择的照片
@@ -165,7 +161,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     self.selectAssets = [selectPickerAssets mutableCopy];
     self.collectionView.lastDataArray = nil;
     self.collectionView.isRecoderSelectPicker = YES;
-//    self.collectionView.selectAssets = self.selectAssets;
     NSInteger count = self.selectAssets.count;
     self.makeView.hidden = !count;
     self.makeView.text = [NSString stringWithFormat:@"%ld",(long)count];
@@ -220,25 +215,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     }
     return _collectionView;
 }
-
-//#pragma mark makeView 红点标记View
-//- (UILabel *)makeView{
-//    if (!_makeView) {
-//        UILabel *makeView = [[UILabel alloc] init];
-//        makeView.textColor = [UIColor whiteColor];
-//        makeView.textAlignment = NSTextAlignmentCenter;
-//        makeView.font = [UIFont systemFontOfSize:13];
-//        makeView.frame = CGRectMake(-5, -5, 20, 20);
-//        makeView.hidden = YES;
-//        makeView.layer.cornerRadius = makeView.frame.size.height / 2.0;
-//        makeView.clipsToBounds = YES;
-//        makeView.backgroundColor = [UIColor redColor];
-//        [self.view addSubview:makeView];
-//        self.makeView = makeView;
-//        
-//    }
-//    return _makeView;
-//}
 
 #pragma mark - circle life
 
@@ -299,11 +275,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     ctrl.delegate = self;
     ctrl.sourceType = UIImagePickerControllerSourceTypeCamera;
     [self presentViewController:ctrl animated:YES completion:nil];
-    
-    
-//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//        [[NSNotificationCenter defaultCenter] postNotificationName:PICKER_TAKE_PHOTO object:nil];
-//    });
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
@@ -368,9 +339,7 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     _assetsGroup = assetsGroup;
     
     self.title = assetsGroup.groupName;
-    
-    // 获取Assets
-//    [self setupAssets];
+
 }
 
 #pragma mark - LGPhotoPickerCollectionViewDelegate
@@ -454,7 +423,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     self.selectAssets = [NSMutableArray arrayWithArray:pickerBrowser.selectedAssets];
     self.collectionView.lastDataArray = nil;
     self.collectionView.isRecoderSelectPicker = YES;
-//    self.collectionView.selectAssets = self.selectAssets;
     NSInteger count = self.selectAssets.count;
     self.makeView.hidden = !count;
     self.makeView.text = [NSString stringWithFormat:@"%ld",(long)count];

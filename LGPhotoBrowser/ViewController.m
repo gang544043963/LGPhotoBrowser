@@ -86,6 +86,7 @@
     pickerVc.status = PickerViewShowStatusCameraRoll;
     pickerVc.maxCount = 9;   // 最多能选9张图片
     pickerVc.delegate = self;
+
     self.showType = style;
     [pickerVc showPickerVc:self];
 }

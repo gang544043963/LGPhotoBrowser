@@ -23,6 +23,7 @@
     if (self) {
         self.showType = showType;
         self.groupVc.showType = showType;
+        self.topShowPhotoPicker = YES;
     }
     return self;
 }
