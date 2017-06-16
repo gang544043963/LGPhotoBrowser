@@ -37,9 +37,10 @@ LGPhotoPickerCollectionViewCellDelegate
     _dataArray = dataArray;
     
     // 需要记录选中的值的数据
+    NSArray *selectedAssest = [self.collectionViewDelegate selectedAssests];
     if (self.isRecoderSelectPicker) {
         NSMutableArray *selectAssets = [NSMutableArray array];
-        for (LGPhotoAssets *asset in self.selectAssets) {
+        for (LGPhotoAssets *asset in selectedAssest) {
             for (LGPhotoAssets *asset2 in self.dataArray) {
                 
                 if ([asset isKindOfClass:[UIImage class]] || [asset2 isKindOfClass:[UIImage class]]) {
@@ -51,7 +52,6 @@ LGPhotoPickerCollectionViewCellDelegate
                 }
             }
         }
-        _selectAssets = selectAssets;
     }
     [self reloadData];
 }
@@ -62,7 +62,7 @@ LGPhotoPickerCollectionViewCellDelegate
         self.backgroundColor = [UIColor clearColor];
         self.dataSource = self;
         self.delegate = self;
-        _selectAssets = [NSMutableArray array];
+
         [self registerNib:[UINib nibWithNibName:@"LGPhotoPickerCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:kPhotoCollectionCellIdentifier];
     }
     return self;
@@ -72,86 +72,19 @@ LGPhotoPickerCollectionViewCellDelegate
                            AtIndex:(NSIndexPath *)indexPath {
 
     LGPhotoAssets *asset = self.dataArray[indexPath.item];
+    NSArray *selectedAssets = [self.collectionViewDelegate selectedAssests];
     if ([asset isKindOfClass:[LGPhotoAssets class]]) {
         cell.imageView.image = asset.thumbImage;
     }
-
-    for (NSInteger i = 0; i < self.selectAssets.count; i ++) {
-        if ([((LGPhotoAssets *)self.selectAssets[i]).assetURL isEqual:asset.assetURL]) {
+    
+    for (NSInteger i = 0; i < selectedAssets.count; i ++) {
+        if ([((LGPhotoAssets *)selectedAssets[i]).assetURL isEqual:asset.assetURL]) {
             [cell selectedWithNumber:(i + 1)];
             return;
         }
     }
     [cell deselected];
 }
-/**
- *  每个cell右上角的选择按钮
- */
-//- (void)setupTickButtonOnCell:(LGPhotoPickerCollectionViewCell *)cell
-//                      AtIndex:(NSIndexPath *)indexPath {
-//    UIButton *tickButton = nil;
-//    if (cell.contentView.subviews.count == 2 && [cell.contentView.subviews[1] isKindOfClass:[UIButton class]]) {//如果是重用cell，则不用再添加button
-//        tickButton = cell.contentView.subviews[1];
-//    } else {
-//        tickButton = [[UIButton alloc] init];
-//        tickButton.frame = CGRectMake(cell.frame.size.width - 40, 0, 40, 40);
-//        [tickButton setBackgroundColor:[UIColor clearColor]];
-//        [cell.contentView addSubview:tickButton];
-//        [tickButton addTarget:self action:@selector(tickBtnTouched:) forControlEvents:UIControlEventTouchUpInside];
-//    }
-//    tickButton.tag = indexPath.item;
-//}
-
-//- (void)tickBtnTouched:(UIButton *)btn {
-//    NSIndexPath * indexPath = [NSIndexPath indexPathForItem:btn.tag inSection:0];
-//    
-//    if (self.topShowPhotoPicker && indexPath.row == 0) {
-//        if ([self.collectionViewDelegate respondsToSelector:@selector(pickerCollectionViewDidCameraSelect:)]) {
-//            [self.collectionViewDelegate pickerCollectionViewDidCameraSelect:self];
-//        }
-//        return ;
-//    }
-//    
-//    if (!self.lastDataArray) {
-//        self.lastDataArray = [NSMutableArray array];
-//    }
-//    
-//    LGPhotoPickerCollectionViewCell *cell = (LGPhotoPickerCollectionViewCell *) [self cellForItemAtIndexPath:indexPath];
-//    
-//    LGPhotoAssets *asset = self.dataArray[indexPath.item];
-//    LGPhotoPickerImageView *pickerImageView = [cell.contentView.subviews objectAtIndex:0];
-//    // 如果没有就添加到数组里面，存在就移除
-//    if ([pickerImageView isKindOfClass:[LGPhotoPickerImageView class]] && pickerImageView.isMaskViewFlag) {
-//        [self.selectAssets removeObject:asset];
-//        [self.lastDataArray removeObject:asset];
-//    }else{
-//        // 1 判断图片数超过最大数或者小于0
-//        NSUInteger maxCount = (self.maxCount < 0) ? KPhotoShowMaxCount :  self.maxCount;
-//        if (self.selectAssets.count >= maxCount) {
-//            NSString *format = [NSString stringWithFormat:@"最多只能选择%zd张图片",maxCount];
-//            if (maxCount == 0) {
-//                format = [NSString stringWithFormat:@"您最多只能选择9张图片"];
-//            }
-//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:format delegate:self cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
-//            [alertView show];
-//            return;
-//        }
-//        
-//        [self.selectAssets addObject:asset];
-//        [self.lastDataArray addObject:asset];
-//    }
-//    // 告诉代理现在被点击了!
-//    if ([self.collectionViewDelegate respondsToSelector:@selector(pickerCollectionViewDidSelected: deleteAsset:)]) {
-//        if (pickerImageView.isMaskViewFlag) {
-//            // 删除的情况下
-//            [self.collectionViewDelegate pickerCollectionViewDidSelected:self deleteAsset:asset];
-//        }else{
-//            [self.collectionViewDelegate pickerCollectionViewDidSelected:self deleteAsset:nil];
-//        }
-//    }
-//    
-//    pickerImageView.maskViewFlag = ([pickerImageView isKindOfClass:[LGPhotoPickerImageView class]]) && !pickerImageView.isMaskViewFlag;
-//}
 
 #pragma mark -<UICollectionViewDataSource>
 - (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -176,6 +109,7 @@ LGPhotoPickerCollectionViewCellDelegate
 - (void)photoPickerCollectionViewCell:(LGPhotoPickerCollectionViewCell *)cell didSelectImage:(UIImage *)image {
     
     NSIndexPath *indexPath = [self indexPathForCell:cell];
+    LGPhotoAssets *asset = self.dataArray[indexPath.item];
     
     if (self.topShowPhotoPicker && indexPath.row == 0) {
         if ([self.collectionViewDelegate respondsToSelector:@selector(pickerCollectionViewDidCameraSelect:)]) {
@@ -188,16 +122,21 @@ LGPhotoPickerCollectionViewCellDelegate
         self.lastDataArray = [NSMutableArray array];
     }
 
-    LGPhotoAssets *asset = self.dataArray[indexPath.item];
     if (cell.selected) {
+        
+        if ([self.collectionViewDelegate respondsToSelector:@selector(pickerCollectionViewDidDeselected:deselectedAsset:)]) {
+            [self.collectionViewDelegate pickerCollectionViewDidDeselected:self deselectedAsset:asset];
+        }
+        
         [cell deselected];
-        [self.selectAssets removeObject:asset];
         [self.lastDataArray removeObject:asset];
         [self reloadData];
     }
     else {
+        
+        NSArray *selectedAssests = [self.collectionViewDelegate selectedAssests];
         NSUInteger maxCount = (self.maxCount < 0) ? KPhotoShowMaxCount :  self.maxCount;
-        if (self.selectAssets.count >= maxCount) {
+        if (selectedAssests.count >= maxCount) {
             NSString *format = [NSString stringWithFormat:@"最多只能选择%zd张图片",maxCount];
             if (maxCount == 0) {
                 format = [NSString stringWithFormat:@"您最多只能选择9张图片"];
@@ -206,18 +145,18 @@ LGPhotoPickerCollectionViewCellDelegate
             [alertView show];
             return;
         }
-        [self.selectAssets addObject:asset];
+        
+        if ([self.collectionViewDelegate respondsToSelector:@selector(pickerCollectionViewDidSelected:selectedAsset:)]) {
+            [self.collectionViewDelegate pickerCollectionViewDidSelected:self selectedAsset:asset];
+        }
+        
         [self.lastDataArray addObject:asset];
-        [cell selectedWithNumber:self.selectAssets.count];
+        [cell selectedWithNumber:selectedAssests.count];
     }
     
-    if ([self.collectionViewDelegate respondsToSelector:@selector(pickerCollectionViewDidSelected: deleteAsset:)]) {
-        if (cell.selected == NO) {
-            [self.collectionViewDelegate pickerCollectionViewDidSelected:self deleteAsset:asset];
-        }else{
-            [self.collectionViewDelegate pickerCollectionViewDidSelected:self deleteAsset:nil];
-        }
-    }
+
+    
+
     
 }
 

@@ -165,7 +165,7 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     self.selectAssets = [selectPickerAssets mutableCopy];
     self.collectionView.lastDataArray = nil;
     self.collectionView.isRecoderSelectPicker = YES;
-    self.collectionView.selectAssets = self.selectAssets;
+//    self.collectionView.selectAssets = self.selectAssets;
     NSInteger count = self.selectAssets.count;
     self.makeView.hidden = !count;
     self.makeView.text = [NSString stringWithFormat:@"%ld",(long)count];
@@ -359,12 +359,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
         _privateTempMaxCount = maxCount;
     }
 
-    if (self.selectAssets.count == maxCount){
-        maxCount = 0;
-    }else if (self.selectPickerAssets.count - self.selectAssets.count > 0) {
-        maxCount = _privateTempMaxCount;
-    }
-    
     self.collectionView.maxCount = maxCount;
 }
 
@@ -387,24 +381,29 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     [self setupPhotoBrowserInCasePreview:NO CurrentIndexPath:indexPath];
 }
 
-//cell的右上角选择框被点击会调用
-- (void) pickerCollectionViewDidSelected:(LGPhotoPickerCollectionView *) pickerCollectionView deleteAsset:(LGPhotoAssets *)deleteAssets{
+- (void)pickerCollectionViewDidSelected:(LGPhotoPickerCollectionView *)pickerCollectionView selectedAsset:(LGPhotoAssets *)assets {
+    
+    [self.selectAssets addObject:assets];
+    [self updateToolbar];
+    
+}
 
-    if (self.selectPickerAssets.count == 0){
-        self.selectAssets = [NSMutableArray arrayWithArray:pickerCollectionView.selectAssets];
-    } else if (deleteAssets == nil) {
-        [self.selectAssets addObject:[pickerCollectionView.selectAssets lastObject]];
-    } else if(deleteAssets) { //取消所选的照片
-        //根据url删除对象
-        NSArray *arr = [self.selectAssets copy];
-        for (LGPhotoAssets *selectAsset in arr) {
-            if ([selectAsset.assetURL isEqual:deleteAssets.assetURL]) {
-                [self.selectAssets removeObject:selectAsset];
-            }
+- (void)pickerCollectionViewDidDeselected:(LGPhotoPickerCollectionView *)pickerCollectionView deselectedAsset:(LGPhotoAssets *)assets {
+    
+    //根据url删除对象
+    NSArray *arr = [self.selectAssets copy];
+    for (LGPhotoAssets *selectAsset in arr) {
+        if ([selectAsset.assetURL isEqual:assets.assetURL]) {
+            [self.selectAssets removeObject:selectAsset];
         }
     }
 
     [self updateToolbar];
+    
+}
+
+- (NSArray<LGPhotoAssets *> *)selectedAssests {
+    return self.selectAssets;
 }
 
 - (void)updateToolbar
@@ -455,7 +454,7 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     self.selectAssets = [NSMutableArray arrayWithArray:pickerBrowser.selectedAssets];
     self.collectionView.lastDataArray = nil;
     self.collectionView.isRecoderSelectPicker = YES;
-    self.collectionView.selectAssets = self.selectAssets;
+//    self.collectionView.selectAssets = self.selectAssets;
     NSInteger count = self.selectAssets.count;
     self.makeView.hidden = !count;
     self.makeView.text = [NSString stringWithFormat:@"%ld",(long)count];
