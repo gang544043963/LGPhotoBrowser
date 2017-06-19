@@ -6,6 +6,7 @@
 //  Copyright (c) 2015年 L&G. All rights reserved.
 
 #import "LGPhotoPickerViewController.h"
+#import "LGPhotoPickerConfiguration.h"
 #import "LGPhoto.h"
 
 @interface LGPhotoPickerViewController ()
@@ -14,15 +15,16 @@
 //是否发送原图，1 原图 0 压缩过图
 @property (nonatomic, assign) BOOL isOriginal;
 
+@property (nonatomic, strong) LGPhotoPickerConfiguration *configuration;
+
 @end
 
 @implementation LGPhotoPickerViewController
 
-- (instancetype)initWithShowType:(LGShowImageType)showType{
+- (instancetype)initWithConfiguration:(LGPhotoPickerConfiguration *)configuration{
     self = [super init];
     if (self) {
-        self.showType = showType;
-        self.groupVc.showType = showType;
+        _configuration = configuration;
     }
     return self;
 }
@@ -33,6 +35,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self addNotification];
+    [self createNavigationController];
 }
 
 - (void)dealloc{
@@ -42,7 +45,7 @@
 
 #pragma mark - init Action
 - (void) createNavigationController{
-    _groupVc = [[LGPhotoPickerGroupViewController alloc] init];
+    _groupVc = [[LGPhotoPickerGroupViewController alloc] initWithConfiguration:self.configuration];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:_groupVc];
     
     nav.view.frame = self.view.bounds;
@@ -50,41 +53,41 @@
     [self.view addSubview:nav.view];
 }
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        [self createNavigationController];
-    }
-    return self;
-}
+//- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+//    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+//        [self createNavigationController];
+//    }
+//    return self;
+//}
 
 - (void)setSelectPickers:(NSArray *)selectPickers{
     _selectPickers = selectPickers;
     self.groupVc.selectAsstes = [selectPickers mutableCopy];
 }
+//
+//- (void)setStatus:(PickerViewShowStatus)status{
+//    _status = status;
+//    self.groupVc.status = status;
+//}
 
-- (void)setStatus:(PickerViewShowStatus)status{
-    _status = status;
-    self.groupVc.status = status;
-}
+//- (void)setMaxCount:(NSInteger)maxCount{
+//    if (maxCount <= 0) return;
+//    _maxCount = maxCount;
+//    self.groupVc.maxCount = maxCount;
+//}
 
-- (void)setMaxCount:(NSInteger)maxCount{
-    if (maxCount <= 0) return;
-    _maxCount = maxCount;
-    self.groupVc.maxCount = maxCount;
-}
+//- (void)setTopShowPhotoPicker:(BOOL)topShowPhotoPicker{
+//    _topShowPhotoPicker = topShowPhotoPicker;
+//    self.groupVc.topShowPhotoPicker = topShowPhotoPicker;
+//}
 
-- (void)setTopShowPhotoPicker:(BOOL)topShowPhotoPicker{
-    _topShowPhotoPicker = topShowPhotoPicker;
-    self.groupVc.topShowPhotoPicker = topShowPhotoPicker;
-}
-
-#pragma mark - 展示控制器
-- (void)showPickerVc:(UIViewController *)vc{
-    __weak typeof(vc)weakVc = vc;
-    if (weakVc != nil) {
-        [weakVc presentViewController:self animated:YES completion:nil];
-    }
-}
+//#pragma mark - 展示控制器
+//- (void)showPickerVc:(UIViewController *)vc{
+//    __weak typeof(vc) weakVc = vc;
+//    if (weakVc != nil) {
+//        [weakVc presentViewController:self animated:YES completion:nil];
+//    }
+//}
 
 - (void) addNotification{
     // 监听异步done通知

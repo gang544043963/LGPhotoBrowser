@@ -7,17 +7,13 @@
 
 #import <UIKit/UIKit.h>
 #import "LGPhotoPickerCommon.h"
+
+@class LGPhotoPickerViewController;
+@class LGPhotoPickerConfiguration;
+
 // 回调
 typedef void(^LGcallBackBlock)(id obj);
-@class LGPhotoPickerViewController;
-// 状态组
-typedef NS_ENUM(NSInteger , PickerViewShowStatus) {
-    PickerViewShowStatusGroup = 0, // default groups .
-    PickerViewShowStatusCameraRoll ,
-    PickerViewShowStatusSavePhotos ,
-    PickerViewShowStatusPhotoStream ,
-    PickerViewShowStatusVideo,
-};
+
 
 @protocol LGPhotoPickerViewControllerDelegate <NSObject>
 /**
@@ -29,24 +25,25 @@ typedef NS_ENUM(NSInteger , PickerViewShowStatus) {
 
 @interface LGPhotoPickerViewController : UIViewController
 
-// @optional
-@property (nonatomic , weak) id<LGPhotoPickerViewControllerDelegate>delegate;
-// 决定你是否需要push到内容控制器, 默认显示组
-@property (nonatomic , assign) PickerViewShowStatus status;
-// 决定以什么风格显示相册，有原图选择按钮？有多选功能？
-@property (nonatomic) LGShowImageType showType;
-// 可以用代理来返回值或者用block来返回值
-@property (nonatomic , copy) LGcallBackBlock callBack;
-// 每次选择图片的最小数, 默认与最大数是9
-@property (nonatomic , assign) NSInteger maxCount;
-// 记录选中的值
-@property (strong,nonatomic) NSArray *selectPickers;
-// 置顶展示图片
-@property (assign,nonatomic) BOOL topShowPhotoPicker;
+// 代理
+@property (nonatomic, weak) id<LGPhotoPickerViewControllerDelegate> delegate;
 
-// @function
-- (instancetype)initWithShowType:(LGShowImageType)showType;
+// 可以用代理来返回值或者用block来返回值
+@property (nonatomic, copy) LGcallBackBlock callBack;
+
+// 记录选中的值
+@property (nonatomic, strong) NSArray *selectPickers;
+
+/**
+ 创建一个图片选择器
+
+ @param showType 显示类型
+ @param configuration 配置
+ @return 返回一个图片选择器的实例
+ */
+- (instancetype)initWithConfiguration:(LGPhotoPickerConfiguration *)configuration;
+
 // 展示控制器
-- (void)showPickerVc:(UIViewController *)vc;
+//- (void)showPickerVc:(UIViewController *)vc;
 
 @end

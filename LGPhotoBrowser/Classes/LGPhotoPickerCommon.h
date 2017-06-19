@@ -23,6 +23,15 @@
 // 点击销毁的block
 typedef void(^ZLPickerBrowserViewControllerTapDisMissBlock)(NSInteger);
 
+// 相册
+typedef NS_ENUM(NSInteger , LGPickerViewShowAlbum) {
+    LGPickerViewShowAlbumGroup = 0, // default groups .
+    LGPickerViewShowAlbumCameraRoll ,
+    LGPickerViewShowAlbumSavePhotos ,
+    LGPickerViewShowAlbumPhotoStream ,
+    LGPickerViewShowAlbumVideo,
+};
+
 //图片显示器分类
 typedef NS_ENUM(NSInteger, LGShowImageType) {
     LGShowImageTypeImagePicker = 0, //照片选择器

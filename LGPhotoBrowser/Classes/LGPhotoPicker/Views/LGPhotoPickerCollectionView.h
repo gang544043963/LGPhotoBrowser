@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LGPhotoAssets.h"
+#import "LGPhotoPickerConfiguration.h"
 
 // 展示状态
 typedef NS_ENUM(NSUInteger, LGPickerCollectionViewShowOrderStatus){
@@ -29,19 +30,31 @@ typedef NS_ENUM(NSUInteger, LGPickerCollectionViewShowOrderStatus){
 // 点击拍照就会调用
 - (void)pickerCollectionViewDidCameraSelect:(LGPhotoPickerCollectionView *) pickerCollectionView;
 
-// 选中的图片
-- (NSArray<LGPhotoAssets *> *)selectedAssests;
+/**
+ 选中的图片
+
+ @param collectionView 相册的collectionView
+ @return 返回已经选中的图片
+ */
+- (NSArray<LGPhotoAssets *> *)selectedAssestsForPhotoPickerCollectionView:(LGPhotoPickerCollectionView *)collectionView;;
+
 @end
 
 @interface LGPhotoPickerCollectionView : UICollectionView<UICollectionViewDelegate>
 
-// 保存所有的数据
-@property (nonatomic, strong) NSArray<__kindof LGPhotoAssets*>        *dataArray;
-// delegate
+- (instancetype)initWithFrame:(CGRect)frame
+         collectionViewLayout:(UICollectionViewLayout *)layout
+                configuraiton:(LGPhotoPickerConfiguration *)configuration;
+
+/**
+ 数据源
+ */
+@property (nonatomic, strong) NSArray<__kindof LGPhotoAssets*> *dataArray;
+
+
+/**
+ 代理
+ */
 @property (nonatomic, weak) id <LGPhotoPickerCollectionViewDelegate> collectionViewDelegate;
-// 限制最大数
-@property (nonatomic, assign) NSInteger maxCount;
-// 置顶展示相册按钮
-@property (nonatomic, assign) BOOL      topShowPhotoPicker;
 
 @end

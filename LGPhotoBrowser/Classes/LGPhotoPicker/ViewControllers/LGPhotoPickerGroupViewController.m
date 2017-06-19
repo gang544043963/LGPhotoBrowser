@@ -18,6 +18,7 @@
 #import "LGPhotoPickerGroupTableViewCell.h"
 #import "LGPhotoPickerAssetsViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "LGPhotoPickerConfiguration.h"
 
 @interface LGPhotoPickerGroupViewController () <UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, weak) LGPhotoPickerAssetsViewController *collectionVc;
@@ -26,43 +27,26 @@
 @property (nonatomic, copy) NSArray *groups;
 @property (nonatomic, copy) NSString *selectGroupURL;
 
+@property (nonatomic, strong) LGPhotoPickerConfiguration *configuration;
+
 @end
 
 @implementation LGPhotoPickerGroupViewController
 
-#pragma mark - dealloc
+#pragma mark - life cycle
 
-- (void)dealloc
-{
-    _tableView.delegate = nil;
-    _tableView.dataSource = nil;
-}
-
-- (instancetype)initWithShowType:(LGShowImageType)showType{
-    self = [super init];
-    if (self) {
-        self.showType = showType;
+- (instancetype)initWithConfiguration:(LGPhotoPickerConfiguration *)configuration {
+    if (self = [super init]) {
+        _configuration = configuration;
     }
     return self;
 }
 
-- (UITableView *)tableView{
-    if (!_tableView) {
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        tableView.translatesAutoresizingMaskIntoConstraints = NO;
-        tableView.delegate = self;
-        [tableView registerClass:[LGPhotoPickerGroupTableViewCell class] forCellReuseIdentifier:NSStringFromClass([LGPhotoPickerGroupTableViewCell class])];
-        [self.view addSubview:tableView];
-        self.tableView = tableView;
-		self.tableView.frame = self.view.bounds;
-    }
-    return _tableView;
-}
-
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
     self.title = @"选择相册";
-    // 设置按钮
     [self addNavBarCancelButton];
     
     ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
@@ -85,6 +69,12 @@
         // 获取图片
         [self getImgs];
     }
+}
+
+- (void)dealloc
+{
+    _tableView.delegate = nil;
+    _tableView.dataSource = nil;
 }
 
 #pragma mark - 创建右边取消按钮
@@ -122,15 +112,13 @@
     LGPhotoPickerGroup *group = self.groups[indexPath.row];
     self.selectGroupURL = [[group.group valueForProperty:ALAssetsGroupPropertyURL] absoluteString];
     
-    LGPhotoPickerAssetsViewController *assetsVc = [[LGPhotoPickerAssetsViewController alloc] init];
+    LGPhotoPickerAssetsViewController *assetsVc = [[LGPhotoPickerAssetsViewController alloc] initWithConfiguration:self.configuration];
     assetsVc.selectedAssetsBlock = ^(NSMutableArray *selectedAssets){
         //回传选择的照片，实现选择记忆
         self.selectAsstes = selectedAssets;
     };
     assetsVc.selectPickerAssets = self.selectAsstes;
     assetsVc.assetsGroup = group;
-    assetsVc.topShowPhotoPicker = self.topShowPhotoPicker;
-    assetsVc.maxCount = self.maxCount;
     [self.navigationController pushViewController:assetsVc animated:YES];
 }
 
@@ -139,11 +127,11 @@
 -(void)getImgs{
     LGPhotoPickerDatas *datas = [LGPhotoPickerDatas defaultPicker];
     __weak typeof(self) weakSelf = self;
-    if (self.status == PickerViewShowStatusVideo){
+    if (self.configuration.showAlbum == LGPickerViewShowAlbumVideo){
         // 获取所有的图片URLs
         [datas getAllGroupWithVideos:^(NSArray *groups) {
             self.groups = [[groups reverseObjectEnumerator] allObjects];
-            if (self.status) {
+            if (self.configuration.showAlbum > 0) {
                 [self gotoHistoryGroup];
             }
             weakSelf.tableView.dataSource = self;
@@ -154,7 +142,7 @@
         // 获取所有的图片URLs
         [datas getAllGroupWithPhotos:^(NSArray *groups) {
             self.groups = [[groups reverseObjectEnumerator] allObjects];
-            if (self.status) {
+            if (self.configuration.showAlbum > 0) {
                 [self gotoHistoryGroup];
             }
             weakSelf.tableView.dataSource = self;
@@ -170,13 +158,13 @@
     //当前用以下方法代替组别记忆功能
     LGPhotoPickerGroup *gp = nil;
     for (LGPhotoPickerGroup *group in self.groups) {
-        if ((self.status == PickerViewShowStatusCameraRoll || self.status == PickerViewShowStatusVideo) && ([group.groupName isEqualToString:@"Camera Roll"] || [group.groupName isEqualToString:@"相机胶卷"])) {
+        if ((self.configuration.showAlbum == LGPickerViewShowAlbumCameraRoll || self.configuration.showAlbum == LGPickerViewShowAlbumVideo) && ([group.groupName isEqualToString:@"Camera Roll"] || [group.groupName isEqualToString:@"相机胶卷"])) {
             gp = group;
             break;
-        }else if (self.status == PickerViewShowStatusSavePhotos && ([group.groupName isEqualToString:@"Saved Photos"] || [group.groupName isEqualToString:@"保存相册"])){
+        }else if (self.configuration.showAlbum == LGPickerViewShowAlbumSavePhotos && ([group.groupName isEqualToString:@"Saved Photos"] || [group.groupName isEqualToString:@"保存相册"])){
             gp = group;
             break;
-        }else if (self.status == PickerViewShowStatusPhotoStream &&  ([group.groupName isEqualToString:@"Stream"] || [group.groupName isEqualToString:@"我的照片流"])){
+        }else if (self.configuration.showAlbum == LGPickerViewShowAlbumPhotoStream &&  ([group.groupName isEqualToString:@"Stream"] || [group.groupName isEqualToString:@"我的照片流"])){
             gp = group;
             break;
         }
@@ -186,22 +174,34 @@
 }
 
 - (void)setupAssetsVCWithGroup:(LGPhotoPickerGroup *)group{
-    LGPhotoPickerAssetsViewController *assetsVc = [[LGPhotoPickerAssetsViewController alloc] initWithShowType:self.showType];
+    LGPhotoPickerAssetsViewController *assetsVc = [[LGPhotoPickerAssetsViewController alloc] initWithConfiguration:self.configuration];
     assetsVc.selectedAssetsBlock = ^(NSMutableArray *selectedAssets){
         //回传选择的照片，实现选择记忆
         self.selectAsstes = [selectedAssets copy];
     };
     assetsVc.selectPickerAssets = self.selectAsstes;
     assetsVc.assetsGroup = group;
-    assetsVc.topShowPhotoPicker = self.topShowPhotoPicker;
-    assetsVc.maxCount = self.maxCount;
     [self.navigationController pushViewController:assetsVc animated:NO];
 }
 
-#pragma mark -<Navigation Actions>
+#pragma mark - Navigation Actions
 
 - (void) cancelBtnTouched{
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Getter and Setter
+- (UITableView *)tableView{
+    if (!_tableView) {
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        tableView.translatesAutoresizingMaskIntoConstraints = NO;
+        tableView.delegate = self;
+        [tableView registerClass:[LGPhotoPickerGroupTableViewCell class] forCellReuseIdentifier:NSStringFromClass([LGPhotoPickerGroupTableViewCell class])];
+        [self.view addSubview:tableView];
+        self.tableView = tableView;
+        self.tableView.frame = self.view.bounds;
+    }
+    return _tableView;
 }
 
 @end
