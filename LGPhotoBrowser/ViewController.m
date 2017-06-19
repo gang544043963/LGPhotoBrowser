@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "LGPhoto.h"
+#import "LGPhotoPickerConfiguration.h"
 #define HEADER_HEIGHT 100
 
 @interface ViewController ()<LGPhotoPickerViewControllerDelegate,LGPhotoPickerBrowserViewControllerDataSource,LGPhotoPickerBrowserViewControllerDelegate, UITableViewDataSource,UITableViewDelegate>
@@ -82,12 +83,19 @@
  *  初始化相册选择器
  */
 - (void)presentPhotoPickerViewControllerWithStyle:(LGShowImageType)style {
-    LGPhotoPickerViewController *pickerVc = [[LGPhotoPickerViewController alloc] initWithShowType:style];
-    pickerVc.status = PickerViewShowStatusCameraRoll;
-    pickerVc.maxCount = 9;   // 最多能选9张图片
+    LGPhotoPickerConfiguration *configuration = [LGPhotoPickerConfiguration defaultConfiguration];
+    configuration.showCameraButton = NO;
+    configuration.showFooterView = NO;
+    configuration.maxSelectCount = 9;
+    configuration.showType = style;
+    configuration.showAlbum = LGPickerViewShowAlbumCameraRoll;
+    LGPhotoPickerViewController *pickerVc = [[LGPhotoPickerViewController alloc] initWithConfiguration:configuration];
+
+//    pickerVc.maxCount = 9;   // 最多能选9张图片
     pickerVc.delegate = self;
     self.showType = style;
-    [pickerVc showPickerVc:self];
+    [self presentViewController:pickerVc animated:YES completion:nil];
+//    [pickerVc showPickerVc:self];
 }
 
 /**

@@ -12,6 +12,7 @@
 #import "LGPhotoPickerGroup.h"
 #import "LGPhotoPickerCollectionViewCell.h"
 #import "LGPhotoPickerFooterCollectionReusableView.h"
+#import "LGPhotoPickerConfiguration.h"
 
 static CGFloat CELL_ROW = 4;
 static CGFloat CELL_MARGIN = 2;
@@ -21,34 +22,32 @@ static CGFloat TOOLBAR_HEIGHT = 44;
 static NSString *const _cellIdentifier = @"cell";
 static NSString *const _footerIdentifier = @"FooterView";
 static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
-@interface LGPhotoPickerAssetsViewController () <LGPhotoPickerCollectionViewDelegate,UICollectionViewDataSource,LGPhotoPickerBrowserViewControllerDataSource,LGPhotoPickerBrowserViewControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface LGPhotoPickerAssetsViewController () <LGPhotoPickerCollectionViewDelegate,LGPhotoPickerBrowserViewControllerDataSource,LGPhotoPickerBrowserViewControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
 // View
 // 相片View
 @property (nonatomic , strong) LGPhotoPickerCollectionView *collectionView;
 // 标记View
-@property (nonatomic , weak) UILabel *makeView;
-@property (nonatomic , strong) UIButton *sendBtn;
-@property (nonatomic , strong) UIButton *previewBtn;
-@property (nonatomic , weak) UIToolbar *toolBar;
-@property (assign,nonatomic) NSUInteger privateTempMaxCount;
-@property (nonatomic , strong) NSMutableArray *assets;
-@property (nonatomic , strong) NSMutableArray<__kindof LGPhotoAssets*> *selectAssets;
-@property (strong,nonatomic) NSMutableArray *takePhotoImages;
+@property (nonatomic, weak) UILabel *makeView;
+@property (nonatomic, strong) UIButton *sendBtn;
+@property (nonatomic, strong) UIButton *previewBtn;
+@property (nonatomic, weak) UIToolbar *toolBar;
+@property (nonatomic, assign) NSUInteger privateTempMaxCount;
+@property (nonatomic, strong) NSMutableArray *assets;
+@property (nonatomic, strong) NSMutableArray<__kindof LGPhotoAssets*> *selectAssets;
+@property (nonatomic, strong) NSMutableArray *takePhotoImages;
 // 1 - 相册浏览器的数据源是 selectAssets， 0 - 相册浏览器的数据源是 assets
 @property (nonatomic, assign) BOOL isPreview;
 // 是否发送原图
 @property (nonatomic, assign) BOOL isOriginal;
+
+@property (nonatomic, strong) LGPhotoPickerConfiguration *configuration;
 
 @end
 
 @implementation LGPhotoPickerAssetsViewController
 
 #pragma mark - dealloc
-
-- (void)dealloc{
-    
-}
 
 - (void)viewDidDisappear:(BOOL)animated
 {
@@ -58,10 +57,9 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     }
 }
 
-- (instancetype)initWithShowType:(LGShowImageType)showType{
-    self = [super init];
-    if (self) {
-        self.showType = showType;
+- (instancetype)initWithConfiguration:(LGPhotoPickerConfiguration *)configuration {
+    if (self = [super init]) {
+        _configuration = configuration;
     }
     return self;
 }
@@ -134,20 +132,15 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     self.isPreview = preview;
     // 图片游览器
     LGPhotoPickerBrowserViewController *pickerBrowser = [[LGPhotoPickerBrowserViewController alloc] init];
-    pickerBrowser.showType = self.showType;
-    // 数据源/delegate
+    pickerBrowser.showType = self.configuration.showType;
     pickerBrowser.delegate = self;
     pickerBrowser.dataSource = self;
-    pickerBrowser.maxCount = self.maxCount;
+    pickerBrowser.maxCount = self.configuration.maxSelectCount;
     pickerBrowser.isOriginal = self.isOriginal;
     pickerBrowser.selectedAssets = [self.selectAssets mutableCopy];
-    // 数据源可以不传，传photos数组 photos<里面是ZLPhotoPickerBrowserPhoto>
-//    pickerBrowser.photos = self.selectAssets;
-    // 是否可以删除照片
     pickerBrowser.editing = NO;
     // 当前选中的值
-    pickerBrowser.currentIndexPath = indexPath;    // 展示控制器
-//    [pickerBrowser showPickerVc:self];
+    pickerBrowser.currentIndexPath = indexPath;
     [self.navigationController presentViewController:pickerBrowser animated:YES completion:nil];
     
 }
@@ -163,9 +156,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     }
     
     self.selectAssets = [selectPickerAssets mutableCopy];
-    self.collectionView.lastDataArray = nil;
-    self.collectionView.isRecoderSelectPicker = YES;
-    self.collectionView.selectAssets = self.selectAssets;
     NSInteger count = self.selectAssets.count;
     self.makeView.hidden = !count;
     self.makeView.text = [NSString stringWithFormat:@"%ld",(long)count];
@@ -173,25 +163,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     self.previewBtn.enabled = (count > 0);
     
     [self updateToolbar];
-}
-
-- (void)setTopShowPhotoPicker:(BOOL)topShowPhotoPicker{
-    _topShowPhotoPicker = topShowPhotoPicker;
-
-    if (self.topShowPhotoPicker == YES) {
-        NSMutableArray *reSortArray= [[NSMutableArray alloc] init];
-        for (id obj in [self.collectionView.dataArray reverseObjectEnumerator]) {
-            [reSortArray addObject:obj];
-        }
-        
-        LGPhotoAssets *lgAsset = [[LGPhotoAssets alloc] init];
-        [reSortArray insertObject:lgAsset atIndex:0];
-        
-        self.collectionView.status = LGPickerCollectionViewShowOrderStatusTimeAsc;
-        self.collectionView.topShowPhotoPicker = topShowPhotoPicker;
-        self.collectionView.dataArray = reSortArray;
-        [self.collectionView reloadData];
-    }
 }
 
 #pragma mark collectionView
@@ -205,9 +176,8 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
         layout.minimumLineSpacing = CELL_LINE_MARGIN;
         layout.footerReferenceSize = CGSizeMake(self.view.frame.size.width, TOOLBAR_HEIGHT * 2);
         
-        LGPhotoPickerCollectionView *collectionView = [[LGPhotoPickerCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+        LGPhotoPickerCollectionView *collectionView = [[LGPhotoPickerCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout configuraiton:self.configuration];
         // 时间置顶
-        collectionView.status = LGPickerCollectionViewShowOrderStatusTimeDesc;
         collectionView.translatesAutoresizingMaskIntoConstraints = NO;
         [collectionView registerClass:[LGPhotoPickerCollectionViewCell class] forCellWithReuseIdentifier:_cellIdentifier];
         // 底部的View
@@ -220,25 +190,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     }
     return _collectionView;
 }
-
-//#pragma mark makeView 红点标记View
-//- (UILabel *)makeView{
-//    if (!_makeView) {
-//        UILabel *makeView = [[UILabel alloc] init];
-//        makeView.textColor = [UIColor whiteColor];
-//        makeView.textAlignment = NSTextAlignmentCenter;
-//        makeView.font = [UIFont systemFontOfSize:13];
-//        makeView.frame = CGRectMake(-5, -5, 20, 20);
-//        makeView.hidden = YES;
-//        makeView.layer.cornerRadius = makeView.frame.size.height / 2.0;
-//        makeView.clipsToBounds = YES;
-//        makeView.backgroundColor = [UIColor redColor];
-//        [self.view addSubview:makeView];
-//        self.makeView = makeView;
-//        
-//    }
-//    return _makeView;
-//}
 
 #pragma mark - circle life
 
@@ -299,11 +250,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     ctrl.delegate = self;
     ctrl.sourceType = UIImagePickerControllerSourceTypeCamera;
     [self presentViewController:ctrl animated:YES completion:nil];
-    
-    
-//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//        [[NSNotificationCenter defaultCenter] postNotificationName:PICKER_TAKE_PHOTO object:nil];
-//    });
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
@@ -352,21 +298,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
 }
 
 #pragma mark - setter
--(void)setMaxCount:(NSInteger)maxCount{
-    _maxCount = maxCount;
-    
-    if (!_privateTempMaxCount) {
-        _privateTempMaxCount = maxCount;
-    }
-
-    if (self.selectAssets.count == maxCount){
-        maxCount = 0;
-    }else if (self.selectPickerAssets.count - self.selectAssets.count > 0) {
-        maxCount = _privateTempMaxCount;
-    }
-    
-    self.collectionView.maxCount = maxCount;
-}
 
 - (void)setAssetsGroup:(LGPhotoPickerGroup *)assetsGroup{
     if (!assetsGroup.groupName.length) return ;
@@ -374,9 +305,7 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     _assetsGroup = assetsGroup;
     
     self.title = assetsGroup.groupName;
-    
-    // 获取Assets
-//    [self setupAssets];
+
 }
 
 #pragma mark - LGPhotoPickerCollectionViewDelegate
@@ -387,24 +316,29 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     [self setupPhotoBrowserInCasePreview:NO CurrentIndexPath:indexPath];
 }
 
-//cell的右上角选择框被点击会调用
-- (void) pickerCollectionViewDidSelected:(LGPhotoPickerCollectionView *) pickerCollectionView deleteAsset:(LGPhotoAssets *)deleteAssets{
+- (void)pickerCollectionViewDidSelected:(LGPhotoPickerCollectionView *)pickerCollectionView selectedAsset:(LGPhotoAssets *)assets {
+    
+    [self.selectAssets addObject:assets];
+    [self updateToolbar];
+    
+}
 
-    if (self.selectPickerAssets.count == 0){
-        self.selectAssets = [NSMutableArray arrayWithArray:pickerCollectionView.selectAssets];
-    } else if (deleteAssets == nil) {
-        [self.selectAssets addObject:[pickerCollectionView.selectAssets lastObject]];
-    } else if(deleteAssets) { //取消所选的照片
-        //根据url删除对象
-        NSArray *arr = [self.selectAssets copy];
-        for (LGPhotoAssets *selectAsset in arr) {
-            if ([selectAsset.assetURL isEqual:deleteAssets.assetURL]) {
-                [self.selectAssets removeObject:selectAsset];
-            }
+- (void)pickerCollectionViewDidDeselected:(LGPhotoPickerCollectionView *)pickerCollectionView deselectedAsset:(LGPhotoAssets *)assets {
+    
+    //根据url删除对象
+    NSArray *arr = [self.selectAssets copy];
+    for (LGPhotoAssets *selectAsset in arr) {
+        if ([selectAsset.assetURL isEqual:assets.assetURL]) {
+            [self.selectAssets removeObject:selectAsset];
         }
     }
 
     [self updateToolbar];
+    
+}
+
+- (NSArray<LGPhotoAssets *> *)selectedAssestsForPhotoPickerCollectionView:(LGPhotoPickerCollectionView *)collectionView {
+    return self.selectAssets;
 }
 
 - (void)updateToolbar
@@ -414,39 +348,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     self.previewBtn.enabled = (count > 0);
     NSString *title = [NSString stringWithFormat:@"发送(%ld)",(long)count];
     [self.sendBtn setTitle:title forState:UIControlStateNormal];
-}
-
-#pragma mark - UICollectionViewDataSource
-- (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 1;
-}
-
-- (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return self.selectAssets.count;
-}
-
-- (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:_identifier forIndexPath:indexPath];
-    
-    if (self.selectAssets.count > indexPath.item) {
-        UIImageView *imageView = [[cell.contentView subviews] lastObject];
-        // 判断真实类型
-        if (![imageView isKindOfClass:[UIImageView class]]) {
-            imageView = [[UIImageView alloc] initWithFrame:cell.bounds];
-            imageView.contentMode = UIViewContentModeScaleAspectFit;
-            imageView.clipsToBounds = YES;
-            [cell.contentView addSubview:imageView];
-        }
-        imageView.tag = indexPath.item;
-        if ([self.selectAssets[indexPath.item] isKindOfClass:[LGPhotoAssets class]]) {
-            imageView.image = [self.selectAssets[indexPath.item] thumbImage];
-        }else if ([self.selectAssets[indexPath.item] isKindOfClass:[UIImage class]]){
-            imageView.image = (UIImage *)self.selectAssets[indexPath.item];
-        }
-    }
-
-    return cell;
 }
 
 #pragma mark - LGPhotoPickerBrowserViewControllerDataSource
@@ -486,9 +387,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
 - (void)photoBrowserWillExit:(LGPhotoPickerBrowserViewController *)pickerBrowser
 {
     self.selectAssets = [NSMutableArray arrayWithArray:pickerBrowser.selectedAssets];
-    self.collectionView.lastDataArray = nil;
-    self.collectionView.isRecoderSelectPicker = YES;
-    self.collectionView.selectAssets = self.selectAssets;
     NSInteger count = self.selectAssets.count;
     self.makeView.hidden = !count;
     self.makeView.text = [NSString stringWithFormat:@"%ld",(long)count];
