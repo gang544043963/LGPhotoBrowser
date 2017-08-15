@@ -387,23 +387,11 @@ static CGFloat BOTTOM_HEIGHT = 60;
     CGContextDrawImage(ctx, smallBounds, subImageRef);
     CGImageRef cgimg = CGBitmapContextCreateImage(ctx);
     UIImage *img = [UIImage imageWithCGImage:cgimg];
-    
-    CGContextRelease(ctx);
-    CGImageRelease(cgimg);
-    return img;
-    
-    
-//    CGImageRef subImageRef = CGImageCreateWithImageInRect(srcImg.CGImage, rect);
-//    CGRect smallBounds = CGRectMake(0, 0, CGImageGetWidth(subImageRef), CGImageGetHeight(subImageRef));
-//    
-//    UIGraphicsBeginImageContext(smallBounds.size);
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//    CGContextDrawImage(context, smallBounds, subImageRef);
-//    UIImage* smallImage = [UIImage imageWithCGImage:subImageRef scale:1 orientation:UIImageOrientationRight];//由于直接从subImageRef中得到uiimage的方向是逆时针转了90°的
-//    UIGraphicsEndImageContext();
-//    CGImageRelease(subImageRef);
-//    
-//    return smallImage;
+	
+	CGImageRelease(subImageRef);
+	CGContextRelease(ctx);
+	CGImageRelease(cgimg);
+	return img;
 }
 
 //旋转image
@@ -583,15 +571,6 @@ static CGFloat BOTTOM_HEIGHT = 60;
     }
     
     [self Captureimage];
-//    UIView *maskView = [[UIView alloc] init];
-//    maskView.frame = self.view.bounds;
-//    maskView.backgroundColor = [UIColor whiteColor];
-//    [self.view addSubview:maskView];
-//    [UIView animateWithDuration:.5 animations:^{
-//        maskView.alpha = 0;
-//    } completion:^(BOOL finished) {
-//        [maskView removeFromSuperview];
-//    }];
 }
 
 - (BOOL)shouldAutorotate{
