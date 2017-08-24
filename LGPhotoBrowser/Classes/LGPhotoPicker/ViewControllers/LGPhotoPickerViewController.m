@@ -18,7 +18,7 @@
 
 @implementation LGPhotoPickerViewController
 
-- (instancetype)initWithShowType:(LGShowImageType)showType{
+- (instancetype)initWithShowType:(LGShowImageType)showType {
     self = [super init];
     if (self) {
         self.showType = showType;
@@ -35,13 +35,13 @@
     [self addNotification];
 }
 
-- (void)dealloc{
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     self.groupVc.delegate = nil;
 }
 
 #pragma mark - init Action
-- (void) createNavigationController{
+- (void) createNavigationController {
     _groupVc = [[LGPhotoPickerGroupViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:_groupVc];
     
@@ -50,49 +50,54 @@
     [self.view addSubview:nav.view];
 }
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         [self createNavigationController];
     }
     return self;
 }
 
-- (void)setSelectPickers:(NSArray *)selectPickers{
+- (void)setSelectPickers:(NSArray *)selectPickers {
     _selectPickers = selectPickers;
     self.groupVc.selectAsstes = [selectPickers mutableCopy];
 }
 
-- (void)setStatus:(PickerViewShowStatus)status{
+- (void)setStatus:(PickerViewShowStatus)status {
     _status = status;
     self.groupVc.status = status;
 }
 
-- (void)setMaxCount:(NSInteger)maxCount{
+- (void)setMaxCount:(NSInteger)maxCount {
     if (maxCount <= 0) return;
     _maxCount = maxCount;
     self.groupVc.maxCount = maxCount;
 }
 
-- (void)setTopShowPhotoPicker:(BOOL)topShowPhotoPicker{
+- (void)setNightMode:(BOOL)nightMode {
+	_nightMode = nightMode;
+	_groupVc.nightMode = nightMode;
+}
+
+- (void)setTopShowPhotoPicker:(BOOL)topShowPhotoPicker {
     _topShowPhotoPicker = topShowPhotoPicker;
     self.groupVc.topShowPhotoPicker = topShowPhotoPicker;
 }
 
 #pragma mark - 展示控制器
-- (void)showPickerVc:(UIViewController *)vc{
+- (void)showPickerVc:(UIViewController *)vc {
     __weak typeof(vc)weakVc = vc;
     if (weakVc != nil) {
         [weakVc presentViewController:self animated:YES completion:nil];
     }
 }
 
-- (void) addNotification{
+- (void) addNotification {
     // 监听异步done通知
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(done:) name:PICKER_TAKE_DONE object:nil];
 }
 
 #pragma mark - 监听点击Done按钮
-- (void)done:(NSNotification *)note{
+- (void)done:(NSNotification *)note {
     NSArray *selectArray =  note.userInfo[@"selectAssets"];
     self.isOriginal = [note.userInfo[@"isOriginal"] boolValue];
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -105,7 +110,7 @@
     });
 }
 
-- (void)setDelegate:(id<LGPhotoPickerViewControllerDelegate>)delegate{
+- (void)setDelegate:(id<LGPhotoPickerViewControllerDelegate>)delegate {
     _delegate = delegate;
     self.groupVc.delegate = delegate;
 }

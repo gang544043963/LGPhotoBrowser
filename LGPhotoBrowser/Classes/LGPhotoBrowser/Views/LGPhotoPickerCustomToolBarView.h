@@ -25,6 +25,8 @@
 
 @property (nonatomic) LGShowImageType showType;
 
+@property (nonatomic, assign) BOOL nightMode;
+
 @property (nonatomic, weak) id<LGPhotoPickerCustomToolBarViewDelegate>delegate;
 
 //- (void)setupToolbar;

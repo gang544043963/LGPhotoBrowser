@@ -33,7 +33,7 @@
         _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(frame), CGRectGetHeight(frame))];
         NSLog(@"%@",NSStringFromCGRect(_toolbar.frame));
         if ([_toolbar respondsToSelector:@selector(setBarTintColor:)]) {
-            _toolbar.barTintColor = nil;
+			_toolbar.barTintColor = self.nightMode? NIGHTMODE_COLOR : [UIColor clearColor];
         }
         if ([[UIToolbar class] respondsToSelector:@selector(appearance)]) {
             [_toolbar setBackgroundImage:nil forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
@@ -144,6 +144,13 @@
     if ([self.delegate respondsToSelector:@selector(customToolBarIsOriginalBtnTouched)]) {
         [self.delegate customToolBarIsOriginalBtnTouched];
     }
+}
+
+#pragma mark setters
+
+- (void)setNightMode:(BOOL)nightMode {
+	_nightMode = nightMode;
+	_toolbar.barTintColor = self.nightMode? NIGHTMODE_COLOR : [UIColor clearColor];
 }
 
 @end

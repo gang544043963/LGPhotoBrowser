@@ -20,6 +20,9 @@
 #define IOS8_OR_LATER   ( [[[UIDevice currentDevice] systemVersion] compare:@"8.0" options:NSNumericSearch] != NSOrderedAscending )
 #define IOS9_OR_LATER   ( [[[UIDevice currentDevice] systemVersion] compare:@"9.0" options:NSNumericSearch] != NSOrderedAscending )
 
+#define NIGHTMODE_COLOR [UIColor colorWithRed:42.0/255.0 green:45.0/255.0 blue:60.0/255.0 alpha:1]
+#define DAYMODE_COLOR [UIColor whiteColor]
+
 // 点击销毁的block
 typedef void(^ZLPickerBrowserViewControllerTapDisMissBlock)(NSInteger);
 

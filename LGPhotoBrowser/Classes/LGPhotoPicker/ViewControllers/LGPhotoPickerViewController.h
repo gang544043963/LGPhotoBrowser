@@ -30,15 +30,17 @@ typedef NS_ENUM(NSInteger , PickerViewShowStatus) {
 @interface LGPhotoPickerViewController : UIViewController
 
 // @optional
-@property (nonatomic , weak) id<LGPhotoPickerViewControllerDelegate>delegate;
+@property (nonatomic ,weak) id<LGPhotoPickerViewControllerDelegate>delegate;
 // 决定你是否需要push到内容控制器, 默认显示组
-@property (nonatomic , assign) PickerViewShowStatus status;
+@property (nonatomic ,assign) PickerViewShowStatus status;
 // 决定以什么风格显示相册，有原图选择按钮？有多选功能？
 @property (nonatomic) LGShowImageType showType;
 // 可以用代理来返回值或者用block来返回值
-@property (nonatomic , copy) LGcallBackBlock callBack;
+@property (nonatomic ,copy) LGcallBackBlock callBack;
 // 每次选择图片的最小数, 默认与最大数是9
-@property (nonatomic , assign) NSInteger maxCount;
+@property (nonatomic ,assign) NSInteger maxCount;
+//黑夜模式 默认0
+@property (nonatomic ,assign) BOOL nightMode;
 // 记录选中的值
 @property (strong,nonatomic) NSArray *selectPickers;
 // 置顶展示图片

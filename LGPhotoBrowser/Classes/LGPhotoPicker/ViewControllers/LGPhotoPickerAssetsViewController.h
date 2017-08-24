@@ -20,6 +20,8 @@
 @property (nonatomic, strong) LGPhotoPickerGroup *assetsGroup;
 
 @property (nonatomic, assign) NSInteger maxCount;
+
+@property (nonatomic, assign) BOOL nightMode;
 // 需要记录选中的值的数据
 @property (nonatomic, strong) NSArray *selectPickerAssets;
 // 置顶展示图片

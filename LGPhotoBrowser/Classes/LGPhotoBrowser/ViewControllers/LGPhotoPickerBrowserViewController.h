@@ -93,6 +93,8 @@
 
 @property (nonatomic, assign) NSInteger       maxCount;
 
+@property (nonatomic, assign) BOOL            nightMode;
+
 @property (nonatomic, assign) BOOL            isOriginal;
 // 放大缩小一张图片的情况下（查看头像）
 - (void)showHeadPortrait:(UIImageView *)toImageView;

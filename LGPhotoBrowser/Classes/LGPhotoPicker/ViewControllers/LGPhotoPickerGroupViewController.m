@@ -25,6 +25,7 @@
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic, copy) NSArray *groups;
 @property (nonatomic, copy) NSString *selectGroupURL;
+@property (nonatomic, strong) LGPhotoPickerAssetsViewController *assetsVc;
 
 @end
 
@@ -32,13 +33,12 @@
 
 #pragma mark - dealloc
 
-- (void)dealloc
-{
+- (void)dealloc {
     _tableView.delegate = nil;
     _tableView.dataSource = nil;
 }
 
-- (instancetype)initWithShowType:(LGShowImageType)showType{
+- (instancetype)initWithShowType:(LGShowImageType)showType {
     self = [super init];
     if (self) {
         self.showType = showType;
@@ -46,7 +46,7 @@
     return self;
 }
 
-- (UITableView *)tableView{
+- (UITableView *)tableView {
     if (!_tableView) {
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         tableView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -55,6 +55,8 @@
         [self.view addSubview:tableView];
         self.tableView = tableView;
 		self.tableView.frame = self.view.bounds;
+		self.tableView.backgroundColor = [UIColor clearColor];
+		self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _tableView;
 }
@@ -80,7 +82,7 @@
         lockLbl.textAlignment = NSTextAlignmentCenter;
         lockLbl.frame = CGRectMake(20, 0, self.view.frame.size.width - 40, self.view.frame.size.height);
         [self.view addSubview:lockLbl];
-    }else{
+    } else {
         [self tableView];
         // 获取图片
         [self getImgs];
@@ -88,7 +90,7 @@
 }
 
 #pragma mark - 创建右边取消按钮
-- (void)addNavBarCancelButton{
+- (void)addNavBarCancelButton {
     UIBarButtonItem *temporaryBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                              target:self
                              action:@selector(cancelBtnTouched)];
@@ -96,13 +98,14 @@
 }
 
 #pragma mark - <UITableViewDataSource>
-- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.groups.count;
 }
 
-- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     LGPhotoPickerGroupTableViewCell *cell = (LGPhotoPickerGroupTableViewCell *)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LGPhotoPickerGroupTableViewCell class])];
+	cell.backgroundColor = [UIColor colorWithWhite:1 alpha:.1f];
     
     if (cell == nil){
         cell = [[LGPhotoPickerGroupTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LGPhotoPickerGroupTableViewCell"];
@@ -113,30 +116,32 @@
 }
 
 #pragma mark -<UITableViewDelegate>
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 80;
 }
 
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     LGPhotoPickerGroup *group = self.groups[indexPath.row];
     self.selectGroupURL = [[group.group valueForProperty:ALAssetsGroupPropertyURL] absoluteString];
     
-    LGPhotoPickerAssetsViewController *assetsVc = [[LGPhotoPickerAssetsViewController alloc] init];
-    assetsVc.selectedAssetsBlock = ^(NSMutableArray *selectedAssets){
+    _assetsVc = [[LGPhotoPickerAssetsViewController alloc] init];
+	__weak LGPhotoPickerGroupViewController *weakSelf = self;
+    _assetsVc.selectedAssetsBlock = ^(NSMutableArray *selectedAssets){
         //回传选择的照片，实现选择记忆
-        self.selectAsstes = selectedAssets;
+        weakSelf.selectAsstes = selectedAssets;
     };
-    assetsVc.selectPickerAssets = self.selectAsstes;
-    assetsVc.assetsGroup = group;
-    assetsVc.topShowPhotoPicker = self.topShowPhotoPicker;
-    assetsVc.maxCount = self.maxCount;
-    [self.navigationController pushViewController:assetsVc animated:YES];
+    _assetsVc.selectPickerAssets = self.selectAsstes;
+    _assetsVc.assetsGroup = group;
+    _assetsVc.topShowPhotoPicker = self.topShowPhotoPicker;
+	_assetsVc.maxCount = self.maxCount;
+	_assetsVc.nightMode = self.nightMode;
+    [self.navigationController pushViewController:_assetsVc animated:YES];
 }
 
 #pragma mark -<Images Datas>
 
--(void)getImgs{
+-(void)getImgs {
     LGPhotoPickerDatas *datas = [LGPhotoPickerDatas defaultPicker];
     __weak typeof(self) weakSelf = self;
     if (self.status == PickerViewShowStatusVideo){
@@ -164,7 +169,7 @@
 }
 
 #pragma mark 从上次选择的组别进入相册选择器
-- (void) gotoHistoryGroup{
+- (void) gotoHistoryGroup {
     //这里可以使用单例或者文件本地化存储实现记忆功能
     
     //当前用以下方法代替组别记忆功能
@@ -173,10 +178,10 @@
         if ((self.status == PickerViewShowStatusCameraRoll || self.status == PickerViewShowStatusVideo) && ([group.groupName isEqualToString:@"Camera Roll"] || [group.groupName isEqualToString:@"相机胶卷"])) {
             gp = group;
             break;
-        }else if (self.status == PickerViewShowStatusSavePhotos && ([group.groupName isEqualToString:@"Saved Photos"] || [group.groupName isEqualToString:@"保存相册"])){
+        } else if (self.status == PickerViewShowStatusSavePhotos && ([group.groupName isEqualToString:@"Saved Photos"] || [group.groupName isEqualToString:@"保存相册"])){
             gp = group;
             break;
-        }else if (self.status == PickerViewShowStatusPhotoStream &&  ([group.groupName isEqualToString:@"Stream"] || [group.groupName isEqualToString:@"我的照片流"])){
+        } else if (self.status == PickerViewShowStatusPhotoStream &&  ([group.groupName isEqualToString:@"Stream"] || [group.groupName isEqualToString:@"我的照片流"])){
             gp = group;
             break;
         }
@@ -185,23 +190,39 @@
     [self setupAssetsVCWithGroup:gp];
 }
 
-- (void)setupAssetsVCWithGroup:(LGPhotoPickerGroup *)group{
-    LGPhotoPickerAssetsViewController *assetsVc = [[LGPhotoPickerAssetsViewController alloc] initWithShowType:self.showType];
-    assetsVc.selectedAssetsBlock = ^(NSMutableArray *selectedAssets){
+- (void)setupAssetsVCWithGroup:(LGPhotoPickerGroup *)group {
+    _assetsVc = [[LGPhotoPickerAssetsViewController alloc] initWithShowType:self.showType];
+	__weak LGPhotoPickerGroupViewController *weakSelf = self;
+	_assetsVc.selectedAssetsBlock = ^(NSMutableArray *selectedAssets){
         //回传选择的照片，实现选择记忆
-        self.selectAsstes = [selectedAssets copy];
+        weakSelf.selectAsstes = [selectedAssets copy];
     };
-    assetsVc.selectPickerAssets = self.selectAsstes;
-    assetsVc.assetsGroup = group;
-    assetsVc.topShowPhotoPicker = self.topShowPhotoPicker;
-    assetsVc.maxCount = self.maxCount;
-    [self.navigationController pushViewController:assetsVc animated:NO];
+    _assetsVc.selectPickerAssets = self.selectAsstes;
+    _assetsVc.assetsGroup = group;
+    _assetsVc.topShowPhotoPicker = self.topShowPhotoPicker;
+    _assetsVc.maxCount = self.maxCount;
+	_assetsVc.nightMode = self.nightMode;
+    [self.navigationController pushViewController:_assetsVc animated:NO];
 }
 
 #pragma mark -<Navigation Actions>
 
-- (void) cancelBtnTouched{
+- (void) cancelBtnTouched {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark -<setters>
+
+- (void)setNightMode:(BOOL)nightMode {
+	_nightMode = nightMode;
+	if (_assetsVc) {
+		[_assetsVc setNightMode:nightMode];
+	}
+	if (nightMode == YES) {
+		self.view.backgroundColor = NIGHTMODE_COLOR;
+	} else {
+		self.view.backgroundColor = DAYMODE_COLOR;
+	}
 }
 
 @end
