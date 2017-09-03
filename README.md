@@ -20,6 +20,8 @@
 
 - 具备相册已选组别记忆功能； 
 
+- 支持夜间模式；
+
 # 1.图片浏览器
 <img src="https://github.com/gang544043963/MyDataSource/blob/master/browser.gif?raw=true" alt="CXLSlideList Screenshot" width="200" height="360"/>
 
