@@ -61,7 +61,10 @@
             pickerGroup.groupName = [group valueForProperty:@"ALAssetsGroupPropertyName"];
             pickerGroup.thumbImage = [UIImage imageWithCGImage:[group posterImage]];
             pickerGroup.assetsCount = [group numberOfAssets];
-            [groups addObject:pickerGroup];
+            if (pickerGroup.assetsCount > 0)
+            {
+                [groups addObject:pickerGroup];
+            }
         }else{
             callBack(groups);
         }
