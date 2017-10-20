@@ -5,6 +5,7 @@
 //  Created by ZL on 14-9-11.
 //  Copyright (c) 2014年 beiqing. All rights reserved.
 //
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 
 #import <AVFoundation/AVFoundation.h>
 #import <ImageIO/ImageIO.h>
@@ -554,9 +555,13 @@ static CGFloat BOTTOM_HEIGHT = 60;
 
 - (void)cancel:(id)sender
 {
-    [self flashLightModel:^{
-        [self.device setFlashMode:AVCaptureFlashModeOff];
-    }];
+    if(IS_IPHONE)
+    {
+        [self flashLightModel:^
+        {
+            [self.device setFlashMode:AVCaptureFlashModeOff];
+        }];
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
