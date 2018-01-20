@@ -122,9 +122,24 @@
     LGPhotoAssets *asset = self.dataArray[indexPath.item];
     LGPhotoPickerImageView *pickerImageView = [cell.contentView.subviews objectAtIndex:0];
     // 如果没有就添加到数组里面，存在就移除
-    if ([pickerImageView isKindOfClass:[LGPhotoPickerImageView class]] && pickerImageView.isMaskViewFlag) {
-        [self.selectAssets removeObject:asset];
-        [self.lastDataArray removeObject:asset];
+    if ([pickerImageView isKindOfClass:[LGPhotoPickerImageView class]] && pickerImageView.isMaskViewFlag)
+    {
+        NSArray *selectArr = [self.selectAssets copy];
+        for (LGPhotoAssets *selectAsset in selectArr)
+        {
+            if ([selectAsset.assetURL isEqual:asset.assetURL])
+            {
+                [self.selectAssets removeObject:selectAsset];
+            }
+        }
+        NSArray *lastDataArr = [self.lastDataArray copy];
+        for (LGPhotoAssets *selectAsset in lastDataArr)
+        {
+            if ([selectAsset.assetURL isEqual:asset.assetURL])
+            {
+                [self.lastDataArray removeObject:selectAsset];
+            }
+        }
     }else{
         // 1 判断图片数超过最大数或者小于0
         NSUInteger maxCount = (self.maxCount < 0) ? KPhotoShowMaxCount :  self.maxCount;

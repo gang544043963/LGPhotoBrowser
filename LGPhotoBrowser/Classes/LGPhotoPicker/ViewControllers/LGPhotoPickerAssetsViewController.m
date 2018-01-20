@@ -261,6 +261,13 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     [self.collectionView reloadData];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.collectionView.selectAssets = [NSMutableArray arrayWithArray:self.selectAssets];
+    self.collectionView.maxCount = self.maxCount;
+}
+
 #pragma mark - 创建右边取消按钮
 - (void)addNavBarCancelButton{
 	UIBarButtonItem *temporaryBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
