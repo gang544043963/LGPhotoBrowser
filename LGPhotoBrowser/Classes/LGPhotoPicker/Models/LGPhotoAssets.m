@@ -39,7 +39,6 @@
 - (UIImage *)fullResolutionImage{
     ALAssetRepresentation *rep = [self.asset defaultRepresentation];
     CGImageRef iref = [rep fullResolutionImage];
-
     return [UIImage imageWithCGImage:iref scale:[rep scale] orientation:(UIImageOrientation)[rep orientation]];
 }
 

@@ -9,6 +9,8 @@
 #import "LGPhotoPickerBrowserPhoto.h"
 #import "LGPhotoPickerCommon.h"
 
+#pragma clang diagnostic ignored "-Wdeprecated"
+
 @interface LGPhotoPickerCustomToolBarView()
 
 @property (nonatomic, strong) UIToolbar *toolbar;

@@ -13,6 +13,8 @@
 #import "LGPhotoPickerCollectionViewCell.h"
 #import "LGPhotoPickerFooterCollectionReusableView.h"
 
+#pragma clang diagnostic ignored "-Wprotocol"
+
 static CGFloat CELL_ROW = 4;
 static CGFloat CELL_MARGIN = 2;
 static CGFloat CELL_LINE_MARGIN = 2;
@@ -21,7 +23,7 @@ static CGFloat TOOLBAR_HEIGHT = 44;
 static NSString *const _cellIdentifier = @"cell";
 static NSString *const _footerIdentifier = @"FooterView";
 static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
-@interface LGPhotoPickerAssetsViewController () <LGPhotoPickerCollectionViewDelegate,UICollectionViewDataSource,LGPhotoPickerBrowserViewControllerDataSource,LGPhotoPickerBrowserViewControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface LGPhotoPickerAssetsViewController () <LGPhotoPickerCollectionViewDelegate,UICollectionViewDataSource,LGPhotoPickerBrowserViewControllerDataSource,LGPhotoPickerBrowserViewControllerDelegate>
 
 // View
 // 相片View
@@ -222,25 +224,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     return _collectionView;
 }
 
-//#pragma mark makeView 红点标记View
-//- (UILabel *)makeView{
-//    if (!_makeView) {
-//        UILabel *makeView = [[UILabel alloc] init];
-//        makeView.textColor = [UIColor whiteColor];
-//        makeView.textAlignment = NSTextAlignmentCenter;
-//        makeView.font = [UIFont systemFontOfSize:13];
-//        makeView.frame = CGRectMake(-5, -5, 20, 20);
-//        makeView.hidden = YES;
-//        makeView.layer.cornerRadius = makeView.frame.size.height / 2.0;
-//        makeView.clipsToBounds = YES;
-//        makeView.backgroundColor = [UIColor redColor];
-//        [self.view addSubview:makeView];
-//        self.makeView = makeView;
-//        
-//    }
-//    return _makeView;
-//}
-
 #pragma mark - circle life
 
 - (void)viewDidLoad {
@@ -269,6 +252,7 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
 }
 
 #pragma mark - 创建右边取消按钮
+
 - (void)addNavBarCancelButton{
 	UIBarButtonItem *temporaryBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
 																							target:self
@@ -277,6 +261,7 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
 }
 
 #pragma mark 初始化所有的组
+
 - (void) setupAssets{
     if (!self.assets) {
         self.assets = [NSMutableArray array];
@@ -299,29 +284,8 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     });
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        // 处理
-        UIImage *image = info[@"UIImagePickerControllerOriginalImage"];
-        
-        [self.assets addObject:image];
-        [self.selectAssets addObject:image];
-        [self.takePhotoImages addObject:image];
-        
-        NSInteger count = self.selectAssets.count;
-        self.makeView.hidden = !count;
-        self.makeView.text = [NSString stringWithFormat:@"%ld",(long)count];
-        self.sendBtn.enabled = (count > 0);
-        self.previewBtn.enabled = (count > 0);
-        
-        [picker dismissViewControllerAnimated:YES completion:nil];
-    }else{
-        NSLog(@"请在真机使用!");
-    }
-}
-
 #pragma mark -初始化底部ToorBar
+
 - (void) setupToorBar{
     UIToolbar *toorBar = [[UIToolbar alloc] init];
     toorBar.translatesAutoresizingMaskIntoConstraints = NO;
@@ -345,6 +309,7 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
 }
 
 #pragma mark - setter
+
 - (void)setMaxCount:(NSInteger)maxCount {
     _maxCount = maxCount;
     
@@ -419,6 +384,7 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
 }
 
 #pragma mark - UICollectionViewDataSource
+
 - (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
 }
@@ -507,8 +473,8 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     [self sendBtnTouched];
 }
 
-#pragma mark -<Navigation Actions>
 #pragma mark -开启异步通知
+
 - (void) cancelBtnTouched{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
