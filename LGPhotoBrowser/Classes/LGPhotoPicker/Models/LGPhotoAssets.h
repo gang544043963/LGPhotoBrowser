@@ -23,6 +23,7 @@
  *  原图
  */
 - (UIImage *)originImage;
+
 - (UIImage *)fullResolutionImage;
 /**
  *  获取是否是视频类型, Default = false
