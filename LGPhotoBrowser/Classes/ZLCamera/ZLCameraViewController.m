@@ -74,9 +74,9 @@ static CGFloat BOTTOM_HEIGHT = 60;
         layout.minimumLineSpacing = ZLCameraColletionViewPadding;
         
         CGFloat collectionViewH = ZLCameraColletionViewW;
-        CGFloat collectionViewY = self.caramView.height - collectionViewH - 10;
+        CGFloat collectionViewY = self.caramView.frame.size.height - collectionViewH - 10;
         
-        UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, collectionViewY, self.view.width, collectionViewH)
+        UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, collectionViewY, self.view.frame.size.width, collectionViewH)
                                                               collectionViewLayout:layout];
         collectionView.backgroundColor = [UIColor clearColor];
         [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
@@ -166,14 +166,11 @@ static CGFloat BOTTOM_HEIGHT = 60;
 }
 
 #pragma mark 初始化按钮
-- (UIButton *) setupButtonWithImageName : (NSString *) imageName andX : (CGFloat ) x{
+- (UIButton *) setupButtonWithImageName:(NSString *)imageName andX:(CGFloat )x{
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     button.backgroundColor = [UIColor clearColor];
-    button.width = 80;
-    button.y = 0;
-    button.height = self.topView.height;
-    button.x = x;
+    button.frame = CGRectMake(x, 0, 80, self.topView.frame.size.height);
     [self.view addSubview:button];
     return button;
 }
@@ -185,12 +182,12 @@ static CGFloat BOTTOM_HEIGHT = 60;
     
     UIView *topView = [[UIView alloc] init];
     topView.backgroundColor = [UIColor blackColor];
-    topView.frame = CGRectMake(0, 0, self.view.width, 40);
+    topView.frame = CGRectMake(0, 0, self.view.frame.size.width, 40);
     [self.view addSubview:topView];
     self.topView = topView;
     
     // 头部View
-    UIButton *deviceBtn = [self setupButtonWithImageName:@"xiang.png" andX:self.view.width - margin - width];
+    UIButton *deviceBtn = [self setupButtonWithImageName:@"xiang.png" andX:self.view.frame.size.width - margin - width];
     [deviceBtn addTarget:self action:@selector(changeCameraDevice:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *flashBtn = [self setupButtonWithImageName:@"shanguangdeng2.png" andX:10];
@@ -203,7 +200,7 @@ static CGFloat BOTTOM_HEIGHT = 60;
     
     
     // 底部View
-    UIView *controlView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.height-BOTTOM_HEIGHT, self.view.width, BOTTOM_HEIGHT)];
+    UIView *controlView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-BOTTOM_HEIGHT, self.view.frame.size.width, BOTTOM_HEIGHT)];
     controlView.backgroundColor = [UIColor blackColor];
     controlView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
     self.controlView = controlView;
@@ -214,16 +211,16 @@ static CGFloat BOTTOM_HEIGHT = 60;
     contentView.alpha = 0.3;
     [controlView addSubview:contentView];
     
-    CGFloat x = (self.view.width - width) / 3;
+    CGFloat x = (self.view.frame.size.width - width) / 3;
     //取消
     UIButton *cancalBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    cancalBtn.frame = CGRectMake(0, 0, x, controlView.height);
+    cancalBtn.frame = CGRectMake(0, 0, x, controlView.frame.size.height);
     [cancalBtn setTitle:@"取消" forState:UIControlStateNormal];
     [cancalBtn addTarget:self action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
     [controlView addSubview:cancalBtn];
     //拍照
     UIButton *cameraBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    cameraBtn.frame = CGRectMake(x+margin, margin / 4, x, controlView.height - margin / 2);
+    cameraBtn.frame = CGRectMake(x+margin, margin / 4, x, controlView.frame.size.height - margin / 2);
     cameraBtn.showsTouchWhenHighlighted = YES;
     cameraBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [cameraBtn setImage:[UIImage imageNamed:@"paizhao.png"] forState:UIControlStateNormal];
@@ -232,7 +229,7 @@ static CGFloat BOTTOM_HEIGHT = 60;
     // 完成
     if (self.cameraType == ZLCameraContinuous) {
         UIButton *doneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        doneBtn.frame = CGRectMake(self.view.width - 2 * margin - width, 0, width, controlView.height);
+        doneBtn.frame = CGRectMake(self.view.frame.size.width - 2 * margin - width, 0, width, controlView.frame.size.height);
         [doneBtn setTitle:@"完成" forState:UIControlStateNormal];
         [doneBtn addTarget:self action:@selector(doneAction) forControlEvents:UIControlEventTouchUpInside];
         [controlView addSubview:doneBtn];

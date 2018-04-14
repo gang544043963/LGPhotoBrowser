@@ -85,11 +85,11 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.minimumLineSpacing = LGPickerColletionViewPadding;
         flowLayout.minimumInteritemSpacing = 0;
-        flowLayout.itemSize = self.view.size;
+        flowLayout.itemSize = self.view.frame.size;
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
         CGRect frame = self.view.bounds;
-        UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width + LGPickerColletionViewPadding,self.view.height) collectionViewLayout:flowLayout];
+        UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width + LGPickerColletionViewPadding,self.view.frame.size.height) collectionViewLayout:flowLayout];
         
         collectionView.showsHorizontalScrollIndicator = YES;
         collectionView.showsVerticalScrollIndicator = NO;
@@ -272,8 +272,8 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
     }
     [self setPageLabelPage:self.currentPage];
     if (self.currentPage >= 0) {
-        CGPoint point = CGPointMake(self.currentPage * self.collectionView.width, 0);
-        NSLog(@"%ld,%f,%f",(long)self.currentPage , self.collectionView.width,point.x);
+        CGPoint point = CGPointMake(self.currentPage * self.collectionView.frame.size.width, 0);
+        NSLog(@"%ld,%f,%f",(long)self.currentPage , self.collectionView.frame.size.width,point.x);
         self.collectionView.contentOffset = point;
         self.beginDraggingContentOffsetX = self.collectionView.contentOffset.x;
     }

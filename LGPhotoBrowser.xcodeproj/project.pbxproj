@@ -61,7 +61,6 @@
 		44290BAC1BDF0F16003D6E79 /* LGPhotoPickerGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44290B621BDF0F16003D6E79 /* LGPhotoPickerGroupTableViewCell.m */; };
 		44290BAD1BDF0F16003D6E79 /* LGPhotoPickerImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44290B641BDF0F16003D6E79 /* LGPhotoPickerImageView.m */; };
 		44290BC71BDF162B003D6E79 /* LGImagePickerSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44290BC61BDF162B003D6E79 /* LGImagePickerSelectView.m */; };
-		44290BCA1BDF1994003D6E79 /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 44290BC91BDF1994003D6E79 /* UIView+Layout.m */; };
 		44290BD11BDF9095003D6E79 /* checkbox_pic2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44290BCD1BDF9095003D6E79 /* checkbox_pic2@2x.png */; };
 		44290BD21BDF9095003D6E79 /* checkbox_pic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44290BCE1BDF9095003D6E79 /* checkbox_pic@2x.png */; };
 		44290BD31BDF9095003D6E79 /* checkbox_pic_non2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44290BCF1BDF9095003D6E79 /* checkbox_pic_non2@2x.png */; };
@@ -189,8 +188,6 @@
 		44290B6F1BDF0F16003D6E79 /* LGPhotoPickerCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGPhotoPickerCommon.h; sourceTree = "<group>"; };
 		44290BC51BDF162B003D6E79 /* LGImagePickerSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGImagePickerSelectView.h; sourceTree = "<group>"; };
 		44290BC61BDF162B003D6E79 /* LGImagePickerSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGImagePickerSelectView.m; sourceTree = "<group>"; };
-		44290BC81BDF1994003D6E79 /* UIView+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Layout.h"; sourceTree = "<group>"; };
-		44290BC91BDF1994003D6E79 /* UIView+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Layout.m"; sourceTree = "<group>"; };
 		44290BCD1BDF9095003D6E79 /* checkbox_pic2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkbox_pic2@2x.png"; sourceTree = "<group>"; };
 		44290BCE1BDF9095003D6E79 /* checkbox_pic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkbox_pic@2x.png"; sourceTree = "<group>"; };
 		44290BCF1BDF9095003D6E79 /* checkbox_pic_non2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkbox_pic_non2@2x.png"; sourceTree = "<group>"; };
@@ -472,18 +469,8 @@
 		44290B651BDF0F16003D6E79 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				44290B661BDF0F16003D6E79 /* Category */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		44290B661BDF0F16003D6E79 /* Category */ = {
-			isa = PBXGroup;
-			children = (
-				44290BC81BDF1994003D6E79 /* UIView+Layout.h */,
-				44290BC91BDF1994003D6E79 /* UIView+Layout.m */,
-			);
-			path = Category;
 			sourceTree = "<group>";
 		};
 		44290BCC1BDF9095003D6E79 /* Images */ = {
@@ -562,7 +549,6 @@
 				TargetAttributes = {
 					44290B031BDF0E3D003D6E79 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = TZZ2ER5BCT;
 						ProvisioningStyle = Automatic;
 					};
 					44290B1C1BDF0E3D003D6E79 = {
@@ -640,7 +626,6 @@
 				44290B9C1BDF0F16003D6E79 /* LGPhotoRect.m in Sources */,
 				440C6AE81BF1925A006A03B0 /* ZLCamera.m in Sources */,
 				44290BA81BDF0F16003D6E79 /* LGPhotoPickerViewController.m in Sources */,
-				44290BCA1BDF1994003D6E79 /* UIView+Layout.m in Sources */,
 				44290BA51BDF0F16003D6E79 /* LGPhotoPickerGroup.m in Sources */,
 				44290B9E1BDF0F16003D6E79 /* LGPhotoPickerBrowserViewController.m in Sources */,
 				440CC4F91C392C9C0010FD30 /* SDImageCache.m in Sources */,
@@ -806,17 +791,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: peng Oliver (GW4AS6447M)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TZZ2ER5BCT;
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = LGPhotoBrowser/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = cn.jj.TKLobby;
+				PRODUCT_BUNDLE_IDENTIFIER = "-44043963-qq.com";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -826,17 +809,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: peng Oliver (GW4AS6447M)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TZZ2ER5BCT;
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = LGPhotoBrowser/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = cn.jj.TKLobby;
+				PRODUCT_BUNDLE_IDENTIFIER = "-44043963-qq.com";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};

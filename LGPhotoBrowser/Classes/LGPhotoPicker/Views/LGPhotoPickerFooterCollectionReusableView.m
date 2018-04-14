@@ -6,7 +6,6 @@
 //  Copyright (c) 2015年 L&G. All rights reserved.
 
 #import "LGPhotoPickerFooterCollectionReusableView.h"
-#import "UIView+Layout.h"
 
 @interface LGPhotoPickerFooterCollectionReusableView ()
 
