@@ -16,13 +16,10 @@
 
 @interface LGPhotoPickerCollectionView () <UICollectionViewDataSource,UICollectionViewDelegate>
 
-@property (nonatomic , strong) LGPhotoPickerFooterCollectionReusableView *footerView;
+@property (nonatomic) LGPhotoPickerFooterCollectionReusableView *footerView;
 
 // 判断是否是第一次加载
-@property (nonatomic , assign , getter=isFirstLoadding) BOOL firstLoadding;
-
-//每个cell右上角的选择按钮
-//@property (nonatomic, weak) UIButton *tickButton;
+@property (nonatomic, assign, getter=isFirstLoadding) BOOL firstLoadding;
 
 @end
 
@@ -140,7 +137,7 @@
                 [self.lastDataArray removeObject:selectAsset];
             }
         }
-    }else{
+    } else {
         // 1 判断图片数超过最大数或者小于0
         NSUInteger maxCount = (self.maxCount < 0) ? KPhotoShowMaxCount :  self.maxCount;
         if (self.selectAssets.count >= maxCount) {
@@ -161,7 +158,7 @@
         if (pickerImageView.isMaskViewFlag) {
             // 删除的情况下
             [self.collectionViewDelegate pickerCollectionViewDidSelected:self deleteAsset:asset];
-        }else{
+        } else {
             [self.collectionViewDelegate pickerCollectionViewDidSelected:self deleteAsset:nil];
         }
     }
@@ -170,6 +167,7 @@
 }
 
 #pragma mark -<UICollectionViewDataSource>
+
 - (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
@@ -189,6 +187,7 @@
 }
 
 #pragma mark - <UICollectionViewDelegate>
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     //cell被点击，进入相册浏览器
     if ([self.collectionViewDelegate respondsToSelector:@selector(pickerCollectionCellTouchedIndexPath:)]) {
@@ -197,6 +196,7 @@
 }
 
 #pragma mark 底部View
+
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     LGPhotoPickerFooterCollectionReusableView *reusableView = nil;
     if (kind == UICollectionElementKindSectionFooter) {

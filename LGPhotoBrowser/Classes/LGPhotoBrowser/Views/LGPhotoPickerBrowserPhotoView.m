@@ -27,7 +27,7 @@
 
 #pragma mark -监听手势
 
-- (void) addGesture {
+- (void)addGesture {
     // 双击放大
     UITapGestureRecognizer *scaleBigTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
     scaleBigTap.numberOfTapsRequired = 2;
@@ -44,13 +44,15 @@
 }
 
 - (void)handleSingleTap:(UITouch *)touch {
-	if ([_tapDelegate respondsToSelector:@selector(view:singleTapDetected:)])
+    if ([_tapDelegate respondsToSelector:@selector(view:singleTapDetected:)]) {
 		[_tapDelegate view:self singleTapDetected:touch];
+    }
 }
 
 - (void)handleDoubleTap:(UITouch *)touch {
-	if ([_tapDelegate respondsToSelector:@selector(view:doubleTapDetected:)])
+    if ([_tapDelegate respondsToSelector:@selector(view:doubleTapDetected:)]) {
 		[_tapDelegate view:self doubleTapDetected:touch];
+    }
 }
 
 @end

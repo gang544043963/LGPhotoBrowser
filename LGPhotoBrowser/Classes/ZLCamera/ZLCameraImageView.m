@@ -10,13 +10,14 @@
 //#import "UIImage+ZLPhotoLib.h"
 
 @interface ZLCameraImageView ()
-@property (strong, nonatomic) UIImageView *deleBjView;
+
+@property (nonatomic) UIImageView *deleBjView;
+
 @end
 
 @implementation ZLCameraImageView
 
-
-- (UIImageView *)deleBjView{
+- (UIImageView *)deleBjView {
     if (!_deleBjView) {
         _deleBjView = [[UIImageView alloc] init];
         _deleBjView.image = [UIImage imageNamed:@"X.png"];
@@ -29,11 +30,11 @@
     return _deleBjView;
 }
 
-- (void)setEdit:(BOOL)edit{
+- (void)setEdit:(BOOL)edit {
     self.deleBjView.hidden = NO;
 }
 
-- (id)initWithFrame:(CGRect)frame{
+- (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.userInteractionEnabled = YES;
     }
@@ -41,7 +42,7 @@
 }
 
 #pragma mark 删除图片
-- (void) deleImage : ( UITapGestureRecognizer *) tap{
+- (void)deleImage:( UITapGestureRecognizer *)tap {
     if ([self.delegatge respondsToSelector:@selector(deleteImageView:)]) {
         [self.delegatge deleteImageView:self];
     }

@@ -10,7 +10,7 @@
 
 @interface LGPhotoAssets : NSObject
 
-@property (strong,nonatomic) ALAsset *asset;
+@property (nonatomic) ALAsset *asset;
 /**
  *  缩略图
  */
@@ -31,7 +31,7 @@
 /**
  *  获取是否是视频类型, Default = false
  */
-@property (assign,nonatomic) BOOL isVideoType;
+@property (nonatomic, assign) BOOL isVideoType;
 /**
  *  获取相册的URL
  */

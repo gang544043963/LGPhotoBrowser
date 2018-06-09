@@ -10,9 +10,9 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 
 @interface LGPhotoPickerGroupTableViewCell ()
-@property (weak, nonatomic) UIImageView *groupImageView;
-@property (weak, nonatomic) UILabel *groupNameLabel;
-@property (weak, nonatomic) UILabel *groupPicCountLabel;
+@property (nonatomic) UIImageView *groupImageView;
+@property (nonatomic) UILabel *groupNameLabel;
+@property (nonatomic) UILabel *groupPicCountLabel;
 @end
 
 @implementation LGPhotoPickerGroupTableViewCell

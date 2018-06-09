@@ -15,11 +15,11 @@
 @property (nonatomic) LGShowImageType showType;
 @property (nonatomic, assign) NSInteger maxCount;
 // 记录选中的值
-@property (nonatomic, strong) NSMutableArray *selectAsstes;
+@property (nonatomic) NSMutableArray *selectAsstes;
 // 置顶展示图片
 @property (nonatomic, assign) BOOL topShowPhotoPicker;
 // 夜间模式
-@property (nonatomic ,assign) BOOL nightMode;
+@property (nonatomic, assign) BOOL nightMode;
 
 - (instancetype)initWithShowType:(LGShowImageType)showType;
 

@@ -23,41 +23,41 @@ static CGFloat BOTTOM_HEIGHT = 60;
 
 @interface ZLCameraViewController () <UIActionSheetDelegate,UICollectionViewDataSource,UICollectionViewDelegate,AVCaptureMetadataOutputObjectsDelegate,ZLCameraImageViewDelegate,ZLCameraViewDelegate,LGPhotoPickerBrowserViewControllerDataSource,LGPhotoPickerBrowserViewControllerDelegate,LGCameraImageViewDelegate>
 
-@property (weak,nonatomic) ZLCameraView *caramView;
-@property (strong, nonatomic) UICollectionView *collectionView;
-@property (strong, nonatomic) UIViewController *currentViewController;
+@property (nonatomic, weak) ZLCameraView *caramView;
+@property (nonatomic) UICollectionView *collectionView;
+@property (nonatomic) UIViewController *currentViewController;
 
 // Datas
-@property (strong, nonatomic) NSMutableArray *images;
-@property (strong, nonatomic) NSMutableDictionary *dictM;
+@property (nonatomic) NSMutableArray *images;
+@property (nonatomic) NSMutableDictionary *dictM;
 
 // AVFoundation
-@property (strong, nonatomic) AVCaptureSession *session;
-@property (strong, nonatomic) AVCaptureStillImageOutput *captureOutput;
-@property (strong, nonatomic) AVCaptureDevice *device;
+@property (nonatomic) AVCaptureSession *session;
+@property (nonatomic) AVCaptureStillImageOutput *captureOutput;
+@property (nonatomic) AVCaptureDevice *device;
 
-@property (strong,nonatomic)AVCaptureDeviceInput * input;
-@property (strong,nonatomic)AVCaptureMetadataOutput * output;
-@property (strong,nonatomic)AVCaptureVideoPreviewLayer * preview;
+@property (nonatomic)AVCaptureDeviceInput * input;
+@property (nonatomic)AVCaptureMetadataOutput * output;
+@property (nonatomic)AVCaptureVideoPreviewLayer * preview;
 
 @property (nonatomic, assign) XGImageOrientation imageOrientation;
 @property (nonatomic, assign) NSInteger flashCameraState;
 
-@property (nonatomic, strong) UIButton *flashBtn;
+@property (nonatomic) UIButton *flashBtn;
 @end
 
 @implementation ZLCameraViewController
 
 #pragma mark - Getter
-#pragma mark Data
-- (NSMutableArray *)images{
+
+- (NSMutableArray *)images {
     if (!_images) {
         _images = [NSMutableArray array];
     }
     return _images;
 }
 
-- (NSMutableDictionary *)dictM{
+- (NSMutableDictionary *)dictM {
     if (!_dictM) {
         _dictM = [NSMutableDictionary dictionary];
     }
@@ -65,7 +65,8 @@ static CGFloat BOTTOM_HEIGHT = 60;
 }
 
 #pragma mark View
-- (UICollectionView *)collectionView{
+
+- (UICollectionView *)collectionView {
     if (!_collectionView) {
         
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
@@ -88,8 +89,7 @@ static CGFloat BOTTOM_HEIGHT = 60;
     return _collectionView;
 }
 
-- (void) initialize
-{
+- (void)initialize {
     //1.创建会话层
     self.device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     
@@ -105,13 +105,11 @@ static CGFloat BOTTOM_HEIGHT = 60;
     self.session = [[AVCaptureSession alloc]init];
     
     [self.session setSessionPreset:AVCaptureSessionPresetHigh];
-    if ([self.session canAddInput:self.input])
-    {
+    if ([self.session canAddInput:self.input]) {
         [self.session addInput:self.input];
     }
     
-    if ([self.session canAddOutput:_captureOutput])
-    {
+    if ([self.session canAddOutput:_captureOutput]) {
         [self.session addOutput:_captureOutput];
     }
     
@@ -130,7 +128,7 @@ static CGFloat BOTTOM_HEIGHT = 60;
     self.caramView = caramView;
 }
 
-- (void)cameraDidSelected:(ZLCameraView *)camera{
+- (void)cameraDidSelected:(ZLCameraView *)camera {
     [self.device lockForConfiguration:nil];
     [self.device setFocusMode:AVCaptureFocusModeAutoFocus];
     [self.device setFocusPointOfInterest:CGPointMake(50,50)];
@@ -141,11 +139,11 @@ static CGFloat BOTTOM_HEIGHT = 60;
 //对焦回调
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if( [keyPath isEqualToString:@"adjustingFocus"] ){
-        NSLog(@"qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
+        
     }
 }
 
-- (void)viewDidLoad{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     [self initialize];
@@ -155,18 +153,19 @@ static CGFloat BOTTOM_HEIGHT = 60;
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
 
 #pragma mark 初始化按钮
-- (UIButton *) setupButtonWithImageName:(NSString *)imageName andX:(CGFloat )x{
+
+- (UIButton *)setupButtonWithImageName:(NSString *)imageName andX:(CGFloat )x {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     button.backgroundColor = [UIColor clearColor];
@@ -176,7 +175,8 @@ static CGFloat BOTTOM_HEIGHT = 60;
 }
 
 #pragma mark -初始化界面
-- (void) setup{
+
+- (void)setup {
     CGFloat width = 50;
     CGFloat margin = 20;
     
@@ -194,11 +194,6 @@ static CGFloat BOTTOM_HEIGHT = 60;
     [flashBtn addTarget:self action:@selector(flashCameraDevice:) forControlEvents:UIControlEventTouchUpInside];
     [flashBtn setTitle:@"关闭" forState:UIControlStateNormal];
     _flashBtn = flashBtn;
-    
-//    UIButton *closeBtn = [self setupButtonWithImageName:@"shanguangdeng2" andX:60];
-//    [closeBtn addTarget:self action:@selector(closeFlashlight:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
     // 底部View
     UIView *controlView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-BOTTOM_HEIGHT, self.view.frame.size.width, BOTTOM_HEIGHT)];
     controlView.backgroundColor = [UIColor blackColor];
@@ -238,22 +233,22 @@ static CGFloat BOTTOM_HEIGHT = 60;
     [self.view addSubview:controlView];
 }
 
-- (NSInteger ) numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+- (NSInteger )numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
 
-- (NSInteger ) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+- (NSInteger )collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.images.count;
 }
 
-- (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     
     ZLCamera *camera = self.images[indexPath.item];
     
     ZLCameraImageView *lastView = [cell.contentView.subviews lastObject];
-    if(![lastView isKindOfClass:[ZLCameraImageView class]]){
+    if (![lastView isKindOfClass:[ZLCameraImageView class]]) {
         // 解决重用问题
         UIImage *image = camera.thumbImage;
         ZLCameraImageView *imageView = [[ZLCameraImageView alloc] init];
@@ -264,13 +259,11 @@ static CGFloat BOTTOM_HEIGHT = 60;
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         [cell.contentView addSubview:imageView];
     }
-    
     lastView.image = camera.thumbImage;
-    
     return cell;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     LGPhotoPickerBrowserViewController *browserVc = [[LGPhotoPickerBrowserViewController alloc] init];
     browserVc.dataSource = self;
@@ -282,11 +275,12 @@ static CGFloat BOTTOM_HEIGHT = 60;
 
 
 #pragma mark - <ZLPhotoPickerBrowserViewControllerDataSource>
-- (NSInteger)photoBrowser:(LGPhotoPickerBrowserViewController *)photoBrowser numberOfItemsInSection:(NSUInteger)section{
+
+- (NSInteger)photoBrowser:(LGPhotoPickerBrowserViewController *)photoBrowser numberOfItemsInSection:(NSUInteger)section {
     return self.images.count;
 }
 
-- (LGPhotoPickerBrowserPhoto *) photoBrowser:(LGPhotoPickerBrowserViewController *)pickerBrowser photoAtIndexPath:(NSIndexPath *)indexPath{
+- (LGPhotoPickerBrowserPhoto *) photoBrowser:(LGPhotoPickerBrowserViewController *)pickerBrowser photoAtIndexPath:(NSIndexPath *)indexPath {
     
     id imageObj = [[self.images objectAtIndex:indexPath.row] photoImage];
     LGPhotoPickerBrowserPhoto *photo = [LGPhotoPickerBrowserPhoto photoAnyImageObjWith:imageObj];
@@ -300,7 +294,7 @@ static CGFloat BOTTOM_HEIGHT = 60;
     return photo;
 }
 
-- (void)deleteImageView:(ZLCameraImageView *)imageView{
+- (void)deleteImageView:(ZLCameraImageView *)imageView {
     NSMutableArray *arrM = [self.images mutableCopy];
     for (ZLCamera *camera in self.images) {
         UIImage *image = camera.thumbImage;
@@ -312,15 +306,14 @@ static CGFloat BOTTOM_HEIGHT = 60;
     [self.collectionView reloadData];
 }
 
-- (void)showPickerVc:(UIViewController *)vc{
+- (void)showPickerVc:(UIViewController *)vc {
     __weak typeof(vc)weakVc = vc;
     if (weakVc != nil) {
         [weakVc presentViewController:self animated:YES completion:nil];
     }
 }
 
--(void)Captureimage
-{
+-(void)Captureimage {
     //get connection
     AVCaptureConnection *videoConnection = nil;
     for (AVCaptureConnection *connection in self.captureOutput.connections) {
@@ -393,8 +386,7 @@ static CGFloat BOTTOM_HEIGHT = 60;
 }
 
 //旋转image
-- (UIImage *)fixOrientation:(UIImage *)srcImg
-{
+- (UIImage *)fixOrientation:(UIImage *)srcImg {
     CGAffineTransform transform = CGAffineTransformIdentity;
     CGFloat width = srcImg.size.width;
     CGFloat height = srcImg.size.height;
@@ -456,13 +448,11 @@ static CGFloat BOTTOM_HEIGHT = 60;
     
 }
 
--(void)CaptureStillImage
-{
+-(void)CaptureStillImage {
     [self  Captureimage];
 }
 
-- (AVCaptureDevice *)cameraWithPosition:(AVCaptureDevicePosition)position
-{
+- (AVCaptureDevice *)cameraWithPosition:(AVCaptureDevicePosition)position {
     NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
     for ( AVCaptureDevice *device in devices )
         if ( device.position == position )
@@ -470,8 +460,7 @@ static CGFloat BOTTOM_HEIGHT = 60;
     return nil;
 }
 
-- (void)changeCameraDevice:(id)sender
-{
+- (void)changeCameraDevice:(id)sender {
     // 翻转
     [UIView beginAnimations:@"animation" context:nil];
     [UIView setAnimationDuration:.5f];
@@ -505,7 +494,7 @@ static CGFloat BOTTOM_HEIGHT = 60;
     }
 }
 
-- (void) flashLightModel : (codeBlock) codeBlock{
+- (void) flashLightModel : (codeBlock) codeBlock {
     if (!codeBlock) return;
     [self.session beginConfiguration];
     [self.device lockForConfiguration:nil];
@@ -514,7 +503,7 @@ static CGFloat BOTTOM_HEIGHT = 60;
     [self.session commitConfiguration];
     [self.session startRunning];
 }
-- (void) flashCameraDevice:(UIButton *)sender{
+- (void) flashCameraDevice:(UIButton *)sender {
     if (_flashCameraState < 0) {
         _flashCameraState = 0;
     }
@@ -542,16 +531,14 @@ static CGFloat BOTTOM_HEIGHT = 60;
             [_flashBtn setTitle:@"关闭" forState:UIControlStateNormal];
             break;
     }
-    if ([self.device isFlashModeSupported:mode])
-    {
+    if ([self.device isFlashModeSupported:mode]) {
         [self flashLightModel:^{
             [self.device setFlashMode:mode];
         }];
     }
 }
 
-- (void)cancel:(id)sender
-{
+- (void)cancel:(id)sender {
     if(IS_IPHONE)
     {
         [self flashLightModel:^
@@ -563,8 +550,7 @@ static CGFloat BOTTOM_HEIGHT = 60;
 }
 
 //拍照
-- (void)stillImage:(id)sender
-{
+- (void)stillImage:(id)sender {
     // 判断图片的限制个数
     if (self.maxCount > 0 && self.images.count >= self.maxCount) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"拍照的个数不能超过%ld",(long)self.maxCount]delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
@@ -575,24 +561,26 @@ static CGFloat BOTTOM_HEIGHT = 60;
     [self Captureimage];
 }
 
-- (BOOL)shouldAutorotate{
+- (BOOL)shouldAutorotate {
     return YES;
 }
 
 #pragma mark - 屏幕
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskAll;
 }
 // 支持屏幕旋转
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
     return YES;
 }
 // 画面一开始加载时就是竖向
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
     return UIInterfaceOrientationPortrait;
 }
 
 #pragma mark - XGCameraImageViewDelegate
+
 - (void)xgCameraImageViewSendBtnTouched {
     [self doneAction];
 }
@@ -601,13 +589,13 @@ static CGFloat BOTTOM_HEIGHT = 60;
     [self.images removeAllObjects];
 }
 //完成、取消
-- (void)doneAction
-{
+- (void)doneAction {
     //关闭相册界面
-    if(self.callback){
+    if (self.callback) {
         self.callback(self.images);
     }
     [self cancel:nil];
 }
+
 @end
 

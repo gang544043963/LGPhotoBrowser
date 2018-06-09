@@ -9,7 +9,7 @@
 
 @interface LGPhotoPickerFooterCollectionReusableView ()
 
-@property (weak, nonatomic) UILabel *footerLabel;
+@property (nonatomic, weak) UILabel *footerLabel;
 
 @end
 

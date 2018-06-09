@@ -14,6 +14,6 @@
 /**
  *  赋值xib
  */
-@property (nonatomic , strong) LGPhotoPickerGroup *group;
+@property (nonatomic ,strong) LGPhotoPickerGroup *group;
 
 @end

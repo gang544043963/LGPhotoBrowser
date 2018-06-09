@@ -9,6 +9,7 @@
 #import "LGPhotoRect.h"
 
 @implementation LGPhotoRect
+
 + (CGRect)setMaxMinZoomScalesForCurrentBoundWithImage:(UIImage *)image {
     if (!([image isKindOfClass:[UIImage class]]) || image == nil) {
         if (!([image isKindOfClass:[UIImage class]])) {

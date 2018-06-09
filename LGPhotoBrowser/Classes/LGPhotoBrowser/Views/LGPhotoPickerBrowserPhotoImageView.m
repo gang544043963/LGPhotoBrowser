@@ -8,7 +8,9 @@
 #import "LGPhotoPickerBrowserPhotoImageView.h"
 
 @interface LGPhotoPickerBrowserPhotoImageView ()
-@property (strong,nonatomic) UITapGestureRecognizer *scaleBigTap;
+
+@property (nonatomic) UITapGestureRecognizer *scaleBigTap;
+
 @end
 
 @implementation LGPhotoPickerBrowserPhotoImageView
@@ -42,7 +44,7 @@
 
 
 #pragma mark -监听手势
-- (void) addGesture {
+- (void)addGesture {
     self.contentMode = UIViewContentModeScaleAspectFit;
     // 双击放大
     UITapGestureRecognizer *scaleBigTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];

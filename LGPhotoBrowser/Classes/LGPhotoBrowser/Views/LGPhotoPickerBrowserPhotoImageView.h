@@ -13,7 +13,7 @@
 @interface LGPhotoPickerBrowserPhotoImageView : UIImageView {}
 
 @property (nonatomic, weak) id <LGPhotoPickerBrowserPhotoImageViewDelegate> tapDelegate;
-@property (assign,nonatomic) CGFloat progress;
+@property (nonatomic, assign) CGFloat progress;
 
 - (void)addScaleBigTap;
 - (void)removeScaleBigTap;

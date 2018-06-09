@@ -39,7 +39,7 @@
     if (!_thumbImage) {
         if (self.asset) {
             _thumbImage = [self.asset thumbImage];
-        }else if (_photoImage){
+        } else if (_photoImage){
             _thumbImage = _photoImage;
         }
     }

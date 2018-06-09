@@ -11,28 +11,28 @@
 
 @interface ZLCameraView ()
 
-@property (strong, nonatomic) CADisplayLink *link;
-@property (assign, nonatomic) NSInteger time;
-@property (assign, nonatomic) CGPoint point;
-@property (assign, nonatomic) BOOL isPlayerEnd;
+@property (nonatomic) CADisplayLink *link;
+@property (nonatomic, assign) NSInteger time;
+@property (nonatomic, assign) CGPoint point;
+@property (nonatomic, assign) BOOL isPlayerEnd;
 
 @end
 
 @implementation ZLCameraView
 
-- (CADisplayLink *)link{
+- (CADisplayLink *)link {
     if (!_link) {
         self.link = [CADisplayLink displayLinkWithTarget:self selector:@selector(refreshView:)];
     }
     return _link;
 }
 
-- (void) refreshView : (CADisplayLink *) link{
+- (void) refreshView : (CADisplayLink *) link {
     [self setNeedsDisplay];
     self.time++;
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
     if (self.isPlayerEnd) return;
     
@@ -48,7 +48,7 @@
     }
 }
 
--(void)drawRect:(CGRect)rect{
+-(void)drawRect:(CGRect)rect {
     [super drawRect:rect];    
     if (self.isPlayerEnd) {
         CGFloat rectValue = BQCameraViewW - self.time % BQCameraViewW;
@@ -64,7 +64,7 @@
             
             CGContextClearRect(currentContext, rectangle);
             
-        }else{
+        } else {
             //创建图形路径句柄
             CGMutablePathRef path = CGPathCreateMutable();
             //设置矩形的边界
@@ -84,8 +84,6 @@
             /* 释放路径 */
             CGPathRelease(path);
         }
-        
     }
-    
 }
 @end

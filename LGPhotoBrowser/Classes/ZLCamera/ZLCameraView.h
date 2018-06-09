@@ -13,12 +13,12 @@
 @protocol ZLCameraViewDelegate <NSObject>
 
 @optional
-- (void) cameraDidSelected : (ZLCameraView *) camera;
+- (void)cameraDidSelected:(ZLCameraView *) camera;
 
 @end
 
 @interface ZLCameraView : UIView
 
-@property (weak, nonatomic) id <ZLCameraViewDelegate> delegate;
+@property (nonatomic, weak) id <ZLCameraViewDelegate> delegate;
 
 @end

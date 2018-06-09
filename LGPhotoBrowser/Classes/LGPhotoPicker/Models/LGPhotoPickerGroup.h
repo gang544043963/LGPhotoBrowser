@@ -13,23 +13,23 @@
 /**
  *  组名
  */
-@property (nonatomic , copy  ) NSString                 *groupName;
+@property(nonatomic, copy)NSString *groupName;
 
 /**
  *  缩略图
  */
-@property (nonatomic , strong) UIImage                  *thumbImage;
+@property(nonatomic) UIImage *thumbImage;
 
 /**
  *  组里面的图片个数
  */
-@property (nonatomic , assign) NSInteger                assetsCount;
+@property(nonatomic, assign)NSInteger assetsCount;
 
 /**
  *  类型 : Saved Photos...
  */
-@property (nonatomic , copy  ) NSString                 *type;
+@property (nonatomic ,copy)NSString *type;
 
-@property (nonatomic , strong) ALAssetsGroup            *group;
+@property (nonatomic)ALAssetsGroup *group;
 
 @end

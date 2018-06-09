@@ -22,6 +22,7 @@
 @optional
 
 - (void)view:(UIView *)view singleTapDetected:(UITouch *)touch;
+
 - (void)view:(UIView *)view doubleTapDetected:(UITouch *)touch;
 
 @end
