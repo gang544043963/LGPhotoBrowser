@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface LGPhotoRect : NSObject
+
 + (CGRect)setMaxMinZoomScalesForCurrentBoundWithImage:(UIImage *)image;
+
 + (CGRect)setMaxMinZoomScalesForCurrentBoundWithImageView:(UIImageView *)imageView;
+
 @end

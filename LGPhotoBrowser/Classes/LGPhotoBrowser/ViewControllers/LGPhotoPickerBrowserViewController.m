@@ -80,7 +80,7 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
 
 #pragma mark setupCollectionView
 
-- (void)setupCollectionView{
+- (void)setupCollectionView {
     if (!_collectionView) {
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.minimumLineSpacing = LGPickerColletionViewPadding;
@@ -168,6 +168,7 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
     if (self.photos.count == 0) {
         NSAssert(self.dataSource, @"你没成为数据源代理");
     }
@@ -281,7 +282,7 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
 
 #pragma mark - UICollectionViewDataSource
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if ([self isDataSourceElsePhotos]) {
         return [self.dataSource photoBrowser:self numberOfItemsInSection:self.currentIndexPath.section];
     }
@@ -424,7 +425,7 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
 
 #pragma mark - <PickerPhotoScrollViewDelegate>
 
-- (void)pickerPhotoScrollViewDidSingleClick:(LGPhotoPickerBrowserPhotoScrollView *)photoScrollView{
+- (void)pickerPhotoScrollViewDidSingleClick:(LGPhotoPickerBrowserPhotoScrollView *)photoScrollView {
     if (self.needHidenBar) {
         [self dismissViewControllerAnimated:YES completion:nil];
         return;
@@ -438,7 +439,7 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
     } completion:nil];
 }
 
-- (void) pickerPhotoScrollViewDidLongPressed:(LGPhotoPickerBrowserPhotoScrollView *)photoScrollView{
+- (void) pickerPhotoScrollViewDidLongPressed:(LGPhotoPickerBrowserPhotoScrollView *)photoScrollView {
     [self longPressAction];
 }
 
@@ -512,7 +513,7 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
             LGPhotoAssets *asset = ((LGPhotoPickerBrowserPhoto *)self.photos[self.currentPage + 1]).asset;
             ((LGPhotoPickerBrowserPhoto *)self.photos[self.currentPage + 1]).photoImage = [asset originImage];
         }
-    } else if(direct == RIGHT && self.currentPage > 0){
+    } else if (direct == RIGHT && self.currentPage > 0){
         if (!((LGPhotoPickerBrowserPhoto *)self.photos[self.currentPage - 1]).photoImage) {
             LGPhotoAssets *asset = ((LGPhotoPickerBrowserPhoto *)self.photos[self.currentPage - 1]).asset;
             ((LGPhotoPickerBrowserPhoto *)self.photos[self.currentPage - 1]).photoImage = [asset originImage];
@@ -526,14 +527,14 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
     NSLog(@"long pressed");
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0){
         if([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeSavedPhotosAlbum]) {
             UIImageWriteToSavedPhotosAlbum(_cellScrollView.photoImageView.image, nil, nil, nil);
             if (_cellScrollView.photoImageView.image) {
                 [self showMessageWithText:@"保存成功"];
             }
-        }else{
+        } else {
             if (_cellScrollView.photoImageView.image) {
                 [self showMessageWithText:@"没有用户权限,保存失败"];
             }
@@ -541,7 +542,7 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
     }
 }
 
-- (void)showMessageWithText:(NSString *)text{
+- (void)showMessageWithText:(NSString *)text {
     UILabel *alertLabel = [[UILabel alloc] init];
     alertLabel.font = [UIFont systemFontOfSize:15];
     alertLabel.text = text;
@@ -561,11 +562,11 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
     }];
 }
 
-- (id<LGPhotoPickerBrowserPhoto>)currentPhoto{
+- (id<LGPhotoPickerBrowserPhoto>)currentPhoto {
     return _cellScrollView.photo;
 }
 
-- (void)forwardImageChatMessage{
+- (void)forwardImageChatMessage {
     
 }
 
@@ -578,17 +579,20 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
 }
 
 
-- (UIView *)getParsentView:(UIView *)view{
+- (UIView *)getParsentView:(UIView *)view {
     return nil;
 }
-- (id)getParsentViewController:(UIView *)view{
+
+- (id)getParsentViewController:(UIView *)view {
     return nil;
 }
+
 - (void)showHeadPortrait:(UIImageView *)toImageView {
 
 }
 
-- (void)showHeadPortrait:(UIImageView *)toImageView originUrl:(NSString *)originUrl{
+- (void)showHeadPortrait:(UIImageView *)toImageView originUrl:(NSString *)originUrl {
 
 }
+
 @end

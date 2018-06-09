@@ -9,41 +9,44 @@
 #import "LGPhotoAssets.h"
 
 // 展示状态
-typedef NS_ENUM(NSUInteger, LGPickerCollectionViewShowOrderStatus){
+typedef NS_ENUM(NSUInteger, LGPickerCollectionViewShowOrderStatus) {
     LGPickerCollectionViewShowOrderStatusTimeDesc = 0, // 升序
     LGPickerCollectionViewShowOrderStatusTimeAsc // 降序
 };
 
 @class LGPhotoPickerCollectionView;
+
 @protocol LGPhotoPickerCollectionViewDelegate <NSObject>
 
+@optional
 // 选择相片就会调用
-- (void) pickerCollectionViewDidSelected:(LGPhotoPickerCollectionView *) pickerCollectionView deleteAsset:(LGPhotoAssets *)deleteAssets;
+- (void)pickerCollectionViewDidSelected:(LGPhotoPickerCollectionView *)pickerCollectionView deleteAsset:(LGPhotoAssets *)deleteAssets;
 
 //点击cell会调用
-- (void) pickerCollectionCellTouchedIndexPath:(NSIndexPath *)indexPath;
+- (void)pickerCollectionCellTouchedIndexPath:(NSIndexPath *)indexPath;
 
 // 点击拍照就会调用
-- (void)pickerCollectionViewDidCameraSelect:(LGPhotoPickerCollectionView *) pickerCollectionView;
+- (void)pickerCollectionViewDidCameraSelect:(LGPhotoPickerCollectionView *)pickerCollectionView;
+
 @end
 
-@interface LGPhotoPickerCollectionView : UICollectionView<UICollectionViewDelegate>
+@interface LGPhotoPickerCollectionView:UICollectionView<UICollectionViewDelegate>
 
 // scrollView滚动的升序降序
-@property (nonatomic , assign) LGPickerCollectionViewShowOrderStatus status;
+@property (nonatomic, assign) LGPickerCollectionViewShowOrderStatus status;
 // 保存所有的数据
-@property (nonatomic , strong) NSArray<__kindof LGPhotoAssets*>        *dataArray;
+@property (nonatomic) NSArray<__kindof LGPhotoAssets*> *dataArray;
 // 保存选中的图片
-@property (nonatomic , strong) NSMutableArray<__kindof LGPhotoAssets*> *selectAssets;
+@property (nonatomic) NSMutableArray<__kindof LGPhotoAssets*> *selectAssets;
 // 最后保存的一次图片
-@property (strong,nonatomic  ) NSMutableArray *lastDataArray;
+@property (nonatomic) NSMutableArray *lastDataArray;
 // delegate
-@property (nonatomic , weak) id <LGPhotoPickerCollectionViewDelegate> collectionViewDelegate;
+@property (nonatomic, weak) id <LGPhotoPickerCollectionViewDelegate> collectionViewDelegate;
 // 限制最大数
-@property (nonatomic , assign) NSInteger maxCount;
+@property (nonatomic, assign) NSInteger maxCount;
 // 置顶展示图片
-@property (assign,nonatomic  ) BOOL      topShowPhotoPicker;
+@property (nonatomic, assign) BOOL topShowPhotoPicker;
 // 记录选中的值
-@property (assign,nonatomic  ) BOOL      isRecoderSelectPicker;
+@property (nonatomic, assign) BOOL isRecoderSelectPicker;
 
 @end

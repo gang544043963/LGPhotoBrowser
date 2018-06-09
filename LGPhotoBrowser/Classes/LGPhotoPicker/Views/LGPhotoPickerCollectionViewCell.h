@@ -11,8 +11,8 @@
 
 @interface LGPhotoPickerCollectionViewCell : UICollectionViewCell
 
-+ (instancetype) cellWithCollectionView : (UICollectionView *) collectionView cellForItemAtIndexPath:(NSIndexPath *) indexPath;
++ (instancetype)cellWithCollectionView:(UICollectionView *) collectionView cellForItemAtIndexPath:(NSIndexPath *) indexPath;
 
-@property (nonatomic , strong) UIImage *cellImage;
+@property (nonatomic) UIImage *cellImage;
 
 @end

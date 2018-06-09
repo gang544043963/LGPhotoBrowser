@@ -15,6 +15,7 @@
 @protocol LGPhotoPickerCustomToolBarViewDelegate <NSObject>
 
 - (void)customToolBarIsOriginalBtnTouched;
+
 - (void)customToolBarSendBtnTouched;
 
 @end

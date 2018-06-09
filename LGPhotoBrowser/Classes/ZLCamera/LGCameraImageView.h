@@ -31,7 +31,7 @@ typedef NS_ENUM(NSInteger, XGImageOrientation) {
 
 @property (nonatomic, weak) id<LGCameraImageViewDelegate>delegate;
 
-@property (nonatomic, strong) UIImage *imageToDisplay;
+@property (nonatomic) UIImage *imageToDisplay;
 
 @property (nonatomic, assign) XGImageOrientation imageOrientation;
 

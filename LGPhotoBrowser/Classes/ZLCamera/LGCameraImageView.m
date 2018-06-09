@@ -12,11 +12,11 @@ static CGFloat BOTTOM_HEIGHT = 60;
 
 @interface LGCameraImageView()
 
-@property (nonatomic, strong) UIImageView *photoDisplayView;
+@property (nonatomic) UIImageView *photoDisplayView;
 
 @end
-@implementation LGCameraImageView
 
+@implementation LGCameraImageView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];

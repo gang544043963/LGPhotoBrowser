@@ -19,16 +19,16 @@ typedef void(^ZLCameraCallBack)(id object);
 @interface ZLCameraViewController : UIViewController
 
 // 顶部View
-@property (weak, nonatomic) UIView *topView;
+@property (nonatomic, weak) UIView *topView;
 // 底部View
-@property (weak, nonatomic) UIView *controlView;
+@property (nonatomic, weak) UIView *controlView;
 // 拍照的个数限制
-@property (assign,nonatomic) NSInteger maxCount;
+@property (nonatomic, assign) NSInteger maxCount;
 // 单张还是连拍
 @property (nonatomic, assign) ZLCameraType cameraType;
-
 // 完成后回调
-@property (copy, nonatomic) ZLCameraCallBack callback;
+@property (nonatomic, copy) ZLCameraCallBack callback;
 
 - (void)showPickerVc:(UIViewController *)vc;
+
 @end

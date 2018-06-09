@@ -26,9 +26,9 @@
     BOOL isNotFirst;
 }
 
-@property (nonatomic, assign) CGFloat                progress;
-@property (strong,nonatomic ) DACircularProgressView *progressView;
-@property (nonatomic, assign) BOOL                   isLoadingDone;
+@property (nonatomic, assign) CGFloat progress;
+@property (nonatomic ) DACircularProgressView *progressView;
+@property (nonatomic, assign) BOOL isLoadingDone;
 
 @end
 
@@ -40,7 +40,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:LGPhotoImageDidFailLoadWithError object:nil];
 }
 
-- (id)init{
+- (id)init {
     if ((self = [super init])) {
         
         // Setup
@@ -101,7 +101,7 @@
     if (progress == 0) return ;
     if (progress / 1.0 != 1.0) {
         [self.progressView setProgress:progress animated:YES];
-    }else{
+    } else {
 		dispatch_async(dispatch_get_main_queue(), ^{
 			[self.progressView removeFromSuperview];
 			self.progressView = nil;
@@ -127,6 +127,7 @@
 }
 
 - (void)imageDownloadStartAction {
+    
 }
 
 - (void)imageDownloadDidFinishAction {
@@ -148,8 +149,6 @@
         }
     }
 }
-
-
 
 - (void)setPhoto:(LGPhotoPickerBrowserPhoto *)photo {
     _photo = photo;
@@ -202,7 +201,7 @@
                 if (image) {
                     _photoImageView.image = image;
                     [weakSelf displayImage];
-                }else{
+                } else {
                     [_photoImageView removeScaleBigTap];
                     _photoImageView.image = [UIImage imageNamed:@"icon_pic_break.png"];
                     [weakSelf displayImage];
@@ -210,7 +209,7 @@
             }];
         }
         
-    }  else {
+    } else {
         _photoImageView.image = photo.photoImage;
         self.isLoadingDone = YES;
         [self displayImage];
@@ -381,10 +380,10 @@
 }
 
 #pragma mark - disMissTap
-- (void) disMissTap:(UITapGestureRecognizer *)tap {
+- (void)disMissTap:(UITapGestureRecognizer *)tap {
     if (self.callback){
         self.callback(nil);
-    }else if ([self.photoScrollViewDelegate respondsToSelector:@selector(pickerPhotoScrollViewDidSingleClick:)]) {
+    } else if ([self.photoScrollViewDelegate respondsToSelector:@selector(pickerPhotoScrollViewDidSingleClick:)]) {
         [self.photoScrollViewDelegate pickerPhotoScrollViewDidSingleClick:self];
     }
 }
@@ -421,7 +420,7 @@
     CGSize imageViewSize = _photoImageView.frame.size;
     if (imageViewSize.height < imageViewSize.width) {//宽图特殊处理  宽图放大 高要变成屏幕高度
         [self handleImageViewDoubleTap:[gesture locationInView:nil]];//locationInView:传nil 传gesture.view坐标不对
-    }else{
+    } else {
         [self handleImageViewDoubleTap:[gesture locationInView:gesture.view]];
     }
 }
@@ -498,7 +497,7 @@
             CGRect zoomRect = [self zoomRectForScale:newScale withCenter:point];
             [self zoomToRect:zoomRect animated:YES];
             isBigScale = YES;
-        }else{
+        } else {
             float newScale = minScale;
             CGRect zoomRect = [self zoomRectForScale:newScale withCenter:point];
             [self zoomToRect:zoomRect animated:YES];
@@ -513,7 +512,6 @@
     zoomRect.size.width  = self.frame.size.width / scale;
     zoomRect.origin.x = center.x - (zoomRect.size.width / 2.0);
     zoomRect.origin.y = center.y - (zoomRect.size.height / 2.0);
-
     return zoomRect;
 }
 

@@ -13,15 +13,15 @@
 
 @interface LGPhotoPickerCustomToolBarView()
 
-@property (nonatomic, strong) UIToolbar *toolbar;
+@property (nonatomic) UIToolbar *toolbar;
 
 @property (nonatomic, copy)  NSString *fileSize;
 
-@property (nonatomic, strong) UIBarButtonItem *isOriginalBtn;
+@property (nonatomic) UIBarButtonItem *isOriginalBtn;
 
-@property (nonatomic, strong) UIBarButtonItem *sendBtn;
+@property (nonatomic) UIBarButtonItem *sendBtn;
 
-@property (nonatomic , weak) UILabel *makeView;
+@property (nonatomic) UILabel *makeView;
 
 @end
 

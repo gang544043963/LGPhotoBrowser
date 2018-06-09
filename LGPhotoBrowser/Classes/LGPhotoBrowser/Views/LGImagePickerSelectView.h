@@ -9,8 +9,8 @@
 
 @interface LGImagePickerSelectView : UIView
 
-@property (nonatomic, strong) UIButton *backBtn;
-@property (nonatomic, strong) UIButton *selectBtn;
+@property (nonatomic) UIButton *backBtn;
+@property (nonatomic) UIButton *selectBtn;
 
 - (void)addTarget:(id)target backAction:(SEL)backAction selectAction:(SEL)selectAction forControlEvents:(UIControlEvents)controlEvents;
 

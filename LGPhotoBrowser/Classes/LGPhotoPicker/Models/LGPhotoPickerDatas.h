@@ -17,26 +17,26 @@ typedef void(^groupCallBackBlock)(id obj);
 /**
  *  获取所有组
  */
-+ (instancetype) defaultPicker;
++ (instancetype)defaultPicker;
 
 /**
  * 获取所有组对应的图片
  */
-- (void) getAllGroupWithPhotos : (groupCallBackBlock ) callBack;
+- (void)getAllGroupWithPhotos:(groupCallBackBlock )callBack;
 
 /**
  * 获取所有组对应的Videos
  */
-- (void) getAllGroupWithVideos : (groupCallBackBlock ) callBack;
+- (void)getAllGroupWithVideos:(groupCallBackBlock )callBack;
 
 /**
  *  传入一个组获取组里面的Asset
  */
-- (void) getGroupPhotosWithGroup : (LGPhotoPickerGroup *) pickerGroup finished : (groupCallBackBlock ) callBack;
+- (void)getGroupPhotosWithGroup:(LGPhotoPickerGroup *)pickerGroup finished:(groupCallBackBlock )callBack;
 
 /**
  *  传入一个AssetsURL来获取UIImage
  */
-- (void) getAssetsPhotoWithURLs:(NSURL *) url callBack:(groupCallBackBlock ) callBack;
+- (void)getAssetsPhotoWithURLs:(NSURL *)url callBack:(groupCallBackBlock )callBack;
 
 @end
