@@ -1,7 +1,4 @@
-# LGPhotoBrowser
-
-
-[![Travis](https://img.shields.io/travis/rust-lang/rust.svg)]()   [![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/GIKICoder/GDataBase/master/LICENSE)&nbsp;
+# LGPhotoBrowser  [![Travis](https://img.shields.io/travis/rust-lang/rust.svg)]()   [![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/GIKICoder/GDataBase/master/LICENSE)&nbsp;
 
 # 前言
  - 此框架经过实际项目锤炼，使用过程中改善了众多bug，在稳定性、流畅性以及内存消耗方面做了大量优化。但难免还有缺陷，希望同仁们在使用过程中发现并指正，并提issue！
