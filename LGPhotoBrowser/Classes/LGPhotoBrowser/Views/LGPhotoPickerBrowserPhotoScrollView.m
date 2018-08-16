@@ -96,17 +96,16 @@
 
 - (void)setProgress:(CGFloat)progress {
     _progress = progress;
-    
-    self.progressView.hidden = NO;
-    if (progress == 0) return ;
-    if (progress / 1.0 != 1.0) {
-        [self.progressView setProgress:progress animated:YES];
-    } else {
-		dispatch_async(dispatch_get_main_queue(), ^{
-			[self.progressView removeFromSuperview];
-			self.progressView = nil;
-		});
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.progressView.hidden = NO;
+        if (progress == 0) return ;
+        if (progress / 1.0 != 1.0) {
+            [self.progressView setProgress:progress animated:YES];
+        } else {
+                [self.progressView removeFromSuperview];
+                self.progressView = nil;
+        }
+    });
 }
 
 - (void)addObservers {
@@ -154,19 +153,13 @@
     _photo = photo;
     
     __weak typeof(self) weakSelf = self;
-    
     if (photo.photoPath.length) {
         //缓存路劲获取
         [photo loadImageFromFileAsync:photo.photoPath];
         _photoImageView.image = photo.photoImage;
         [self displayImage];
     } else if (photo.photoURL.absoluteString.length) {
-        
-        [photo loadImageFromURLAsync:photo.photoURL];
-        
         _photoImageView.image = photo.photoImage;
-        
-        
         // 本地相册
         NSRange photoRange = [photo.photoURL.absoluteString rangeOfString:@"assets-library"];
         if (photoRange.location != NSNotFound){
