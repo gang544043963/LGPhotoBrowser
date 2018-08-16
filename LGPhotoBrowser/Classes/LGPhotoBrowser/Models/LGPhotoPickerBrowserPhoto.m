@@ -70,9 +70,6 @@
         self.photoImage = nil;
     }
 }
-- (void)loadImageFromURLAsync:(NSURL *)url {
-    
-}
 
 - (void)notifyImageDidStartLoad {
     dispatch_async(dispatch_get_main_queue(), ^{
