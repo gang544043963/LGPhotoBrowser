@@ -73,8 +73,8 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     [self setupAssets];
     
     [self addNavBarCancelButton];
-    // 初始化底部ToorBar
-    [self setupToorBar];
+    // 初始化底部toolBar
+    [self setuptoolBar];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -283,27 +283,31 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
     });
 }
 
-#pragma mark -初始化底部ToorBar
+#pragma mark -初始化底部toolBar
 
-- (void) setupToorBar {
-    UIToolbar *toorBar = [[UIToolbar alloc] init];
-    toorBar.translatesAutoresizingMaskIntoConstraints = NO;
-    toorBar.barStyle = UIBarStyleBlackTranslucent;
-    [self.view addSubview:toorBar];
-    self.toolBar = toorBar;
+- (void) setuptoolBar {
+    UIToolbar *toolBar = [[UIToolbar alloc] init];
+    toolBar.translatesAutoresizingMaskIntoConstraints = NO;
+    toolBar.barStyle = UIBarStyleBlackTranslucent;
+    [self.view addSubview:toolBar];
+    self.toolBar = toolBar;
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(toorBar);
-    NSString *widthVfl =  @"H:|-0-[toorBar]-0-|";
-    NSString *heightVfl = @"V:[toorBar(44)]-0-|";
+    NSDictionary *views = NSDictionaryOfVariableBindings(toolBar);
+    NSString *widthVfl =  @"H:|-0-[toolBar]-0-|";
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:widthVfl options:0 metrics:0 views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:heightVfl options:0 metrics:0 views:views]];
-    
+    if (@available(iOS 11.0, *)) {
+        [toolBar.lastBaselineAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor].active = YES;
+    } else {
+        NSString *heightVfl = @"V:[toolBar(44)]-0-|";
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:heightVfl options:0 metrics:0 views:views]];
+    }
     // 左视图 中间距 右视图
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:self.previewBtn];
     UIBarButtonItem *fiexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:self.sendBtn];
     
-    toorBar.items = @[leftItem,fiexItem,rightItem];
+    toolBar.items = @[leftItem,fiexItem,rightItem];
+
 }
 
 #pragma mark - setter

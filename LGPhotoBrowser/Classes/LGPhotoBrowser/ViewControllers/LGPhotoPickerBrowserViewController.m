@@ -234,7 +234,10 @@ typedef NS_ENUM(NSInteger, DraggingDirect) {
 - (void)setupXGToolbar {
     if ((!_XGtoolbar)  && (!self.needHidenBar)) {
         CGFloat height = 44;
-        _XGtoolbar = [[LGPhotoPickerCustomToolBarView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - height, CGRectGetWidth(self.view.bounds), height) showType:self.showType];
+        if (IPHONE_X) {
+            height = 44 + 34;
+        }
+        _XGtoolbar = [[LGPhotoPickerCustomToolBarView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - height, CGRectGetWidth(self.view.bounds), height)];
         _XGtoolbar.delegate = self;
 		_XGtoolbar.nightMode = self.nightMode;
         __weak LGPhotoPickerBrowserViewController * weakself = self;

@@ -24,14 +24,9 @@
 
 @property (nonatomic, copy) NSString *(^getSizeBlock)(void);
 
-@property (nonatomic) LGShowImageType showType;
-
 @property (nonatomic, assign) BOOL nightMode;
 
 @property (nonatomic, weak) id<LGPhotoPickerCustomToolBarViewDelegate>delegate;
-
-//- (void)setupToolbar;
-- (instancetype)initWithFrame:(CGRect)frame showType:(LGShowImageType)showType;
 
 - (void)updateToolbarWithOriginal:(BOOL)isOriginal
                       currentPage:(NSInteger)currentPage
